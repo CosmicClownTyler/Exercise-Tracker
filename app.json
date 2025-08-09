@@ -24,6 +24,12 @@
         },
         "web": {
             "favicon": "./assets/favicon.png"
-        }
+        },
+        "extra": {
+            "eas": {
+                "projectId": "88f71cd9-011d-4ae0-ba7d-d752d9628a81"
+            }
+        },
+        "owner": "cosmicclowntyler"
     }
 }
