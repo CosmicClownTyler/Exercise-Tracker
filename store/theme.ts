@@ -10,8 +10,8 @@ import { ColorHex, ThemeState } from '@/types/types';
 // The initial default theme state
 export const defaultThemeState: ThemeState = {
     systemColorScheme: undefined,
-    colorScheme: 'automatic',
-    accentType: 'automatic',
+    colorScheme: 'system',
+    accentType: 'default',
     customAccentColor: Accents.Red,
     colors: DarkColorTheme,
     isDark: true,
@@ -38,9 +38,9 @@ const _undefinedSystemColorScheme: CaseReducer<ThemeState> = (state) => {
     state.systemColorScheme = undefined;
     state = updateStateTheme(state);
 };
-// Set the color scheme to automatic
+// Set the color scheme to system
 const _automaticColorScheme: CaseReducer<ThemeState> = (state) => {
-    state.colorScheme = 'automatic';
+    state.colorScheme = 'system';
     state = updateStateTheme(state);
 };
 // Set the color scheme to dark
@@ -53,9 +53,9 @@ const _lightColorScheme: CaseReducer<ThemeState> = (state) => {
     state.colorScheme = 'light';
     state = updateStateTheme(state);
 };
-// Set the accent color to automatic
+// Set the accent color to default
 const _automaticAccentColor: CaseReducer<ThemeState> = (state) => {
-    state.accentType = 'automatic';
+    state.accentType = 'default';
     state = updateStateTheme(state);
 };
 // Set the accent color to custom
@@ -120,8 +120,8 @@ function updateStateTheme(theme: ThemeState) {
     return theme;
 }
 function updateThemeColors(theme: ThemeState) {
-    // If the color scheme is automatic, set the colors based on the system color scheme
-    if (theme.colorScheme == 'automatic') {
+    // If the color scheme is system, set the colors based on the system color scheme
+    if (theme.colorScheme == 'system') {
         // Dark
         if (theme.systemColorScheme == 'dark') {
             theme = updateThemeDarkColors(theme);
@@ -159,8 +159,8 @@ function updateThemeLightColors(theme: ThemeState) {
     return theme;
 }
 function updateThemeAccentColor(theme: ThemeState) {
-    // If the accent type is automatic, set the accent color based on the current color scheme
-    if (theme.accentType == 'automatic') {
+    // If the accent type is default, set the accent color based on the current color scheme
+    if (theme.accentType == 'default') {
         // Dark
         if (theme.isDark) {
             theme = updateThemeDarkAccentColor(theme);

@@ -147,9 +147,9 @@ function Theme({ navigation, route }: ThemeProps) {
                 <TableView>
                     <Section header='Theme' {...tableSectionProps}>
                         <Cell
-                            title='Automatic'
+                            title='System'
                             cellStyle='Basic'
-                            accessory={theme.colorScheme == 'automatic' ? 'Checkmark' : undefined}
+                            accessory={theme.colorScheme == 'system' ? 'Checkmark' : undefined}
                             onPress={setSchemeAutomatic}
                             {...tableCellProps}
                         />
@@ -170,9 +170,9 @@ function Theme({ navigation, route }: ThemeProps) {
                     </Section>
                     <Section header='Accent Colors' {...tableSectionProps}>
                         <Cell
-                            title='Automatic'
+                            title='Default'
                             cellStyle='Basic'
-                            accessory={theme.accentType == 'automatic' ? 'Checkmark' : undefined}
+                            accessory={theme.accentType == 'default' ? 'Checkmark' : undefined}
                             onPress={setAccentDefault}
                             {...tableCellProps}
                         />

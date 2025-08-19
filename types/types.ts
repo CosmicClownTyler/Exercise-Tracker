@@ -14,8 +14,8 @@ export interface SettingsState {
 };
 export interface ThemeState {
     systemColorScheme: 'dark' | 'light' | undefined,
-    colorScheme: 'dark' | 'light' | 'automatic',
-    accentType: 'automatic' | 'custom',
+    colorScheme: 'dark' | 'light' | 'system',
+    accentType: 'default' | 'custom',
     customAccentColor: ColorHex,
     colors: ColorTheme,
     isDark: boolean,
