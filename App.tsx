@@ -14,9 +14,7 @@ import CalendarScreen from '@/Screens/CalendarScreen';
 import HomeScreen from '@/Screens/HomeScreen';
 import SettingsScreen from '@/Screens/SettingsScreen';
 
-import { RootTabParamList, StoreState, ColorHex } from '@/types/types';
-
-import { View, Text, StyleSheet } from 'react-native';
+import { RootBottomTabParamList, StoreState, ColorHex } from '@/types/types';
 
 export default function App() {
     return (
@@ -28,7 +26,7 @@ export default function App() {
     );
 };
 
-const Tab = createBottomTabNavigator<RootTabParamList>();
+const Tab = createBottomTabNavigator<RootBottomTabParamList>();
 
 export function AppComponent() {
     // Get the redux store dispatch
