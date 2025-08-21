@@ -2,17 +2,16 @@ import { useState } from 'react';
 import { View, Text } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@/hooks';
 
 import * as Styles from '@/Styles/Styles';
 import TextButton from '@/Components/TextButton';
 import CircularProgress from '@/Components/CircularProgress';
 
 import { PlanksComponentProps } from '@/types/props';
-import { StoreState } from '@/types/types';
 
 export default function PlanksComponent(props: PlanksComponentProps) {
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const textStyles = Styles.textStyles(settings);
     const textButtonProps = Styles.textButtonProps(settings);
     const circularProgressProps = Styles.circularProgressProps(settings);

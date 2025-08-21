@@ -1,7 +1,7 @@
 import { StyleSheet, SafeAreaView, ScrollView, View, TouchableOpacity, Text, AppState } from 'react-native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector } from '@/hooks';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
@@ -13,7 +13,7 @@ import PushUpsComponent from '@/Components/Exercises/PushUpsComponent';
 import PullUpsComponent from '@/Components/Exercises/PullUpsComponent';
 import PlanksComponent from '@/Components/Exercises/PlanksComponent';
 
-import { HomeStackParamList, StoreState } from '@/types/types';
+import { HomeStackParamList } from '@/types/types';
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
@@ -36,7 +36,7 @@ type PullUpsProps = NativeStackScreenProps<HomeStackParamList, 'PullUps'>;
 type PlanksProps = NativeStackScreenProps<HomeStackParamList, 'Planks'>;
 
 function Home({ navigation, route }: HomeProps) {
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const containerStyles = Styles.containerStyles(settings);
     const headerProps = Styles.headerProps(settings);
     const textButtonProps = Styles.textButtonProps(settings);
@@ -79,7 +79,7 @@ function Home({ navigation, route }: HomeProps) {
 }
 
 function SitUps({ navigation, route }: SitUpsProps) {
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const containerStyles = Styles.containerStyles(settings);
     const headerProps = Styles.headerProps(settings);
 
@@ -93,7 +93,7 @@ function SitUps({ navigation, route }: SitUpsProps) {
     );
 }
 function PushUps({ navigation, route }: PushUpsProps) {
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const containerStyles = Styles.containerStyles(settings);
     const headerProps = Styles.headerProps(settings);
 
@@ -107,7 +107,7 @@ function PushUps({ navigation, route }: PushUpsProps) {
     );
 }
 function PullUps({ navigation, route }: PullUpsProps) {
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const containerStyles = Styles.containerStyles(settings);
     const headerProps = Styles.headerProps(settings);
 
@@ -121,7 +121,7 @@ function PullUps({ navigation, route }: PullUpsProps) {
     );
 }
 function Planks({ navigation, route }: PlanksProps) {
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const containerStyles = Styles.containerStyles(settings);
     const headerProps = Styles.headerProps(settings);
 

@@ -4,9 +4,10 @@ import { OrientationLock, lockAsync } from 'expo-screen-orientation';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Provider, useSelector, useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '@/store';
+import { useAppSelector, useAppDispatch } from '@/hooks';
 import { darkSystemColorScheme, lightSystemColorScheme, undefinedSystemColorScheme } from '@/store/theme';
 
 import { CalendarIcon, CheckmarkIcon, SettingsIcon } from '@/Components/TabBarIcons';
@@ -14,7 +15,7 @@ import CalendarScreen from '@/Screens/CalendarScreen';
 import HomeScreen from '@/Screens/HomeScreen';
 import SettingsScreen from '@/Screens/SettingsScreen';
 
-import { RootBottomTabParamList, StoreState, ColorHex } from '@/types/types';
+import { RootBottomTabParamList, ColorHex } from '@/types/types';
 
 export default function App() {
     return (
@@ -30,10 +31,10 @@ const Tab = createBottomTabNavigator<RootBottomTabParamList>();
 
 export function AppComponent() {
     // Get the redux store dispatch
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     // Get the settings state
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const theme = settings.theme;
 
     // Get the device color scheme
@@ -42,13 +43,13 @@ export function AppComponent() {
     // Set the system color scheme based on user's device preferences
     useEffect(() => {
         if (systemColorScheme == 'dark') {
-            // dispatch(darkSystemColorScheme());
+            dispatch(darkSystemColorScheme());
         }
         else if (systemColorScheme == 'light') {
-            // dispatch(lightSystemColorScheme());
+            dispatch(lightSystemColorScheme());
         }
         else {
-            // dispatch(undefinedSystemColorScheme());
+            dispatch(undefinedSystemColorScheme());
         }
     }, [systemColorScheme, dispatch]);
 

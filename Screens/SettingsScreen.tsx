@@ -2,7 +2,7 @@ import { SafeAreaView, ScrollView } from 'react-native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '@/hooks';
 import { automaticColorScheme, darkColorScheme, lightColorScheme, automaticAccentColor, customAccentColor, setThemeAccentColor } from '@/store/theme';
 import { taskViewFullscreen, taskViewPopup } from '@/store/preferences';
 
@@ -10,7 +10,7 @@ import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import ColorPicker from '@/Components/ColorPicker';
 
-import { ColorHex, SettingsStackParamList, StoreState } from '@/types/types';
+import { SettingsStackParamList, ColorHex } from '@/types/types';
 
 const SettingsStack = createNativeStackNavigator<SettingsStackParamList>();
 
@@ -31,7 +31,7 @@ type NotificationsProps = NativeStackScreenProps<SettingsStackParamList, 'Notifi
 type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>;
 
 function Settings({ navigation, route }: SettingsProps) {
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const containerStyles = Styles.containerStyles(settings);
     const headerProps = Styles.headerProps(settings);
     const scrollViewProps = Styles.scrollViewProps(settings);
@@ -75,7 +75,7 @@ function Settings({ navigation, route }: SettingsProps) {
 }
 
 function DateTime({ navigation, route }: DateTimeProps) {
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const containerStyles = Styles.containerStyles(settings);
     const headerProps = Styles.headerProps(settings);
     const scrollViewProps = Styles.scrollViewProps(settings);
@@ -92,7 +92,7 @@ function DateTime({ navigation, route }: DateTimeProps) {
 }
 
 function Notifications({ navigation, route }: NotificationsProps) {
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const containerStyles = Styles.containerStyles(settings);
     const headerProps = Styles.headerProps(settings);
     const scrollViewProps = Styles.scrollViewProps(settings);
@@ -109,7 +109,7 @@ function Notifications({ navigation, route }: NotificationsProps) {
 }
 
 function Theme({ navigation, route }: ThemeProps) {
-    const settings = useSelector((state: StoreState) => state.settings);
+    const settings = useAppSelector(state => state.settings);
     const theme = settings.theme;
     const containerStyles = Styles.containerStyles(settings);
     const headerProps = Styles.headerProps(settings);
@@ -118,23 +118,23 @@ function Theme({ navigation, route }: ThemeProps) {
     const tableCellProps = Styles.tableCellProps(settings);
     const colorPickerProps = Styles.colorPickerProps(settings);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     // Functions for changing theme scheme and accent color
     const setSchemeAutomatic = () => {
-        // dispatch(automaticColorScheme());
+        dispatch(automaticColorScheme());
     };
     const setSchemeDark = () => {
-        // dispatch(darkColorScheme());
+        dispatch(darkColorScheme());
     };
     const setSchemeLight = () => {
-        // dispatch(lightColorScheme());
+        dispatch(lightColorScheme());
     };
     const setAccentDefault = () => {
-        // dispatch(automaticAccentColor());
+        dispatch(automaticAccentColor());
     };
     const setAccentCustom = () => {
-        // dispatch(customAccentColor());
+        dispatch(customAccentColor());
     };
     const setAccentColor = (color: ColorHex) => {
         dispatch(setThemeAccentColor(color));

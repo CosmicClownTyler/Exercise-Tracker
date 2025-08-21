@@ -1,43 +1,42 @@
-import { configureStore, combineReducers, Reducer, EnhancedStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
+import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Persistor, persistReducer, persistStore } from 'redux-persist';
 
 import { historyReducer } from '@/store/history';
 import { settingsReducer } from '@/store/settings';
 
-// The combined root reducer
-const rootReducer: Reducer = combineReducers({
+// The root reducer
+const rootReducer = combineReducers({
     history: historyReducer,
     settings: settingsReducer,
 });
 
-// A config for persisting the root store with async storage
+// Redux Persist config
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    blacklist: ['settings'],
 };
-// The accompanying persisted reducer
-const persistedReducer: Reducer = persistReducer(persistConfig, rootReducer);
 
-// A general function to create and return a store using the above reducer
-export function createStore() {
-    return configureStore({
-        reducer: rootReducer,
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
-    });
-}
-export function createPersistedStore() {
-    return configureStore({
-        reducer: persistedReducer,
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
-    });
-}
+// The persisted reducer
+const persistedReducer = persistReducer(
+    persistConfig,
+    rootReducer
+);
 
 // The main store and persistor for the app
-export const store: EnhancedStore = createPersistedStore();
-export const persistor: Persistor = persistStore(store);
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
+});
+export const persistor = persistStore(store);
+
+// Get the type of our store variable
+export type AppStore = typeof store;
+// Infer the type of the state from the store
+export type AppState = ReturnType<typeof store.getState>;
+// Infer the type of the dispatch from the store itself
+export type AppDispatch = typeof store.dispatch;
 
 // use this to delete all persisted data while developing
 // persistor.pause();

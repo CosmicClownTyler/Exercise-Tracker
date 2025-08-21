@@ -1,7 +1,4 @@
-import { CaseReducer, PayloadAction, Slice, createSlice, Reducer } from '@reduxjs/toolkit';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { persistReducer } from 'redux-persist';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { DarkColorTheme, LightColorTheme, Accents } from '@/Styles/Colors'
 
@@ -17,85 +14,56 @@ export const defaultThemeState: ThemeState = {
     isDark: true,
 };
 
-// The individual reducer functions
-// Revert the theme back to the default
-const _revertToDefaultTheme: CaseReducer<ThemeState> = (state) => {
-    console.warn('RESETTING THEME');
-    state = defaultThemeState;
-};
-// Set the system color scheme to dark
-const _darkSystemColorScheme: CaseReducer<ThemeState> = (state) => {
-    state.systemColorScheme = 'dark';
-    state = updateStateTheme(state);
-};
-// Set the system color scheme to light
-const _lightSystemColorScheme: CaseReducer<ThemeState> = (state) => {
-    state.systemColorScheme = 'light';
-    state = updateStateTheme(state);
-};
-// Set the system color scheme to undefined
-const _undefinedSystemColorScheme: CaseReducer<ThemeState> = (state) => {
-    state.systemColorScheme = undefined;
-    state = updateStateTheme(state);
-};
-// Set the color scheme to system
-const _automaticColorScheme: CaseReducer<ThemeState> = (state) => {
-    state.colorScheme = 'system';
-    state = updateStateTheme(state);
-};
-// Set the color scheme to dark
-const _darkColorScheme: CaseReducer<ThemeState> = (state) => {
-    state.colorScheme = 'dark';
-    state = updateStateTheme(state);
-};
-// Set the color scheme to light
-const _lightColorScheme: CaseReducer<ThemeState> = (state) => {
-    state.colorScheme = 'light';
-    state = updateStateTheme(state);
-};
-// Set the accent color to default
-const _automaticAccentColor: CaseReducer<ThemeState> = (state) => {
-    state.accentType = 'default';
-    state = updateStateTheme(state);
-};
-// Set the accent color to custom
-const _customAccentColor: CaseReducer<ThemeState> = (state) => {
-    state.accentType = 'custom';
-    state = updateStateTheme(state);
-};
-// Set the accent color based on the payload
-const _setThemeAccentColor: CaseReducer<ThemeState, PayloadAction<ColorHex>> = (state, action) => {
-    state.customAccentColor = action.payload;
-    state = updateStateTheme(state);
-};
-
 // The theme slice
-export const themeSlice: Slice = createSlice({
+export const themeSlice = createSlice({
     name: 'theme',
     initialState: defaultThemeState,
     reducers: {
-        revertToDefaultTheme: _revertToDefaultTheme,
-        darkSystemColorScheme: _darkSystemColorScheme,
-        lightSystemColorScheme: _lightSystemColorScheme,
-        undefinedSystemColorScheme: _undefinedSystemColorScheme,
-        automaticColorScheme: _automaticColorScheme,
-        darkColorScheme: _darkColorScheme,
-        lightColorScheme: _lightColorScheme,
-        automaticAccentColor: _automaticAccentColor,
-        customAccentColor: _customAccentColor,
-        setThemeAccentColor: _setThemeAccentColor,
+        revertToDefaultTheme: (state) => {
+            console.warn('RESETTING THEME');
+            state = defaultThemeState;
+        },
+        darkSystemColorScheme: (state) => {
+            state.systemColorScheme = 'dark';
+            state = updateStateTheme(state);
+        },
+        lightSystemColorScheme: (state) => {
+            state.systemColorScheme = 'light';
+            state = updateStateTheme(state);
+        },
+        undefinedSystemColorScheme: (state) => {
+            state.systemColorScheme = undefined;
+            state = updateStateTheme(state);
+        },
+        automaticColorScheme: (state) => {
+            state.colorScheme = 'system';
+            state = updateStateTheme(state);
+        },
+        darkColorScheme: (state) => {
+            state.colorScheme = 'dark';
+            state = updateStateTheme(state);
+        },
+        lightColorScheme: (state) => {
+            state.colorScheme = 'light';
+            state = updateStateTheme(state);
+        },
+        automaticAccentColor: (state) => {
+            state.accentType = 'default';
+            state = updateStateTheme(state);
+        },
+        customAccentColor: (state) => {
+            state.accentType = 'custom';
+            state = updateStateTheme(state);
+        },
+        setThemeAccentColor: (state, action: PayloadAction<ColorHex>) => {
+            state.customAccentColor = action.payload;
+            state = updateStateTheme(state);
+        },
     },
 });
 
-// The config for storing this data
-const themeConfig = {
-    key: 'theme',
-    storage: AsyncStorage,
-    blacklist: ['systemColorScheme'], // blacklist the system color scheme as this should not be saved, but instead determined by the system's preferences
-};
-
-// The persisted reducer for this slice
-export const themeReducer: Reducer = persistReducer(themeConfig, themeSlice.reducer);
+// The reducer for this slice
+export const themeReducer = themeSlice.reducer;
 
 // The actions for this slice
 export const {
