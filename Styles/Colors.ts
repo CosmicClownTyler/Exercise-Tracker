@@ -1,6 +1,7 @@
 import { ColorTheme, ColorHex, ColorRGB } from '@/types/types';
 
 export const DarkColorTheme: ColorTheme = {
+    isDark: true,
     background: '#000000',
     primary: '#ffffff',
     secondary: '#999999',
@@ -9,6 +10,7 @@ export const DarkColorTheme: ColorTheme = {
     accent: '#00aaff',
 };
 export const LightColorTheme: ColorTheme = {
+    isDark: false,
     background: '#ffffff',
     primary: '#000000',
     secondary: '#666666',

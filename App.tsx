@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useColorScheme, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import { OrientationLock, lockAsync } from 'expo-screen-orientation';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -7,8 +6,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '@/store';
-import { useAppSelector, useAppDispatch } from '@/hooks';
-import { darkSystemColorScheme, lightSystemColorScheme, undefinedSystemColorScheme } from '@/store/theme';
+
+import { useThemeColors } from '@/hooks';
 
 import { CalendarIcon, CheckmarkIcon, SettingsIcon } from '@/Components/TabBarIcons';
 import CalendarScreen from '@/Screens/CalendarScreen';
@@ -30,35 +29,15 @@ export default function App() {
 const Tab = createBottomTabNavigator<RootBottomTabParamList>();
 
 export function AppComponent() {
-    // Get the redux store dispatch
-    const dispatch = useAppDispatch();
-
-    // Get the settings state
-    const settings = useAppSelector(state => state.settings);
-    const theme = settings.theme;
-
-    // Get the device color scheme
-    const systemColorScheme = useColorScheme();
-
-    // Set the system color scheme based on user's device preferences
-    useEffect(() => {
-        if (systemColorScheme == 'dark') {
-            dispatch(darkSystemColorScheme());
-        }
-        else if (systemColorScheme == 'light') {
-            dispatch(lightSystemColorScheme());
-        }
-        else {
-            dispatch(undefinedSystemColorScheme());
-        }
-    }, [systemColorScheme, dispatch]);
+    // Get the theme colors
+    const themeColors = useThemeColors();
 
     // Set the orientation lock for the application
     lockAsync(OrientationLock.PORTRAIT_UP);
 
     return (
         <NavigationContainer>
-            <StatusBar backgroundColor={theme.colors.background} barStyle={theme.isDark ? 'light-content' : 'dark-content'} />
+            <StatusBar backgroundColor={themeColors.background} barStyle={themeColors.isDark ? 'light-content' : 'dark-content'} />
             <Tab.Navigator
                 initialRouteName='Home'
                 screenOptions={({ route }) => ({
@@ -66,12 +45,12 @@ export function AppComponent() {
                     headerShown: false,
                     // Bottom tab options
                     tabBarStyle: {
-                        backgroundColor: theme.colors.background,
-                        borderTopColor: theme.colors.borders,
+                        backgroundColor: themeColors.background,
+                        borderTopColor: themeColors.borders,
                         borderTopWidth: 1,
                     },
-                    tabBarInactiveTintColor: theme.colors.secondary,
-                    tabBarActiveTintColor: theme.colors.accent,
+                    tabBarInactiveTintColor: themeColors.secondary,
+                    tabBarActiveTintColor: themeColors.accent,
                     tabBarIcon: ({ color, size }) => {
                         if (route.name === 'Calendar')
                             return <CalendarIcon color={color as ColorHex} size={size} />;

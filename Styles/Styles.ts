@@ -8,13 +8,11 @@ import { CalendarProps, CheckboxProps, CircularProgressProps, ColorPickerProps, 
 
 import { calcContrastingAccentPair } from '@/Styles/Colors';
 
-import { SettingsState } from '@/types/types';
+import { ColorTheme } from '@/types/types';
 
 // Consistent styles across common elements
-export function containerStyles(settings: SettingsState) {
-    const theme = settings.theme;
-
-    const { background, primary, secondary, foreground, borders, accent } = theme.colors;
+export function containerStyles(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     return StyleSheet.create({
         container: {
@@ -26,10 +24,8 @@ export function containerStyles(settings: SettingsState) {
         },
     });
 }
-export function textStyles(settings: SettingsState) {
-    const theme = settings.theme;
-
-    const { primary } = theme.colors;
+export function textStyles(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     return StyleSheet.create({
         text: {
@@ -45,11 +41,11 @@ export function textStyles(settings: SettingsState) {
 }
 
 // Consistent props for react native components
-export function scrollViewProps(settings: SettingsState) {
-    const theme = settings.theme;
+export function scrollViewProps(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     const scrollViewProps: ScrollViewProps = {
-        indicatorStyle: theme.isDark ? 'white' : 'black',
+        indicatorStyle: isDark ? 'white' : 'black',
         style: {
             width: '100%',
         }
@@ -57,10 +53,8 @@ export function scrollViewProps(settings: SettingsState) {
 
     return scrollViewProps;
 }
-export function tableSectionProps(settings: SettingsState) {
-    const theme = settings.theme;
-
-    const { background, primary, secondary, foreground, borders, accent } = theme.colors;
+export function tableSectionProps(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     const tableSectionProps: SectionInterface = {
         headerTextColor: secondary,
@@ -70,10 +64,8 @@ export function tableSectionProps(settings: SettingsState) {
 
     return tableSectionProps;
 }
-export function tableCellProps(settings: SettingsState) {
-    const theme = settings.theme;
-
-    const { background, primary, secondary, foreground, borders, accent } = theme.colors;
+export function tableCellProps(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     const tableCellProps: CellInterface = {
         titleTextColor: primary,
@@ -89,10 +81,8 @@ export function tableCellProps(settings: SettingsState) {
 }
 
 // Consistent props for custom components
-export function calendarProps(settings: SettingsState) {
-    const theme = settings.theme;
-
-    const { background, primary, secondary, foreground, borders, accent } = theme.colors;
+export function calendarProps(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     const calendarProps: CalendarProps = {
         calendarStyle: {
@@ -110,10 +100,8 @@ export function calendarProps(settings: SettingsState) {
 
     return calendarProps;
 }
-export function checkboxProps(settings: SettingsState) {
-    const theme = settings.theme;
-
-    const { background, primary, secondary, foreground, borders, accent } = theme.colors;
+export function checkboxProps(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     const checkboxProps: CheckboxProps = {
         color: accent,
@@ -122,10 +110,8 @@ export function checkboxProps(settings: SettingsState) {
 
     return checkboxProps;
 }
-export function circularProgressProps(settings: SettingsState) {
-    const theme = settings.theme;
-
-    const { background, primary, secondary, foreground, borders, accent } = theme.colors;
+export function circularProgressProps(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     // Calculate the background and progress bar colors using an appropriate contrast from the accent
     const { lighter, darker } = calcContrastingAccentPair(accent);
@@ -137,10 +123,8 @@ export function circularProgressProps(settings: SettingsState) {
 
     return circularProgressProps;
 }
-export function colorPickerProps(settings: SettingsState) {
-    const theme = settings.theme;
-
-    const { background, primary, secondary, foreground, borders, accent } = theme.colors;
+export function colorPickerProps(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     const colorPickerProps: ColorPickerProps = {
         style: {
@@ -153,10 +137,8 @@ export function colorPickerProps(settings: SettingsState) {
 
     return colorPickerProps;
 }
-export function headerProps(settings: SettingsState) {
-    const theme = settings.theme;
-
-    const { background, primary, secondary, foreground, borders, accent } = theme.colors;
+export function headerProps(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     const headerProps: HeaderProps = {
         titleStyle: {
@@ -172,10 +154,8 @@ export function headerProps(settings: SettingsState) {
 
     return headerProps;
 }
-export function textButtonProps(settings: SettingsState) {
-    const theme = settings.theme;
-
-    const { background, primary, secondary, foreground, borders, accent } = theme.colors;
+export function textButtonProps(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
     const textButtonProps: TextButtonProps = {
         style: {

@@ -1,7 +1,7 @@
 import { StyleSheet, SafeAreaView, ScrollView, View, TouchableOpacity, Text, AppState } from 'react-native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { useAppSelector } from '@/hooks';
+import { useThemeColors } from '@/hooks';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
@@ -36,11 +36,11 @@ type PullUpsProps = NativeStackScreenProps<HomeStackParamList, 'PullUps'>;
 type PlanksProps = NativeStackScreenProps<HomeStackParamList, 'Planks'>;
 
 function Home({ navigation, route }: HomeProps) {
-    const settings = useAppSelector(state => state.settings);
-    const containerStyles = Styles.containerStyles(settings);
-    const headerProps = Styles.headerProps(settings);
-    const textButtonProps = Styles.textButtonProps(settings);
-    const scrollViewProps = Styles.scrollViewProps(settings);
+    const themeColors = useThemeColors();
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+    const textButtonProps = Styles.textButtonProps(themeColors);
+    const scrollViewProps = Styles.scrollViewProps(themeColors);
 
     return (
         <View style={{ width: '100%', height: '100%' }}>
@@ -79,9 +79,9 @@ function Home({ navigation, route }: HomeProps) {
 }
 
 function SitUps({ navigation, route }: SitUpsProps) {
-    const settings = useAppSelector(state => state.settings);
-    const containerStyles = Styles.containerStyles(settings);
-    const headerProps = Styles.headerProps(settings);
+    const themeColors = useThemeColors();
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
 
     return (
         <View style={{ width: '100%', height: '100%' }}>
@@ -93,9 +93,9 @@ function SitUps({ navigation, route }: SitUpsProps) {
     );
 }
 function PushUps({ navigation, route }: PushUpsProps) {
-    const settings = useAppSelector(state => state.settings);
-    const containerStyles = Styles.containerStyles(settings);
-    const headerProps = Styles.headerProps(settings);
+    const themeColors = useThemeColors();
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
 
     return (
         <View style={{ width: '100%', height: '100%' }}>
@@ -107,9 +107,9 @@ function PushUps({ navigation, route }: PushUpsProps) {
     );
 }
 function PullUps({ navigation, route }: PullUpsProps) {
-    const settings = useAppSelector(state => state.settings);
-    const containerStyles = Styles.containerStyles(settings);
-    const headerProps = Styles.headerProps(settings);
+    const themeColors = useThemeColors();
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
 
     return (
         <View style={{ width: '100%', height: '100%' }}>
@@ -121,9 +121,9 @@ function PullUps({ navigation, route }: PullUpsProps) {
     );
 }
 function Planks({ navigation, route }: PlanksProps) {
-    const settings = useAppSelector(state => state.settings);
-    const containerStyles = Styles.containerStyles(settings);
-    const headerProps = Styles.headerProps(settings);
+    const themeColors = useThemeColors();
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
 
     return (
         <View style={{ width: '100%', height: '100%' }}>

@@ -29,12 +29,9 @@ export interface SettingsState {
     preferences: PreferencesState;
 };
 export interface ThemeState {
-    systemColorScheme: 'dark' | 'light' | undefined;
     colorScheme: 'dark' | 'light' | 'system';
     accentType: 'default' | 'custom';
     customAccentColor: ColorHex;
-    colors: ColorTheme;
-    isDark: boolean;
 };
 export interface PreferencesState {
     taskViewIsPopup: boolean;
@@ -43,6 +40,7 @@ export interface PreferencesState {
 
 // Theme, style and color types
 export interface ColorTheme {
+    isDark: boolean;            // The boolean value determining if this color theme is dark or light themed
     background: ColorHex;       // The color used for the background and empty spaces                  Determined by theme color scheme
     primary: ColorHex;          // The color used for the main text and other key elements             Determined by theme color scheme
     secondary: ColorHex;        // The color used for smaller text and other side elements             Determined by theme color scheme

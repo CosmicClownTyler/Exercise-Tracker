@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, Text } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
 
-import { useAppSelector } from '@/hooks';
+import { useThemeColors } from '@/hooks';
 
 import * as Styles from '@/Styles/Styles';
 import TextButton from '@/Components/TextButton';
@@ -11,10 +11,10 @@ import CircularProgress from '@/Components/CircularProgress';
 import { SitUpsComponentProps } from '@/types/props';
 
 export default function SitUpsComponent(props: SitUpsComponentProps) {
-    const settings = useAppSelector(state => state.settings);
-    const textStyles = Styles.textStyles(settings);
-    const textButtonProps = Styles.textButtonProps(settings);
-    const circularProgressProps = Styles.circularProgressProps(settings);
+    const themeColors = useThemeColors();
+    const textStyles = Styles.textStyles(themeColors);
+    const textButtonProps = Styles.textButtonProps(themeColors);
+    const circularProgressProps = Styles.circularProgressProps(themeColors);
 
     const threshold = 0.2;
     const [subscribed, setSubscribed] = useState(false);

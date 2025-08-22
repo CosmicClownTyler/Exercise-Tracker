@@ -1,16 +1,16 @@
 import { SafeAreaView, View } from 'react-native';
 
-import { useAppSelector } from '@/hooks';
+import { useThemeColors } from '@/hooks';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import Calendar from '@/Components/Calendar';
 
 export default function CalendarScreen() {
-    const settings = useAppSelector(state => state.settings);
-    const containerStyles = Styles.containerStyles(settings);
-    const headerProps = Styles.headerProps(settings);
-    const calendarProps = Styles.calendarProps(settings);
+    const themeColors = useThemeColors();
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+    const calendarProps = Styles.calendarProps(themeColors);
 
     return (
         <SafeAreaView style={containerStyles.container}>
@@ -19,7 +19,7 @@ export default function CalendarScreen() {
                 <Calendar
                     {...calendarProps}
                     // Extra information from the theme to ensure the component rerenders correctly
-                    themeKey={[settings.theme.isDark, settings.theme.colors.accent as string]}
+                    themeKey={[themeColors.isDark, themeColors.accent]}
                 />
             </View>
         </SafeAreaView>

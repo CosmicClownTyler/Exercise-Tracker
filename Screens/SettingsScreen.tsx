@@ -2,7 +2,7 @@ import { SafeAreaView, ScrollView } from 'react-native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
 
-import { useAppSelector, useAppDispatch } from '@/hooks';
+import { useThemeColors, useAppSelector, useAppDispatch } from '@/hooks';
 import { automaticColorScheme, darkColorScheme, lightColorScheme, automaticAccentColor, customAccentColor, setThemeAccentColor } from '@/store/theme';
 import { taskViewFullscreen, taskViewPopup } from '@/store/preferences';
 
@@ -31,12 +31,12 @@ type NotificationsProps = NativeStackScreenProps<SettingsStackParamList, 'Notifi
 type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>;
 
 function Settings({ navigation, route }: SettingsProps) {
-    const settings = useAppSelector(state => state.settings);
-    const containerStyles = Styles.containerStyles(settings);
-    const headerProps = Styles.headerProps(settings);
-    const scrollViewProps = Styles.scrollViewProps(settings);
-    const tableSectionProps = Styles.tableSectionProps(settings);
-    const tableCellProps = Styles.tableCellProps(settings);
+    const themeColors = useThemeColors();
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+    const scrollViewProps = Styles.scrollViewProps(themeColors);
+    const tableSectionProps = Styles.tableSectionProps(themeColors);
+    const tableCellProps = Styles.tableCellProps(themeColors);
 
     return (
         <SafeAreaView style={containerStyles.container}>
@@ -75,10 +75,10 @@ function Settings({ navigation, route }: SettingsProps) {
 }
 
 function DateTime({ navigation, route }: DateTimeProps) {
-    const settings = useAppSelector(state => state.settings);
-    const containerStyles = Styles.containerStyles(settings);
-    const headerProps = Styles.headerProps(settings);
-    const scrollViewProps = Styles.scrollViewProps(settings);
+    const themeColors = useThemeColors();
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+    const scrollViewProps = Styles.scrollViewProps(themeColors);
 
     return (
         <SafeAreaView style={containerStyles.container}>
@@ -92,10 +92,10 @@ function DateTime({ navigation, route }: DateTimeProps) {
 }
 
 function Notifications({ navigation, route }: NotificationsProps) {
-    const settings = useAppSelector(state => state.settings);
-    const containerStyles = Styles.containerStyles(settings);
-    const headerProps = Styles.headerProps(settings);
-    const scrollViewProps = Styles.scrollViewProps(settings);
+    const themeColors = useThemeColors();
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+    const scrollViewProps = Styles.scrollViewProps(themeColors);
 
     return (
         <SafeAreaView style={containerStyles.container}>
@@ -109,15 +109,15 @@ function Notifications({ navigation, route }: NotificationsProps) {
 }
 
 function Theme({ navigation, route }: ThemeProps) {
-    const settings = useAppSelector(state => state.settings);
-    const theme = settings.theme;
-    const containerStyles = Styles.containerStyles(settings);
-    const headerProps = Styles.headerProps(settings);
-    const scrollViewProps = Styles.scrollViewProps(settings);
-    const tableSectionProps = Styles.tableSectionProps(settings);
-    const tableCellProps = Styles.tableCellProps(settings);
-    const colorPickerProps = Styles.colorPickerProps(settings);
+    const themeColors = useThemeColors();
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+    const scrollViewProps = Styles.scrollViewProps(themeColors);
+    const tableSectionProps = Styles.tableSectionProps(themeColors);
+    const tableCellProps = Styles.tableCellProps(themeColors);
+    const colorPickerProps = Styles.colorPickerProps(themeColors);
 
+    const theme = useAppSelector(state => state.settings.theme);
     const dispatch = useAppDispatch();
 
     // Functions for changing theme scheme and accent color
