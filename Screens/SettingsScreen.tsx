@@ -1,6 +1,8 @@
-import { SafeAreaView, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useThemeColors, useAppSelector, useAppDispatch } from '@/hooks';
 import { automaticColorScheme, darkColorScheme, lightColorScheme, automaticAccentColor, customAccentColor, setThemeAccentColor } from '@/store/theme';
@@ -39,7 +41,7 @@ function Settings({ navigation, route }: SettingsProps) {
     const tableCellProps = Styles.tableCellProps(themeColors);
 
     return (
-        <SafeAreaView style={containerStyles.container}>
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Settings' {...headerProps} />
             <ScrollView {...scrollViewProps}>
                 <TableView>
@@ -81,7 +83,7 @@ function DateTime({ navigation, route }: DateTimeProps) {
     const scrollViewProps = Styles.scrollViewProps(themeColors);
 
     return (
-        <SafeAreaView style={containerStyles.container}>
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Date & Time' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
             <ScrollView {...scrollViewProps}>
                 <TableView>
@@ -98,7 +100,7 @@ function Notifications({ navigation, route }: NotificationsProps) {
     const scrollViewProps = Styles.scrollViewProps(themeColors);
 
     return (
-        <SafeAreaView style={containerStyles.container}>
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Notifications' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
             <ScrollView {...scrollViewProps}>
                 <TableView>
@@ -141,7 +143,7 @@ function Theme({ navigation, route }: ThemeProps) {
     };
 
     return (
-        <SafeAreaView style={containerStyles.container}>
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Theme & Colors' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
             <ScrollView {...scrollViewProps}>
                 <TableView>

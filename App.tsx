@@ -3,6 +3,8 @@ import { OrientationLock, lockAsync } from 'expo-screen-orientation';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '@/store';
@@ -18,11 +20,13 @@ import { RootBottomTabParamList, ColorHex } from '@/types/types';
 
 export default function App() {
     return (
-        <Provider store={store}>
-            <PersistGate persistor={persistor}>
-                <AppComponent />
-            </PersistGate>
-        </Provider>
+        <SafeAreaProvider>
+            <Provider store={store}>
+                <PersistGate persistor={persistor}>
+                    <AppComponent />
+                </PersistGate>
+            </Provider>
+        </SafeAreaProvider>
     );
 };
 
@@ -46,8 +50,9 @@ export function AppComponent() {
                     // Bottom tab options
                     tabBarStyle: {
                         backgroundColor: themeColors.background,
-                        borderTopColor: themeColors.borders,
+                        borderWidth: 0,
                         borderTopWidth: 1,
+                        borderColor: themeColors.borders,
                     },
                     tabBarInactiveTintColor: themeColors.secondary,
                     tabBarActiveTintColor: themeColors.accent,

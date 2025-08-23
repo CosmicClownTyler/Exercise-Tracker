@@ -1,4 +1,6 @@
-import { SafeAreaView, View } from 'react-native';
+import { View } from 'react-native';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useThemeColors } from '@/hooks';
 
@@ -13,7 +15,7 @@ export default function CalendarScreen() {
     const calendarProps = Styles.calendarProps(themeColors);
 
     return (
-        <SafeAreaView style={containerStyles.container}>
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Calendar' {...headerProps} />
             <View style={{ flexGrow: 1, width: '100%' }}>
                 <Calendar

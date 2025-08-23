@@ -1,5 +1,7 @@
-import { StyleSheet, SafeAreaView, ScrollView, View, TouchableOpacity, Text, AppState } from 'react-native';
+import { StyleSheet, ScrollView, View, TouchableOpacity, Text, AppState } from 'react-native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useThemeColors } from '@/hooks';
 
@@ -43,38 +45,36 @@ function Home({ navigation, route }: HomeProps) {
     const scrollViewProps = Styles.scrollViewProps(themeColors);
 
     return (
-        <View style={{ width: '100%', height: '100%' }}>
-            <SafeAreaView style={containerStyles.container}>
-                <Header title='Home' {...headerProps} />
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='Home' {...headerProps} />
+            <View style={{
+                width: '100%',
+                flexGrow: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
                 <View style={{
-                    width: '100%',
-                    flexGrow: 1,
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    flexDirection: 'row',
                 }}>
-                    <View style={{
-                        flexDirection: 'row',
-                    }}>
-                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('SitUps'); }}>
-                            Sit Ups
-                        </TextButtonSquare>
-                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('PushUps'); }}>
-                            Push Ups
-                        </TextButtonSquare>
-                    </View>
-                    <View style={{
-                        flexDirection: 'row',
-                    }}>
-                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('PullUps'); }}>
-                            Pull Ups
-                        </TextButtonSquare>
-                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Planks'); }}>
-                            Planks
-                        </TextButtonSquare>
-                    </View>
+                    <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('SitUps'); }}>
+                        Sit Ups
+                    </TextButtonSquare>
+                    <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('PushUps'); }}>
+                        Push Ups
+                    </TextButtonSquare>
                 </View>
-            </SafeAreaView>
-        </View>
+                <View style={{
+                    flexDirection: 'row',
+                }}>
+                    <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('PullUps'); }}>
+                        Pull Ups
+                    </TextButtonSquare>
+                    <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Planks'); }}>
+                        Planks
+                    </TextButtonSquare>
+                </View>
+            </View>
+        </SafeAreaView>
     );
 }
 
@@ -84,12 +84,10 @@ function SitUps({ navigation, route }: SitUpsProps) {
     const headerProps = Styles.headerProps(themeColors);
 
     return (
-        <View style={{ width: '100%', height: '100%' }}>
-            <SafeAreaView style={containerStyles.container}>
-                <Header title='Sit Ups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-                <SitUpsComponent />
-            </SafeAreaView>
-        </View>
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='Sit Ups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <SitUpsComponent />
+        </SafeAreaView>
     );
 }
 function PushUps({ navigation, route }: PushUpsProps) {
@@ -98,12 +96,10 @@ function PushUps({ navigation, route }: PushUpsProps) {
     const headerProps = Styles.headerProps(themeColors);
 
     return (
-        <View style={{ width: '100%', height: '100%' }}>
-            <SafeAreaView style={containerStyles.container}>
-                <Header title='Push Ups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-                <PushUpsComponent />
-            </SafeAreaView>
-        </View>
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='Push Ups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <PushUpsComponent />
+        </SafeAreaView>
     );
 }
 function PullUps({ navigation, route }: PullUpsProps) {
@@ -112,12 +108,10 @@ function PullUps({ navigation, route }: PullUpsProps) {
     const headerProps = Styles.headerProps(themeColors);
 
     return (
-        <View style={{ width: '100%', height: '100%' }}>
-            <SafeAreaView style={containerStyles.container}>
-                <Header title='Pull Ups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-                <PullUpsComponent />
-            </SafeAreaView>
-        </View>
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='Pull Ups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <PullUpsComponent />
+        </SafeAreaView>
     );
 }
 function Planks({ navigation, route }: PlanksProps) {
@@ -126,11 +120,9 @@ function Planks({ navigation, route }: PlanksProps) {
     const headerProps = Styles.headerProps(themeColors);
 
     return (
-        <View style={{ width: '100%', height: '100%' }}>
-            <SafeAreaView style={containerStyles.container}>
-                <Header title='Planks' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-                <PlanksComponent />
-            </SafeAreaView>
-        </View>
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='Planks' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <PlanksComponent />
+        </SafeAreaView>
     );
 }
