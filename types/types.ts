@@ -20,6 +20,7 @@ export type RootBottomTabParamList = {
     History: undefined;
 };
 
+
 // State types
 export interface HistoryState {
     dates: Date[];
@@ -34,6 +35,7 @@ export interface ThemeState {
     customAccentColor: ColorHex;
 };
 export interface PreferencesState {
+    weekStartsOn: Weekday;
     taskViewIsPopup: boolean;
 };
 
@@ -54,3 +56,15 @@ export type ColorRGB = {
     b: number;
 };
 export type ColorHex = `#${string}`;
+
+
+// Weekday enum
+export enum Weekday {
+    Sunday = 'Sunday',
+    Monday = 'Monday',
+    Tuesday = 'Tuesday',
+    Wednesday = 'Wednesday',
+    Thursday = 'Thursday',
+    Friday = 'Friday',
+    Saturday = 'Saturday',
+};

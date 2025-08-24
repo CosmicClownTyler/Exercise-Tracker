@@ -8,7 +8,7 @@ import { CalendarProps, CheckboxProps, CircularProgressProps, ColorPickerProps, 
 
 import { calcContrastingAccentPair } from '@/Styles/Colors';
 
-import { ColorTheme } from '@/types/types';
+import { ColorTheme, Weekday } from '@/types/types';
 
 // Consistent styles across common elements
 export function containerStyles(colors: ColorTheme) {
@@ -81,8 +81,33 @@ export function tableCellProps(colors: ColorTheme) {
 }
 
 // Consistent props for custom components
-export function calendarProps(colors: ColorTheme) {
+export function calendarProps(colors: ColorTheme, weekStartsOn: Weekday) {
     const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
+
+    let firstDay: number = 0;
+    switch (weekStartsOn) {
+        case Weekday.Sunday:
+            firstDay = 0;
+            break;
+        case Weekday.Monday:
+            firstDay = 1;
+            break;
+        case Weekday.Tuesday:
+            firstDay = 2;
+            break;
+        case Weekday.Wednesday:
+            firstDay = 3;
+            break;
+        case Weekday.Thursday:
+            firstDay = 4;
+            break;
+        case Weekday.Friday:
+            firstDay = 5;
+            break;
+        case Weekday.Saturday:
+            firstDay = 6;
+            break;
+    }
 
     const calendarProps: CalendarProps = {
         calendarStyle: {
@@ -95,7 +120,8 @@ export function calendarProps(colors: ColorTheme) {
             disabledArrowColor: secondary,         // disabled arrow color
             selectedDayBackgroundColor: accent,    // selected day background color
             selectedDayTextColor: background,      // selected day text color
-        }
+        },
+        firstDay: firstDay,
     };
 
     return calendarProps;

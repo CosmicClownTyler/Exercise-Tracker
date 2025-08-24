@@ -1,9 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { PreferencesState } from '@/types/types';
+import { PreferencesState, Weekday } from '@/types/types';
 
 // The initial default preferences state
 export const defaultPreferencesState: PreferencesState = {
+    weekStartsOn: Weekday.Sunday,
     taskViewIsPopup: true,
 };
 
@@ -15,6 +16,9 @@ export const preferencesSlice = createSlice({
         revertToDefaultPreferences: (state) => {
             console.warn('RESETTING PREFERENCES');
             state = defaultPreferencesState;
+        },
+        setWeekStartsOn: (state, action: PayloadAction<Weekday>) => {
+            state.weekStartsOn = action.payload;
         },
         taskViewFullscreen: (state) => {
             state.taskViewIsPopup = false;
@@ -31,6 +35,7 @@ export const preferencesReducer = preferencesSlice.reducer;
 // The actions for this slice
 export const {
     revertToDefaultPreferences,
+    setWeekStartsOn,
     taskViewFullscreen,
     taskViewPopup,
 } = preferencesSlice.actions;

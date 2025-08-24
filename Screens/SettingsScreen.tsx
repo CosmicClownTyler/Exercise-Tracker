@@ -6,13 +6,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useThemeColors, useAppSelector, useAppDispatch } from '@/hooks';
 import { automaticColorScheme, darkColorScheme, lightColorScheme, automaticAccentColor, customAccentColor, setThemeAccentColor } from '@/store/theme';
-import { taskViewFullscreen, taskViewPopup } from '@/store/preferences';
+import { setWeekStartsOn } from '@/store/preferences';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import ColorPicker from '@/Components/ColorPicker';
 
-import { SettingsStackParamList, ColorHex } from '@/types/types';
+import { SettingsStackParamList, ColorHex, Weekday } from '@/types/types';
 
 const SettingsStack = createNativeStackNavigator<SettingsStackParamList>();
 
@@ -81,12 +81,73 @@ function DateTime({ navigation, route }: DateTimeProps) {
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const scrollViewProps = Styles.scrollViewProps(themeColors);
+    const tableSectionProps = Styles.tableSectionProps(themeColors);
+    const tableCellProps = Styles.tableCellProps(themeColors);
+
+    const preferences = useAppSelector(state => state.settings.preferences);
+    const dispatch = useAppDispatch();
+
+    // Functions for changing preferences
+    const setWeekStartDay = (day: Weekday) => {
+        dispatch(setWeekStartsOn(day));
+    };
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Date & Time' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
             <ScrollView {...scrollViewProps}>
                 <TableView>
+                    <Section header='First Day of the Week' {...tableSectionProps}>
+                        <Cell
+                            title='Sunday'
+                            cellStyle='Basic'
+                            accessory={preferences.weekStartsOn == Weekday.Sunday ? 'Checkmark' : undefined}
+                            onPress={() => setWeekStartDay(Weekday.Sunday)}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Monday'
+                            cellStyle='Basic'
+                            accessory={preferences.weekStartsOn == Weekday.Monday ? 'Checkmark' : undefined}
+                            onPress={() => setWeekStartDay(Weekday.Monday)}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Tuesday'
+                            cellStyle='Basic'
+                            accessory={preferences.weekStartsOn == Weekday.Tuesday ? 'Checkmark' : undefined}
+                            onPress={() => setWeekStartDay(Weekday.Tuesday)}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Wednesday'
+                            cellStyle='Basic'
+                            accessory={preferences.weekStartsOn == Weekday.Wednesday ? 'Checkmark' : undefined}
+                            onPress={() => setWeekStartDay(Weekday.Wednesday)}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Thursday'
+                            cellStyle='Basic'
+                            accessory={preferences.weekStartsOn == Weekday.Thursday ? 'Checkmark' : undefined}
+                            onPress={() => setWeekStartDay(Weekday.Thursday)}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Friday'
+                            cellStyle='Basic'
+                            accessory={preferences.weekStartsOn == Weekday.Friday ? 'Checkmark' : undefined}
+                            onPress={() => setWeekStartDay(Weekday.Friday)}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Saturday'
+                            cellStyle='Basic'
+                            accessory={preferences.weekStartsOn == Weekday.Saturday ? 'Checkmark' : undefined}
+                            onPress={() => setWeekStartDay(Weekday.Saturday)}
+                            {...tableCellProps}
+                        />
+                    </Section>
                 </TableView>
             </ScrollView>
         </SafeAreaView>
