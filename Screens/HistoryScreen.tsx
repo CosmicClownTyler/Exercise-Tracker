@@ -8,7 +8,7 @@ import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import Calendar from '@/Components/Calendar';
 
-export default function CalendarScreen() {
+export default function HistoryScreen() {
     const themeColors = useThemeColors();
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
@@ -16,7 +16,7 @@ export default function CalendarScreen() {
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
-            <Header title='Calendar' {...headerProps} />
+            <Header title='History' {...headerProps} />
             <View style={{ flexGrow: 1, width: '100%' }}>
                 <Calendar
                     {...calendarProps}

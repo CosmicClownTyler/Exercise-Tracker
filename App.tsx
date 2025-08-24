@@ -12,7 +12,7 @@ import { store, persistor } from '@/store';
 import { useThemeColors } from '@/hooks';
 
 import { CalendarIcon, CheckmarkIcon, SettingsIcon } from '@/Components/TabBarIcons';
-import CalendarScreen from '@/Screens/CalendarScreen';
+import HistoryScreen from '@/Screens/HistoryScreen';
 import HomeScreen from '@/Screens/HomeScreen';
 import SettingsScreen from '@/Screens/SettingsScreen';
 
@@ -57,7 +57,7 @@ export function AppComponent() {
                     tabBarInactiveTintColor: themeColors.secondary,
                     tabBarActiveTintColor: themeColors.accent,
                     tabBarIcon: ({ color, size }) => {
-                        if (route.name === 'Calendar')
+                        if (route.name === 'History')
                             return <CalendarIcon color={color as ColorHex} size={size} />;
                         if (route.name === 'Home')
                             return <CheckmarkIcon color={color as ColorHex} size={size} />;
@@ -66,7 +66,7 @@ export function AppComponent() {
                     },
                 })}
             >
-                <Tab.Screen name='Calendar' component={CalendarScreen} />
+                <Tab.Screen name='History' component={HistoryScreen} />
                 <Tab.Screen name='Home' component={HomeScreen} />
                 <Tab.Screen name='Settings' component={SettingsScreen} />
             </Tab.Navigator>

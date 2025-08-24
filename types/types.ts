@@ -17,7 +17,7 @@ export type SettingsStackParamList = {
 export type RootBottomTabParamList = {
     Home: NavigatorScreenParams<HomeStackParamList>;
     Settings: NavigatorScreenParams<SettingsStackParamList>;
-    Calendar: undefined;
+    History: undefined;
 };
 
 // State types
