@@ -2,14 +2,14 @@ import type { NavigatorScreenParams } from '@react-navigation/native';
 
 // Navigation types
 export type HomeStackParamList = {
-    Home2: undefined;
+    Landing: undefined;
     SitUps: undefined;
     PushUps: undefined;
     PullUps: undefined;
     Planks: undefined;
 };
 export type SettingsStackParamList = {
-    Settings2: undefined;
+    Landing: undefined;
     DateTime: undefined;
     Notifications: undefined;
     Theme: undefined;

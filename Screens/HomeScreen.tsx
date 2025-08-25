@@ -21,8 +21,8 @@ const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
 export default function HomeScreen() {
     return (
-        <HomeStack.Navigator initialRouteName='Home2' screenOptions={{ headerShown: false }} >
-            <HomeStack.Screen name='Home2' component={Home} />
+        <HomeStack.Navigator initialRouteName='Landing' screenOptions={{ headerShown: false }} >
+            <HomeStack.Screen name='Landing' component={Landing} />
             <HomeStack.Screen name='SitUps' component={SitUps} />
             <HomeStack.Screen name='PushUps' component={PushUps} />
             <HomeStack.Screen name='PullUps' component={PullUps} />
@@ -31,13 +31,13 @@ export default function HomeScreen() {
     );
 }
 
-type HomeProps = NativeStackScreenProps<HomeStackParamList, 'Home2'>;
+type HomeProps = NativeStackScreenProps<HomeStackParamList, 'Landing'>;
 type SitUpsProps = NativeStackScreenProps<HomeStackParamList, 'SitUps'>;
 type PushUpsProps = NativeStackScreenProps<HomeStackParamList, 'PushUps'>;
 type PullUpsProps = NativeStackScreenProps<HomeStackParamList, 'PullUps'>;
 type PlanksProps = NativeStackScreenProps<HomeStackParamList, 'Planks'>;
 
-function Home({ navigation, route }: HomeProps) {
+function Landing({ navigation, route }: HomeProps) {
     const themeColors = useThemeColors();
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);

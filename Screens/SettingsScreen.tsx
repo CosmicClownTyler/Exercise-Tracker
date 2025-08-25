@@ -18,8 +18,8 @@ const SettingsStack = createNativeStackNavigator<SettingsStackParamList>();
 
 export default function SettingsScreen() {
     return (
-        <SettingsStack.Navigator initialRouteName='Settings2' screenOptions={{ headerShown: false }} >
-            <SettingsStack.Screen name='Settings2' component={Settings} />
+        <SettingsStack.Navigator initialRouteName='Landing' screenOptions={{ headerShown: false }} >
+            <SettingsStack.Screen name='Landing' component={Landing} />
             <SettingsStack.Screen name='DateTime' component={DateTime} />
             <SettingsStack.Screen name='Notifications' component={Notifications} />
             <SettingsStack.Screen name='Theme' component={Theme} />
@@ -27,12 +27,12 @@ export default function SettingsScreen() {
     );
 }
 
-type SettingsProps = NativeStackScreenProps<SettingsStackParamList, 'Settings2'>;
+type SettingsProps = NativeStackScreenProps<SettingsStackParamList, 'Landing'>;
 type DateTimeProps = NativeStackScreenProps<SettingsStackParamList, 'DateTime'>;
 type NotificationsProps = NativeStackScreenProps<SettingsStackParamList, 'Notifications'>;
 type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>;
 
-function Settings({ navigation, route }: SettingsProps) {
+function Landing({ navigation, route }: SettingsProps) {
     const themeColors = useThemeColors();
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
