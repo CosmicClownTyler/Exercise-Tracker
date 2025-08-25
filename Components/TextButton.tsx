@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-import { TextButtonProps } from '@/types/props';
+import type { TextButtonProps } from '@/types/props';
 
 export default function TextButton(props: TextButtonProps) {
     // Deconstruct props

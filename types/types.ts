@@ -1,6 +1,11 @@
 import type { NavigatorScreenParams } from '@react-navigation/native';
 
 // Navigation types
+export type RootBottomTabParamList = {
+    Home: NavigatorScreenParams<HomeStackParamList>;
+    Settings: NavigatorScreenParams<SettingsStackParamList>;
+    History: NavigatorScreenParams<SettingsStackParamList>;
+};
 export type HomeStackParamList = {
     Landing: undefined;
     SitUps: undefined;
@@ -13,11 +18,6 @@ export type SettingsStackParamList = {
     DateTime: undefined;
     Notifications: undefined;
     Theme: undefined;
-};
-export type RootBottomTabParamList = {
-    Home: NavigatorScreenParams<HomeStackParamList>;
-    Settings: NavigatorScreenParams<SettingsStackParamList>;
-    History: undefined;
 };
 
 
@@ -40,7 +40,7 @@ export interface PreferencesState {
 };
 
 
-// Theme, style and color types
+// Theme and color types
 export interface ColorTheme {
     isDark: boolean;            // The boolean value determining if this color theme is dark or light themed
     background: ColorHex;       // The color used for the background and empty spaces                  Determined by theme color scheme

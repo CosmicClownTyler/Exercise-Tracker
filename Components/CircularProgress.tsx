@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Dimensions, Animated, View, Text } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 
-const AnimatedPath = Animated.createAnimatedComponent(Path);
+import type { CircularProgressProps } from '@/types/props';
 
-import { CircularProgressProps } from '@/types/props';
+const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export default function CircularProgress(props: CircularProgressProps) {
     // Deconstruct props with default values

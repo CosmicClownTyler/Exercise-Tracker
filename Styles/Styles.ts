@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
 
-// Import prop types
-import { ScrollViewProps } from 'react-native';
-import { SectionInterface } from 'react-native-tableview-simple/lib/typescript/components/Section';
-import { CellInterface } from 'react-native-tableview-simple/lib/typescript/components/Cell';
-import { CalendarProps, CheckboxProps, CircularProgressProps, ColorPickerProps, HeaderProps, TextButtonProps } from '@/types/props';
-
 import { calcContrastingAccentPair } from '@/Styles/Colors';
 
-import { ColorTheme, Weekday } from '@/types/types';
+import type { ScrollViewProps } from 'react-native';
+import type { SectionInterface } from 'react-native-tableview-simple/lib/typescript/components/Section';
+import type { CellInterface } from 'react-native-tableview-simple/lib/typescript/components/Cell';
+import type { CalendarProps, CheckboxProps, CircularProgressProps, ColorPickerProps, HeaderProps, TextButtonProps } from '@/types/props';
+
+import { Weekday } from '@/types/types';
+import type { ColorTheme } from '@/types/types';
 
 // Consistent styles across common elements
 export function containerStyles(colors: ColorTheme) {

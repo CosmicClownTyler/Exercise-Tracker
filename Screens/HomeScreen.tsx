@@ -1,21 +1,19 @@
-import { StyleSheet, ScrollView, View, TouchableOpacity, Text, AppState } from 'react-native';
-import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
-
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useThemeColors } from '@/hooks';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
-import TextButton from '@/Components/TextButton';
 import { TextButtonSquare } from '@/Components/TextButton';
-
 import SitUpsComponent from '@/Components/Exercises/SitUpsComponent';
 import PushUpsComponent from '@/Components/Exercises/PushUpsComponent';
 import PullUpsComponent from '@/Components/Exercises/PullUpsComponent';
 import PlanksComponent from '@/Components/Exercises/PlanksComponent';
 
-import { HomeStackParamList } from '@/types/types';
+import type { HomeStackParamList } from '@/types/types';
+import type { HomeLandingProps, SitUpsProps, PushUpsProps, PullUpsProps, PlanksProps, } from '@/types/props';
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
@@ -31,18 +29,14 @@ export default function HomeScreen() {
     );
 }
 
-type HomeProps = NativeStackScreenProps<HomeStackParamList, 'Landing'>;
-type SitUpsProps = NativeStackScreenProps<HomeStackParamList, 'SitUps'>;
-type PushUpsProps = NativeStackScreenProps<HomeStackParamList, 'PushUps'>;
-type PullUpsProps = NativeStackScreenProps<HomeStackParamList, 'PullUps'>;
-type PlanksProps = NativeStackScreenProps<HomeStackParamList, 'Planks'>;
-
-function Landing({ navigation, route }: HomeProps) {
+function Landing({ navigation, route }: HomeLandingProps) {
+    // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const textButtonProps = Styles.textButtonProps(themeColors);
-    const scrollViewProps = Styles.scrollViewProps(themeColors);
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
@@ -79,7 +73,10 @@ function Landing({ navigation, route }: HomeProps) {
 }
 
 function SitUps({ navigation, route }: SitUpsProps) {
+    // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
 
@@ -91,7 +88,10 @@ function SitUps({ navigation, route }: SitUpsProps) {
     );
 }
 function PushUps({ navigation, route }: PushUpsProps) {
+    // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
 
@@ -103,7 +103,10 @@ function PushUps({ navigation, route }: PushUpsProps) {
     );
 }
 function PullUps({ navigation, route }: PullUpsProps) {
+    // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
 
@@ -115,7 +118,10 @@ function PullUps({ navigation, route }: PullUpsProps) {
     );
 }
 function Planks({ navigation, route }: PlanksProps) {
+    // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
 

@@ -1,8 +1,21 @@
-import { DimensionValue, StyleProp, ViewStyle, TextStyle, ImageStyle, ImageSourcePropType } from 'react-native';
+import type { DimensionValue, StyleProp, ViewStyle, TextStyle, ImageSourcePropType } from 'react-native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { Theme as CalendarTheme, MarkedDates as CalendarMarkedDates, MarkingTypes as CalendarMarkingTypes } from 'react-native-calendars/src/types';
 
-import { Theme as CalendarTheme, MarkedDates as CalendarMarkedDates, MarkingTypes as CalendarMarkingTypes } from 'react-native-calendars/src/types';
+import type { HomeStackParamList, SettingsStackParamList, ColorHex } from '@/types/types';
 
-import { ColorHex } from '@/types/types';
+// Home stack route props
+export type HomeLandingProps = NativeStackScreenProps<HomeStackParamList, 'Landing'>;
+export type SitUpsProps = NativeStackScreenProps<HomeStackParamList, 'SitUps'>;
+export type PushUpsProps = NativeStackScreenProps<HomeStackParamList, 'PushUps'>;
+export type PullUpsProps = NativeStackScreenProps<HomeStackParamList, 'PullUps'>;
+export type PlanksProps = NativeStackScreenProps<HomeStackParamList, 'Planks'>;
+// Settings stack route props
+export type SettingsLandingProps = NativeStackScreenProps<SettingsStackParamList, 'Landing'>;
+export type DateTimeProps = NativeStackScreenProps<SettingsStackParamList, 'DateTime'>;
+export type NotificationsProps = NativeStackScreenProps<SettingsStackParamList, 'Notifications'>;
+export type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>;
+
 
 // Component props
 export interface CalendarProps {
@@ -63,6 +76,7 @@ export interface TextButtonProps {
     textStyle?: StyleProp<TextStyle>;
     children?: string;
 };
+
 
 // Exercise component props
 export interface PlanksComponentProps {

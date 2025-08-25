@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { StyleSheet, Animated, TouchableOpacity } from 'react-native';
 
-import { CheckboxProps } from '@/types/props';
+import type { CheckboxProps } from '@/types/props';
 
 export default function Checkbox(props: CheckboxProps) {
     // Deconstruct props with default values

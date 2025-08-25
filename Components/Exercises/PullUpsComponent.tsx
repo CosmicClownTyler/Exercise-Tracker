@@ -8,7 +8,7 @@ import * as Styles from '@/Styles/Styles';
 import TextButton from '@/Components/TextButton';
 import CircularProgress from '@/Components/CircularProgress';
 
-import { PullUpsComponentProps } from '@/types/props';
+import type { PullUpsComponentProps } from '@/types/props';
 
 export default function PullUpsComponent(props: PullUpsComponentProps) {
     const themeColors = useThemeColors();

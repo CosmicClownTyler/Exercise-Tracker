@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Accents } from '@/Styles/Colors'
 
-import { ThemeState, ColorHex } from '@/types/types';
+import type { ThemeState, ColorHex } from '@/types/types';
 
 // The initial default theme state
 export const defaultThemeState: ThemeState = {

@@ -1,5 +1,4 @@
 import { View } from 'react-native';
-
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAppSelector, useThemeColors } from '@/hooks';
@@ -9,8 +8,13 @@ import Header from '@/Components/Header';
 import Calendar from '@/Components/Calendar';
 
 export default function HistoryScreen() {
+    // Get necessary state
     const weekStartsOn = useAppSelector(state => state.settings.preferences.weekStartsOn);
+
+    // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const calendarProps = Styles.calendarProps(themeColors, weekStartsOn);

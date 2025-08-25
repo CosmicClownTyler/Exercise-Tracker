@@ -1,6 +1,6 @@
 import { Image } from 'react-native';
 
-import { TabBarIconProps } from '@/types/props';
+import type { TabBarIconProps } from '@/types/props';
 
 export function CalendarIcon({ color, size }: TabBarIconProps) {
     return (<Image

@@ -1,4 +1,4 @@
-import { ColorTheme, ColorHex, ColorRGB } from '@/types/types';
+import type { ColorTheme, ColorHex, ColorRGB } from '@/types/types';
 
 export const DarkColorTheme: ColorTheme = {
     isDark: true,

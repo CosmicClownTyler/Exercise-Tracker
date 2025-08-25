@@ -1,8 +1,7 @@
 import { ScrollView } from 'react-native';
-import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { TableView, Section, Cell } from 'react-native-tableview-simple';
-
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { TableView, Section, Cell } from 'react-native-tableview-simple';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useThemeColors, useAppSelector, useAppDispatch } from '@/hooks';
 import { automaticColorScheme, darkColorScheme, lightColorScheme, automaticAccentColor, customAccentColor, setThemeAccentColor } from '@/store/theme';
@@ -12,7 +11,9 @@ import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import ColorPicker from '@/Components/ColorPicker';
 
-import { SettingsStackParamList, ColorHex, Weekday } from '@/types/types';
+import { Weekday } from '@/types/types';
+import type { SettingsStackParamList, ColorHex } from '@/types/types';
+import type { SettingsLandingProps, DateTimeProps, NotificationsProps, ThemeProps } from '@/types/props';
 
 const SettingsStack = createNativeStackNavigator<SettingsStackParamList>();
 
@@ -27,13 +28,11 @@ export default function SettingsScreen() {
     );
 }
 
-type SettingsProps = NativeStackScreenProps<SettingsStackParamList, 'Landing'>;
-type DateTimeProps = NativeStackScreenProps<SettingsStackParamList, 'DateTime'>;
-type NotificationsProps = NativeStackScreenProps<SettingsStackParamList, 'Notifications'>;
-type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>;
-
-function Landing({ navigation, route }: SettingsProps) {
+function Landing({ navigation, route }: SettingsLandingProps) {
+    // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const scrollViewProps = Styles.scrollViewProps(themeColors);
@@ -77,15 +76,19 @@ function Landing({ navigation, route }: SettingsProps) {
 }
 
 function DateTime({ navigation, route }: DateTimeProps) {
+    // Get necessary state
+    const dispatch = useAppDispatch();
+    const weekStartsOn = useAppSelector(state => state.settings.preferences.weekStartsOn);
+
+    // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const scrollViewProps = Styles.scrollViewProps(themeColors);
     const tableSectionProps = Styles.tableSectionProps(themeColors);
     const tableCellProps = Styles.tableCellProps(themeColors);
-
-    const preferences = useAppSelector(state => state.settings.preferences);
-    const dispatch = useAppDispatch();
 
     // Functions for changing preferences
     const setWeekStartDay = (day: Weekday) => {
@@ -101,49 +104,49 @@ function DateTime({ navigation, route }: DateTimeProps) {
                         <Cell
                             title='Sunday'
                             cellStyle='Basic'
-                            accessory={preferences.weekStartsOn == Weekday.Sunday ? 'Checkmark' : undefined}
+                            accessory={weekStartsOn == Weekday.Sunday ? 'Checkmark' : undefined}
                             onPress={() => setWeekStartDay(Weekday.Sunday)}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Monday'
                             cellStyle='Basic'
-                            accessory={preferences.weekStartsOn == Weekday.Monday ? 'Checkmark' : undefined}
+                            accessory={weekStartsOn == Weekday.Monday ? 'Checkmark' : undefined}
                             onPress={() => setWeekStartDay(Weekday.Monday)}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Tuesday'
                             cellStyle='Basic'
-                            accessory={preferences.weekStartsOn == Weekday.Tuesday ? 'Checkmark' : undefined}
+                            accessory={weekStartsOn == Weekday.Tuesday ? 'Checkmark' : undefined}
                             onPress={() => setWeekStartDay(Weekday.Tuesday)}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Wednesday'
                             cellStyle='Basic'
-                            accessory={preferences.weekStartsOn == Weekday.Wednesday ? 'Checkmark' : undefined}
+                            accessory={weekStartsOn == Weekday.Wednesday ? 'Checkmark' : undefined}
                             onPress={() => setWeekStartDay(Weekday.Wednesday)}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Thursday'
                             cellStyle='Basic'
-                            accessory={preferences.weekStartsOn == Weekday.Thursday ? 'Checkmark' : undefined}
+                            accessory={weekStartsOn == Weekday.Thursday ? 'Checkmark' : undefined}
                             onPress={() => setWeekStartDay(Weekday.Thursday)}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Friday'
                             cellStyle='Basic'
-                            accessory={preferences.weekStartsOn == Weekday.Friday ? 'Checkmark' : undefined}
+                            accessory={weekStartsOn == Weekday.Friday ? 'Checkmark' : undefined}
                             onPress={() => setWeekStartDay(Weekday.Friday)}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Saturday'
                             cellStyle='Basic'
-                            accessory={preferences.weekStartsOn == Weekday.Saturday ? 'Checkmark' : undefined}
+                            accessory={weekStartsOn == Weekday.Saturday ? 'Checkmark' : undefined}
                             onPress={() => setWeekStartDay(Weekday.Saturday)}
                             {...tableCellProps}
                         />
@@ -155,7 +158,10 @@ function DateTime({ navigation, route }: DateTimeProps) {
 }
 
 function Notifications({ navigation, route }: NotificationsProps) {
+    // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const scrollViewProps = Styles.scrollViewProps(themeColors);
@@ -172,16 +178,20 @@ function Notifications({ navigation, route }: NotificationsProps) {
 }
 
 function Theme({ navigation, route }: ThemeProps) {
+    // Get necessary state
+    const dispatch = useAppDispatch();
+    const theme = useAppSelector(state => state.settings.theme);
+
+    // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const scrollViewProps = Styles.scrollViewProps(themeColors);
     const tableSectionProps = Styles.tableSectionProps(themeColors);
     const tableCellProps = Styles.tableCellProps(themeColors);
     const colorPickerProps = Styles.colorPickerProps(themeColors);
-
-    const theme = useAppSelector(state => state.settings.theme);
-    const dispatch = useAppDispatch();
 
     // Functions for changing theme scheme and accent color
     const setSchemeAutomatic = () => {

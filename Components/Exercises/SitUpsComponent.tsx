@@ -8,7 +8,7 @@ import * as Styles from '@/Styles/Styles';
 import TextButton from '@/Components/TextButton';
 import CircularProgress from '@/Components/CircularProgress';
 
-import { SitUpsComponentProps } from '@/types/props';
+import type { SitUpsComponentProps } from '@/types/props';
 
 export default function SitUpsComponent(props: SitUpsComponentProps) {
     const themeColors = useThemeColors();

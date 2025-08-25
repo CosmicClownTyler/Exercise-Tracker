@@ -8,7 +8,7 @@ import * as Styles from '@/Styles/Styles';
 import TextButton from '@/Components/TextButton';
 import CircularProgress from '@/Components/CircularProgress';
 
-import { PlanksComponentProps } from '@/types/props';
+import type { PlanksComponentProps } from '@/types/props';
 
 export default function PlanksComponent(props: PlanksComponentProps) {
     const themeColors = useThemeColors();

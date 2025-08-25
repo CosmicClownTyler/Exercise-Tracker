@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { HistoryState } from '@/types/types';
+import type { HistoryState } from '@/types/types';
 
 // The initial default history state
 export const defaultHistoryState: HistoryState = {

@@ -1,10 +1,11 @@
 import { useColorScheme } from 'react-native';
 
 import { useStore, useSelector, useDispatch } from 'react-redux';
-import type { AppStore, AppState, AppDispatch } from '@/store/';
 
 import { DarkColorTheme, LightColorTheme } from '@/Styles/Colors'
-import { ColorTheme } from '@/types/types';
+
+import type { AppStore, AppState, AppDispatch } from '@/store/';
+import type { ColorTheme } from '@/types/types';
 
 // Typed store, selector, and dispatch
 export const useAppStore = useStore.withTypes<AppStore>();

@@ -16,7 +16,7 @@ import HistoryScreen from '@/Screens/HistoryScreen';
 import HomeScreen from '@/Screens/HomeScreen';
 import SettingsScreen from '@/Screens/SettingsScreen';
 
-import { RootBottomTabParamList, ColorHex } from '@/types/types';
+import type { RootBottomTabParamList, ColorHex } from '@/types/types';
 
 export default function App() {
     return (

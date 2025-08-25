@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
-import { Calendar as RNCalendar, DateData } from 'react-native-calendars';
+import { Calendar as RNCalendar } from 'react-native-calendars';
 
-import { CalendarProps } from '@/types/props';
+import type { DateData } from 'react-native-calendars';
+import type { CalendarProps } from '@/types/props';
 
 export default function Calendar(props: CalendarProps) {
     // Deconstruct props

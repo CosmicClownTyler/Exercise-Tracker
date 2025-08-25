@@ -1,6 +1,6 @@
 import { StyleSheet, View, TouchableOpacity, Image, Text } from 'react-native';
 
-import { HeaderProps } from '@/types/props';
+import type { HeaderProps } from '@/types/props';
 
 export default function Header(props: HeaderProps) {
     // Deconstruct props

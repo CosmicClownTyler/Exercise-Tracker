@@ -2,7 +2,7 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 
 import { Accents } from '@/Styles/Colors';
 
-import { ColorPickerProps } from '@/types/props';
+import type { ColorPickerProps } from '@/types/props';
 
 export default function ColorPicker(props: ColorPickerProps) {
     // Deconstruct props

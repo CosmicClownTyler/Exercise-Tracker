@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { PreferencesState, Weekday } from '@/types/types';
+import { Weekday } from '@/types/types';
+import type { PreferencesState } from '@/types/types';
 
 // The initial default preferences state
 export const defaultPreferencesState: PreferencesState = {
