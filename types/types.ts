@@ -19,11 +19,15 @@ export type SettingsStackParamList = {
     Notifications: undefined;
     Theme: undefined;
 };
+export type HistoryStackParamList = {
+    Landing: undefined;
+    Entry: { id: number };
+};
 
 
 // State types
 export interface HistoryState {
-    dates: Date[];
+    entries: HistoryEntry[];
 };
 export interface SettingsState {
     theme: ThemeState;
@@ -37,6 +41,15 @@ export interface ThemeState {
 export interface PreferencesState {
     weekStartsOn: Weekday;
     taskViewIsPopup: boolean;
+};
+
+
+// History entry type
+export interface HistoryEntry {
+    id: number;
+    date: string; // ISO formatted date string
+    exercise: string;
+    count: number;
 };
 
 

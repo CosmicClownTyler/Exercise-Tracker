@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { HistoryState } from '@/types/types';
+import type { HistoryState, HistoryEntry } from '@/types/types';
 
 // The initial default history state
 export const defaultHistoryState: HistoryState = {
-    dates: [],
+    entries: [],
 };
 
 // The history slice
@@ -16,8 +16,8 @@ export const historySlice = createSlice({
             console.warn('RESETTING HISTORY');
             state = defaultHistoryState;
         },
-        addDate: (state, action) => {
-            state.dates.push(action.payload);
+        addEntry: (state, action: PayloadAction<HistoryEntry>) => {
+            state.entries.push(action.payload);
         },
     },
 });
@@ -28,5 +28,5 @@ export const historyReducer = historySlice.reducer;
 // The actions for this slice
 export const {
     revertToDefaultHistory,
-    addDate
+    addEntry
 } = historySlice.actions;
