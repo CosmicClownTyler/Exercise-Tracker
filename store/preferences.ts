@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Weekday } from '@/types/types';
+import type { AppState } from "@/store";
 import type { PreferencesState } from '@/types/types';
 
 // The initial default preferences state
@@ -40,3 +41,8 @@ export const {
     taskViewFullscreen,
     taskViewPopup,
 } = preferencesSlice.actions;
+
+// Basic selectors
+export const selectPreferences = (state: AppState) => state.settings.preferences;
+export const selectPreferencesWeekStartsOn = (state: AppState) => state.settings.preferences.weekStartsOn;
+export const selectPreferencesTaskViewIsPopup = (state: AppState) => state.settings.preferences.taskViewIsPopup;

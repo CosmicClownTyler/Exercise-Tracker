@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '@/store';
 
-import { useThemeColors } from '@/hooks';
+import { useThemeColors } from '@/hooks/theme';
 
 import { CalendarIcon, CheckmarkIcon, SettingsIcon } from '@/Components/TabBarIcons';
 import HistoryScreen from '@/Screens/HistoryScreen';

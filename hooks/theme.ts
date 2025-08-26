@@ -1,27 +1,22 @@
 import { useColorScheme } from 'react-native';
 
-import { useStore, useSelector, useDispatch } from 'react-redux';
+import { useAppSelector } from '@/hooks/hooks';
+import { selectThemeColorScheme, selectThemeAccentType, selectThemeCustomAccentColor } from '@/store/theme';
 
 import { DarkColorTheme, LightColorTheme } from '@/Styles/Colors'
 
-import type { AppStore, AppState, AppDispatch } from '@/store/';
 import type { ColorTheme } from '@/types/types';
-
-// Typed store, selector, and dispatch
-export const useAppStore = useStore.withTypes<AppStore>();
-export const useAppSelector = useSelector.withTypes<AppState>();
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 
 // Hook for getting the theme's color scheme ('light' or 'dark')
 export const useThemeColorScheme = () => {
-    // Get the theme from the state
-    const theme = useAppSelector(state => state.settings.theme);
+    // Get the color scheme from the theme state
+    const colorScheme = useAppSelector(state => selectThemeColorScheme(state));
 
     // Get the system color scheme from react native's hook
     const systemColorScheme = useColorScheme();
 
     // If the theme's color scheme is set to system, return the system color scheme
-    if (theme.colorScheme == 'system') {
+    if (colorScheme == 'system') {
         if (systemColorScheme == 'light') {
             return 'light';
         }
@@ -31,20 +26,14 @@ export const useThemeColorScheme = () => {
     }
     // Otherwise return the theme's color scheme, either 'dark' or 'light'
     else {
-        return theme.colorScheme;
+        return colorScheme;
     }
-}
-// Hook for getting the theme's accent type ('default' or 'custom')
-export const useThemeAccentType = () => {
-    // Get the theme from the state
-    const theme = useAppSelector(state => state.settings.theme);
-
-    return theme.accentType;
 }
 // Hook for getting the theme's colors
 export const useThemeColors = () => {
-    // Get the theme from the state
-    const theme = useAppSelector(state => state.settings.theme);
+    // Get the accent type and custom accent color from the theme state
+    const accentType = useAppSelector(state => selectThemeAccentType(state));
+    const customAccentColor = useAppSelector(state => selectThemeCustomAccentColor(state));
 
     // Get the theme's color scheme
     const colorScheme = useThemeColorScheme();
@@ -53,8 +42,8 @@ export const useThemeColors = () => {
     let colors = colorScheme == 'dark' ? { ...DarkColorTheme } : { ...LightColorTheme };
 
     // Set the accent color if the accent type is custom
-    if (theme.accentType == "custom") {
-        colors.accent = theme.customAccentColor;
+    if (accentType == "custom") {
+        colors.accent = customAccentColor;
     }
 
     return colors as ColorTheme;

@@ -3,8 +3,19 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { useThemeColors, useAppSelector, useAppDispatch } from '@/hooks';
-import { automaticColorScheme, darkColorScheme, lightColorScheme, automaticAccentColor, customAccentColor, setThemeAccentColor } from '@/store/theme';
+import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
+import { useThemeColors } from '@/hooks/theme';
+import { selectPreferencesWeekStartsOn } from '@/store/preferences';
+import {
+    selectThemeColorScheme,
+    selectThemeAccentType,
+    automaticColorScheme,
+    darkColorScheme,
+    lightColorScheme,
+    automaticAccentColor,
+    customAccentColor,
+    setThemeAccentColor
+} from '@/store/theme';
 import { setWeekStartsOn } from '@/store/preferences';
 
 import * as Styles from '@/Styles/Styles';
@@ -78,7 +89,7 @@ function Landing({ navigation, route }: SettingsLandingProps) {
 function DateTime({ navigation, route }: DateTimeProps) {
     // Get necessary state
     const dispatch = useAppDispatch();
-    const weekStartsOn = useAppSelector(state => state.settings.preferences.weekStartsOn);
+    const weekStartsOn = useAppSelector(state => selectPreferencesWeekStartsOn(state));
 
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -180,7 +191,8 @@ function Notifications({ navigation, route }: NotificationsProps) {
 function Theme({ navigation, route }: ThemeProps) {
     // Get necessary state
     const dispatch = useAppDispatch();
-    const theme = useAppSelector(state => state.settings.theme);
+    const themeColorScheme = useAppSelector(state => selectThemeColorScheme(state));
+    const themeAccentType = useAppSelector(state => selectThemeAccentType(state));
 
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -222,21 +234,21 @@ function Theme({ navigation, route }: ThemeProps) {
                         <Cell
                             title='System'
                             cellStyle='Basic'
-                            accessory={theme.colorScheme == 'system' ? 'Checkmark' : undefined}
+                            accessory={themeColorScheme == 'system' ? 'Checkmark' : undefined}
                             onPress={setSchemeAutomatic}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Dark'
                             cellStyle='Basic'
-                            accessory={theme.colorScheme == 'dark' ? 'Checkmark' : undefined}
+                            accessory={themeColorScheme == 'dark' ? 'Checkmark' : undefined}
                             onPress={setSchemeDark}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Light'
                             cellStyle='Basic'
-                            accessory={theme.colorScheme == 'light' ? 'Checkmark' : undefined}
+                            accessory={themeColorScheme == 'light' ? 'Checkmark' : undefined}
                             onPress={setSchemeLight}
                             {...tableCellProps}
                         />
@@ -245,20 +257,20 @@ function Theme({ navigation, route }: ThemeProps) {
                         <Cell
                             title='Default'
                             cellStyle='Basic'
-                            accessory={theme.accentType == 'default' ? 'Checkmark' : undefined}
+                            accessory={themeAccentType == 'default' ? 'Checkmark' : undefined}
                             onPress={setAccentDefault}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Custom'
                             cellStyle='Basic'
-                            accessory={theme.accentType == 'custom' ? 'Checkmark' : undefined}
+                            accessory={themeAccentType == 'custom' ? 'Checkmark' : undefined}
                             onPress={setAccentCustom}
                             {...tableCellProps}
                         />
                     </Section>
                 </TableView>
-                {theme.accentType == 'custom' ?
+                {themeAccentType == 'custom' ?
                     <ColorPicker onChange={setAccentColor} {...colorPickerProps} /> : null}
             </ScrollView>
         </SafeAreaView>

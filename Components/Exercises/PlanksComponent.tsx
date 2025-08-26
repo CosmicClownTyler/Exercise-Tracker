@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, Text } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
 
-import { useThemeColors } from '@/hooks';
+import { useThemeColors } from '@/hooks/theme';
 
 import * as Styles from '@/Styles/Styles';
 import TextButton from '@/Components/TextButton';

@@ -4,7 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { useAppSelector, useThemeColors } from '@/hooks';
+import { useAppSelector } from '@/hooks/hooks';
+import { useThemeColors } from '@/hooks/theme';
+import { selectHistoryEntries } from '@/store/history';
+import { selectPreferencesWeekStartsOn } from '@/store/preferences';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
@@ -27,8 +30,8 @@ export default function HistoryScreen() {
 
 function Landing({ navigation, route }: HistoryLandingProps) {
     // Get necessary state
-    const entries = useAppSelector(state => state.history.entries);
-    const weekStartsOn = useAppSelector(state => state.settings.preferences.weekStartsOn);
+    const entries = useAppSelector(state => selectHistoryEntries(state));
+    const weekStartsOn = useAppSelector(state => selectPreferencesWeekStartsOn(state));
 
     // Use the theme colors
     const themeColors = useThemeColors();

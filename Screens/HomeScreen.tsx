@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { useThemeColors } from '@/hooks';
+import { useThemeColors } from '@/hooks/theme';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
