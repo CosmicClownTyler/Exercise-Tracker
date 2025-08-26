@@ -1,6 +1,6 @@
 import type { DimensionValue, StyleProp, ViewStyle, TextStyle, ImageSourcePropType } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import type { Theme as CalendarTheme, MarkedDates as CalendarMarkedDates, MarkingTypes as CalendarMarkingTypes } from 'react-native-calendars/src/types';
+import type { Theme as CalendarTheme, MarkedDates as CalendarMarkedDates, MarkingTypes as CalendarMarkingTypes, DateData } from 'react-native-calendars/src/types';
 
 import type { HomeStackParamList, SettingsStackParamList, ColorHex } from '@/types/types';
 
@@ -19,14 +19,16 @@ export type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>
 
 // Component props
 export interface CalendarProps {
-    calendarStyle?: CalendarTheme,
-    markedDates?: CalendarMarkedDates,
-    themeKey?: any,
-    monthFormat?: string,
-    hideExtraDays?: boolean,
-    firstDay?: number,
-    enableSwipeMonths?: boolean,
-    markingType?: CalendarMarkingTypes,
+    calendarStyle?: CalendarTheme;
+    selectedDay?: DateData;
+    onDaySelect: (date: DateData) => void;
+    markedDates?: CalendarMarkedDates;
+    themeKey?: any;
+    monthFormat?: string;
+    hideExtraDays?: boolean;
+    firstDay?: number;
+    enableSwipeMonths?: boolean;
+    markingType?: CalendarMarkingTypes;
 };
 export interface CheckboxProps {
     checked?: boolean;
@@ -55,16 +57,16 @@ export interface ColorPickerProps {
     buttonStyle?: StyleProp<ViewStyle>;
 };
 export interface HeaderProps {
-    title?: string,
-    titleStyle?: StyleProp<TextStyle>,
-    imageColor?: ColorHex,
-    style?: StyleProp<ViewStyle>,
-    leftText?: string,
-    leftImage?: ImageSourcePropType,
-    onLeft?: () => void,
-    rightText?: string,
-    rightImage?: ImageSourcePropType,
-    onRight?: () => void,
+    title?: string;
+    titleStyle?: StyleProp<TextStyle>;
+    imageColor?: ColorHex;
+    style?: StyleProp<ViewStyle>;
+    leftText?: string;
+    leftImage?: ImageSourcePropType;
+    onLeft?: () => void;
+    rightText?: string;
+    rightImage?: ImageSourcePropType;
+    onRight?: () => void;
 };
 export interface TabBarIconProps {
     color: ColorHex;

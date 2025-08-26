@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Calendar as RNCalendar } from 'react-native-calendars';
 
 import type { DateData } from 'react-native-calendars';
@@ -8,6 +8,8 @@ export default function Calendar(props: CalendarProps) {
     // Deconstruct props
     const {
         calendarStyle,
+        selectedDay,
+        onDaySelect,
         markedDates: initialMarkedDates,
         themeKey,
         monthFormat = 'MMMM yyyy',
@@ -17,8 +19,8 @@ export default function Calendar(props: CalendarProps) {
         markingType = 'multi-dot',
     } = props;
 
-    // State for the currently selected day
-    const [selectedDay, setSelectedDay] = useState<DateData | null>(null);
+    // State for the date that is shown in the calendar
+    // (note: not the selected date, just the date that is shown, to keep track of which month is being shown)
     const shownDate = useRef<DateData | null>(null);
 
     // Mark the currently selected date using the selection style and mark all other dates based on props
@@ -27,16 +29,7 @@ export default function Calendar(props: CalendarProps) {
         markedDates[selectedDay.dateString] = { selected: true };
     }
 
-    // Functions for selecting days and months
-    const onDaySelect = (date: DateData) => {
-        // If pressing the currently selected date, clear the selection
-        if (selectedDay && selectedDay.dateString == date.dateString) {
-            setSelectedDay(null);
-        }
-        else {
-            setSelectedDay(date);
-        }
-    };
+    // Functions for selecting the month
     const onMonthSelect = (date: DateData) => {
         shownDate.current = date;
         shownDate.current.day = 1;

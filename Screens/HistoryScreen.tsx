@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -6,6 +7,7 @@ import { useAppSelector, useThemeColors } from '@/hooks';
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import Calendar from '@/Components/Calendar';
+import type { DateData } from 'react-native-calendars';
 
 export default function HistoryScreen() {
     // Get necessary state
@@ -18,6 +20,29 @@ export default function HistoryScreen() {
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const calendarProps = Styles.calendarProps(themeColors, weekStartsOn);
+    // Todays date
+    const todayDate = new Date();
+    const today: DateData = {
+        year: todayDate.getFullYear(),
+        month: todayDate.getMonth() + 1, // (get month starts at 0 for January, DateData starts at 1 for January)
+        day: todayDate.getDate(),
+        timestamp: todayDate.getTime(),
+        dateString: todayDate.toISOString().split("T")[0],
+    };
+
+    // The currently selected day
+    const [selectedDay, setSelectedDay] = useState<DateData | undefined>(today);
+
+    // Function for selecting days
+    const onDaySelect = (date: DateData) => {
+        // If pressing the currently selected date, clear the selection
+        if (selectedDay && selectedDay.dateString == date.dateString) {
+            setSelectedDay(undefined);
+        }
+        else {
+            setSelectedDay(date);
+        }
+    };
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
@@ -25,6 +50,8 @@ export default function HistoryScreen() {
             <View style={{ flexGrow: 1, width: '100%' }}>
                 <Calendar
                     {...calendarProps}
+                    selectedDay={selectedDay}
+                    onDaySelect={onDaySelect}
                     // Extra information from the theme to ensure the component rerenders correctly
                     themeKey={[themeColors.isDark, themeColors.accent, weekStartsOn]}
                 />
