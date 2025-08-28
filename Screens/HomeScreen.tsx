@@ -2,11 +2,13 @@ import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { useAppSelector } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
+import { selectPreferencesHomepageListView } from '@/store/preferences';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
-import { TextButtonSquare } from '@/Components/TextButton';
+import TextButton, { TextButtonSquare } from '@/Components/TextButton';
 import SitUpsComponent from '@/Components/Exercises/SitUpsComponent';
 import PushUpsComponent from '@/Components/Exercises/PushUpsComponent';
 import PullUpsComponent from '@/Components/Exercises/PullUpsComponent';
@@ -30,6 +32,9 @@ export default function HomeScreen() {
 }
 
 function Landing({ navigation, route }: HomeLandingProps) {
+    // Get necessary state
+    const homepageListView = useAppSelector(state => selectPreferencesHomepageListView(state));
+
     // Use the theme colors
     const themeColors = useThemeColors();
 
@@ -41,33 +46,56 @@ function Landing({ navigation, route }: HomeLandingProps) {
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Home' {...headerProps} />
-            <View style={{
-                width: '100%',
-                flexGrow: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
+            {homepageListView &&
                 <View style={{
-                    flexDirection: 'row',
+                    width: '100%',
+                    flexGrow: 1,
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
                 }}>
-                    <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('SitUps'); }}>
+                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('SitUps'); }}>
                         Sit Ups
-                    </TextButtonSquare>
-                    <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('PushUps'); }}>
+                    </TextButton>
+                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('PushUps'); }}>
                         Push Ups
-                    </TextButtonSquare>
-                </View>
-                <View style={{
-                    flexDirection: 'row',
-                }}>
-                    <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('PullUps'); }}>
+                    </TextButton>
+                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('PullUps'); }}>
                         Pull Ups
-                    </TextButtonSquare>
-                    <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Planks'); }}>
+                    </TextButton>
+                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Planks'); }}>
                         Planks
-                    </TextButtonSquare>
+                    </TextButton>
                 </View>
-            </View>
+            }
+            {!homepageListView &&
+                <View style={{
+                    width: '100%',
+                    flexGrow: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                    <View style={{
+                        flexDirection: 'row',
+                    }}>
+                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('SitUps'); }}>
+                            Sit Ups
+                        </TextButtonSquare>
+                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('PushUps'); }}>
+                            Push Ups
+                        </TextButtonSquare>
+                    </View>
+                    <View style={{
+                        flexDirection: 'row',
+                    }}>
+                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('PullUps'); }}>
+                            Pull Ups
+                        </TextButtonSquare>
+                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Planks'); }}>
+                            Planks
+                        </TextButtonSquare>
+                    </View>
+                </View>
+            }
         </SafeAreaView>
     );
 }

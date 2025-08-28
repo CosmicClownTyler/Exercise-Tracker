@@ -187,6 +187,7 @@ export function textButtonProps(colors: ColorTheme) {
         style: {
             backgroundColor: foreground,
             borderColor: borders,
+            marginTop: 20,
         },
         textStyle: {
             color: primary,
