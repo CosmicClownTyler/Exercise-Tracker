@@ -23,7 +23,7 @@ export type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>
 // Component props
 export interface CalendarProps {
     calendarStyle?: CalendarTheme;
-    selectedDay?: DateData;
+    selectedDay?: DateData | null;
     onDaySelect: (date: DateData) => void;
     markedDates?: CalendarMarkedDates;
     themeKey?: any;

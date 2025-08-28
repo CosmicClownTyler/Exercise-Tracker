@@ -9,9 +9,9 @@ export const useHistoryEntriesById = (id: number) => {
     return entries;
 }
 // Hook for getting history entries for a specific date
-export const useHistoryEntriesByDate = (date: string) => {
+export const useHistoryEntriesByDate = (date: string | null) => {
     // Get the history entries from the state
-    const entries = useAppSelector(state => selectHistoryEntriesByDate(state, date));
+    const entries = useAppSelector(state => date ? selectHistoryEntriesByDate(state, date) : []);
 
     return entries;
 }

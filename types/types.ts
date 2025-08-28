@@ -27,7 +27,9 @@ export type HistoryStackParamList = {
 
 // State types
 export interface HistoryState {
-    entries: HistoryEntry[];
+    byId: Record<number, HistoryEntry>;
+    allIds: number[];
+    nextId: number;
 };
 export interface SettingsState {
     theme: ThemeState;
@@ -47,10 +49,12 @@ export interface PreferencesState {
 // History entry type
 export interface HistoryEntry {
     id: number;
-    date: string; // ISO formatted date string
+    date: string; // string in YYYY-MM-DD format
     exercise: string;
     count: number;
 };
+// New history entry type (omits the ID value as it is set automatically)
+export type NewHistoryEntry = Omit<HistoryEntry, "id">;
 
 
 // Theme and color types

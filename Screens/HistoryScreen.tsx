@@ -6,15 +6,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useAppSelector } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
-import { selectHistoryEntries } from '@/store/history';
+import { useHistoryEntriesByDate } from '@/hooks/history';
 import { selectPreferencesWeekStartsOn } from '@/store/preferences';
+
+import { dateToDateData } from '@/lib/utils';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import Calendar from '@/Components/Calendar';
 
 import type { DateData } from 'react-native-calendars';
-import type { HistoryStackParamList } from '@/types/types';
+import type { HistoryStackParamList, HistoryEntry } from '@/types/types';
 import type { HistoryLandingProps, EntryProps } from '@/types/props';
 
 const HistoryStack = createNativeStackNavigator<HistoryStackParamList>();
@@ -29,9 +31,14 @@ export default function HistoryScreen() {
 }
 
 function Landing({ navigation, route }: HistoryLandingProps) {
+    // The currently selected day
+    const [selectedDay, setSelectedDay] = useState<DateData | null>(dateToDateData(new Date()));
+
     // Get necessary state
-    const entries = useAppSelector(state => selectHistoryEntries(state));
     const weekStartsOn = useAppSelector(state => selectPreferencesWeekStartsOn(state));
+
+    // Use the entries for the current date
+    const entries: HistoryEntry[] = useHistoryEntriesByDate(selectedDay ? selectedDay.dateString : null);
 
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -44,24 +51,11 @@ function Landing({ navigation, route }: HistoryLandingProps) {
     const tableSectionProps = Styles.tableSectionProps(themeColors);
     const tableCellProps = Styles.tableCellProps(themeColors);
 
-    // Todays date
-    const todayDate = new Date();
-    const today: DateData = {
-        year: todayDate.getFullYear(),
-        month: todayDate.getMonth() + 1, // (get month starts at 0 for January, DateData starts at 1 for January)
-        day: todayDate.getDate(),
-        timestamp: todayDate.getTime(),
-        dateString: todayDate.toISOString().split("T")[0],
-    };
-
-    // The currently selected day
-    const [selectedDay, setSelectedDay] = useState<DateData | undefined>(today);
-
     // Function for selecting days
     const onDaySelect = (date: DateData) => {
         // If pressing the currently selected date, clear the selection
         if (selectedDay && selectedDay.dateString == date.dateString) {
-            setSelectedDay(undefined);
+            setSelectedDay(null);
         }
         else {
             setSelectedDay(date);
