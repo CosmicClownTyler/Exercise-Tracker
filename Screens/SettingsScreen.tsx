@@ -5,7 +5,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
-import { selectPreferencesWeekStartsOn } from '@/store/preferences';
+import {
+    selectPreferencesWeekStartsOn,
+    selectPreferencesHomepageListView,
+    setWeekStartsOn,
+    homepageListView,
+    homepageGridView,
+} from '@/store/preferences';
 import {
     selectThemeColorScheme,
     selectThemeAccentType,
@@ -14,9 +20,8 @@ import {
     lightColorScheme,
     automaticAccentColor,
     customAccentColor,
-    setThemeAccentColor
+    setThemeAccentColor,
 } from '@/store/theme';
-import { setWeekStartsOn } from '@/store/preferences';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
@@ -24,7 +29,7 @@ import ColorPicker from '@/Components/ColorPicker';
 
 import { Weekday } from '@/types/types';
 import type { SettingsStackParamList, ColorHex } from '@/types/types';
-import type { SettingsLandingProps, DateTimeProps, NotificationsProps, ThemeProps } from '@/types/props';
+import type { SettingsLandingProps, DateTimeProps, NotificationsProps, LayoutProps, ThemeProps } from '@/types/props';
 
 const SettingsStack = createNativeStackNavigator<SettingsStackParamList>();
 
@@ -34,6 +39,7 @@ export default function SettingsScreen() {
             <SettingsStack.Screen name='Landing' component={Landing} />
             <SettingsStack.Screen name='DateTime' component={DateTime} />
             <SettingsStack.Screen name='Notifications' component={Notifications} />
+            <SettingsStack.Screen name='Layout' component={Layout} />
             <SettingsStack.Screen name='Theme' component={Theme} />
         </SettingsStack.Navigator>
     );
@@ -72,6 +78,13 @@ function Landing({ navigation, route }: SettingsLandingProps) {
                         />
                     </Section>
                     <Section header='Display & Appearance' {...tableSectionProps}>
+                        <Cell
+                            title='Layout'
+                            cellStyle='Basic'
+                            accessory='DisclosureIndicator'
+                            onPress={() => { navigation.navigate('Layout'); }}
+                            {...tableCellProps}
+                        />
                         <Cell
                             title='Theme & Colors'
                             cellStyle='Basic'
@@ -182,6 +195,56 @@ function Notifications({ navigation, route }: NotificationsProps) {
             <Header title='Notifications' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
             <ScrollView {...scrollViewProps}>
                 <TableView>
+                </TableView>
+            </ScrollView>
+        </SafeAreaView>
+    );
+}
+
+function Layout({ navigation, route }: LayoutProps) {
+    // Get necessary state
+    const dispatch = useAppDispatch();
+    const isHomepageListView = useAppSelector(state => selectPreferencesHomepageListView(state));
+
+    // Use the theme colors
+    const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+    const scrollViewProps = Styles.scrollViewProps(themeColors);
+    const tableSectionProps = Styles.tableSectionProps(themeColors);
+    const tableCellProps = Styles.tableCellProps(themeColors);
+
+    // Functions for changing layout
+    const setHomepageListView = () => {
+        dispatch(homepageListView());
+    };
+    const setHomepageGridView = () => {
+        dispatch(homepageGridView());
+    };
+
+    return (
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='Layout' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <ScrollView {...scrollViewProps}>
+                <TableView>
+                    <Section header='Layout' {...tableSectionProps}>
+                        <Cell
+                            title='List'
+                            cellStyle='Basic'
+                            accessory={isHomepageListView ? 'Checkmark' : undefined}
+                            onPress={setHomepageListView}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Grid'
+                            cellStyle='Basic'
+                            accessory={!isHomepageListView ? 'Checkmark' : undefined}
+                            onPress={setHomepageGridView}
+                            {...tableCellProps}
+                        />
+                    </Section>
                 </TableView>
             </ScrollView>
         </SafeAreaView>

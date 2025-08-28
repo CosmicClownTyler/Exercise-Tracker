@@ -17,6 +17,7 @@ export type SettingsStackParamList = {
     Landing: undefined;
     DateTime: undefined;
     Notifications: undefined;
+    Layout: undefined;
     Theme: undefined;
 };
 export type HistoryStackParamList = {
@@ -42,7 +43,7 @@ export interface ThemeState {
 };
 export interface PreferencesState {
     weekStartsOn: Weekday;
-    taskViewIsPopup: boolean;
+    homepageListView: boolean;
 };
 
 

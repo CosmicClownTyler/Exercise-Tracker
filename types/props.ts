@@ -17,6 +17,7 @@ export type EntryProps = NativeStackScreenProps<HistoryStackParamList, 'Entry'>;
 export type SettingsLandingProps = NativeStackScreenProps<SettingsStackParamList, 'Landing'>;
 export type DateTimeProps = NativeStackScreenProps<SettingsStackParamList, 'DateTime'>;
 export type NotificationsProps = NativeStackScreenProps<SettingsStackParamList, 'Notifications'>;
+export type LayoutProps = NativeStackScreenProps<SettingsStackParamList, 'Layout'>;
 export type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>;
 
 
