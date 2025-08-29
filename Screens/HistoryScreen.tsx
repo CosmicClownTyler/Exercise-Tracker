@@ -28,7 +28,7 @@ export default function HistoryScreen() {
             <HistoryStack.Screen name='Entry' component={Entry} />
         </HistoryStack.Navigator>
     );
-}
+};
 
 function Landing({ navigation, route }: HistoryLandingProps) {
     // The currently selected day
@@ -94,7 +94,7 @@ function Landing({ navigation, route }: HistoryLandingProps) {
             }
         </SafeAreaView>
     );
-}
+};
 
 function Entry({ navigation, route }: EntryProps) {
     // Use the theme colors
@@ -124,4 +124,4 @@ function Entry({ navigation, route }: EntryProps) {
             </View>
         </SafeAreaView>
     );
-}
+};

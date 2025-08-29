@@ -11,7 +11,7 @@ export function CalendarIcon({ color, size }: TabBarIconProps) {
             height: size,
         }}
     />);
-}
+};
 
 export function CalendarCheckmarkIcon({ color, size }: TabBarIconProps) {
     return (<Image
@@ -22,7 +22,7 @@ export function CalendarCheckmarkIcon({ color, size }: TabBarIconProps) {
             height: size,
         }}
     />);
-}
+};
 
 export function CheckmarkIcon({ color, size }: TabBarIconProps) {
     return (<Image
@@ -33,7 +33,7 @@ export function CheckmarkIcon({ color, size }: TabBarIconProps) {
             height: size,
         }}
     />);
-}
+};
 
 export function HistoryIcon({ color, size }: TabBarIconProps) {
     return (<Image
@@ -44,7 +44,7 @@ export function HistoryIcon({ color, size }: TabBarIconProps) {
             height: size,
         }}
     />);
-}
+};
 
 export function SettingsIcon({ color, size }: TabBarIconProps) {
     return (<Image
@@ -55,4 +55,4 @@ export function SettingsIcon({ color, size }: TabBarIconProps) {
             height: size,
         }}
     />);
-}
+};

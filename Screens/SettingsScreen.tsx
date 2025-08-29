@@ -43,7 +43,7 @@ export default function SettingsScreen() {
             <SettingsStack.Screen name='Theme' component={Theme} />
         </SettingsStack.Navigator>
     );
-}
+};
 
 function Landing({ navigation, route }: SettingsLandingProps) {
     // Use the theme colors
@@ -97,7 +97,7 @@ function Landing({ navigation, route }: SettingsLandingProps) {
             </ScrollView>
         </SafeAreaView>
     );
-}
+};
 
 function DateTime({ navigation, route }: DateTimeProps) {
     // Get necessary state
@@ -179,7 +179,7 @@ function DateTime({ navigation, route }: DateTimeProps) {
             </ScrollView>
         </SafeAreaView>
     );
-}
+};
 
 function Notifications({ navigation, route }: NotificationsProps) {
     // Use the theme colors
@@ -199,7 +199,7 @@ function Notifications({ navigation, route }: NotificationsProps) {
             </ScrollView>
         </SafeAreaView>
     );
-}
+};
 
 function Layout({ navigation, route }: LayoutProps) {
     // Get necessary state
@@ -249,7 +249,7 @@ function Layout({ navigation, route }: LayoutProps) {
             </ScrollView>
         </SafeAreaView>
     );
-}
+};
 
 function Theme({ navigation, route }: ThemeProps) {
     // Get necessary state
@@ -338,4 +338,4 @@ function Theme({ navigation, route }: ThemeProps) {
             </ScrollView>
         </SafeAreaView>
     );
-}
+};

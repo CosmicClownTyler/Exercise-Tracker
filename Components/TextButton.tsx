@@ -16,7 +16,7 @@ export default function TextButton(props: TextButtonProps) {
             </Text>
         </TouchableOpacity>
     );
-}
+};
 export function TextButtonSquare(props: TextButtonProps) {
     // Deconstruct props
     const { onPress, style, textStyle, children } = props;
@@ -30,7 +30,7 @@ export function TextButtonSquare(props: TextButtonProps) {
             {children}
         </TextButton>
     );
-}
+};
 
 const buttonStyles = StyleSheet.create({
     button: {

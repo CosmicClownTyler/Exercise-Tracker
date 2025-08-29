@@ -107,7 +107,7 @@ export default function CircularProgress(props: CircularProgressProps) {
             </View>
         </View>
     );
-}
+};
 
 // A function for converting from polar coordinates (radius, angle) to cartesian coordinates (x, y)
 const polarToCartesian = (radius: number, angleInDegrees: number) => {

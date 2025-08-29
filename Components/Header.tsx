@@ -117,7 +117,7 @@ export default function Header(props: HeaderProps) {
             </View>
         </View>
     );
-}
+};
 
 const headerStyles = StyleSheet.create({
     header: {

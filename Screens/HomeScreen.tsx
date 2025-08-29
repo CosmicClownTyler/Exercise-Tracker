@@ -29,7 +29,7 @@ export default function HomeScreen() {
             <HomeStack.Screen name='Planks' component={Planks} />
         </HomeStack.Navigator>
     );
-}
+};
 
 function Landing({ navigation, route }: HomeLandingProps) {
     // Get necessary state
@@ -98,7 +98,7 @@ function Landing({ navigation, route }: HomeLandingProps) {
             }
         </SafeAreaView>
     );
-}
+};
 
 function SitUps({ navigation, route }: SitUpsProps) {
     // Use the theme colors
@@ -114,7 +114,7 @@ function SitUps({ navigation, route }: SitUpsProps) {
             <SitUpsComponent />
         </SafeAreaView>
     );
-}
+};
 function PushUps({ navigation, route }: PushUpsProps) {
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -129,7 +129,7 @@ function PushUps({ navigation, route }: PushUpsProps) {
             <PushUpsComponent />
         </SafeAreaView>
     );
-}
+};
 function PullUps({ navigation, route }: PullUpsProps) {
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -144,7 +144,7 @@ function PullUps({ navigation, route }: PullUpsProps) {
             <PullUpsComponent />
         </SafeAreaView>
     );
-}
+};
 function Planks({ navigation, route }: PlanksProps) {
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -159,4 +159,4 @@ function Planks({ navigation, route }: PlanksProps) {
             <PlanksComponent />
         </SafeAreaView>
     );
-}
+};

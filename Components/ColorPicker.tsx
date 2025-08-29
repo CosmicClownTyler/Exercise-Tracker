@@ -19,7 +19,7 @@ export default function ColorPicker(props: ColorPickerProps) {
             ))}
         </View>
     );
-}
+};
 
 const colorPickerStyles = StyleSheet.create({
     colorGridMenu: {

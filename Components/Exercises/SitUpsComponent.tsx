@@ -128,7 +128,7 @@ export default function SitUpsComponent(props: SitUpsComponentProps) {
 
         </View>
     );
-}
+};
 
 
 

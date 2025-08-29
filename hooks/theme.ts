@@ -28,7 +28,7 @@ export const useThemeColorScheme = () => {
     else {
         return colorScheme;
     }
-}
+};
 // Hook for getting the theme's colors
 export const useThemeColors = () => {
     // Get the accent type and custom accent color from the theme state
@@ -47,4 +47,4 @@ export const useThemeColors = () => {
     }
 
     return colors as ColorTheme;
-}
+};

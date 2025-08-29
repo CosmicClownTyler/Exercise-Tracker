@@ -23,7 +23,7 @@ export function containerStyles(colors: ColorTheme) {
             justifyContent: 'space-between',
         },
     });
-}
+};
 export function textStyles(colors: ColorTheme) {
     const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
@@ -38,7 +38,7 @@ export function textStyles(colors: ColorTheme) {
             color: primary,
         },
     });
-}
+};
 
 // Consistent props for react native components
 export function scrollViewProps(colors: ColorTheme) {
@@ -52,7 +52,7 @@ export function scrollViewProps(colors: ColorTheme) {
     };
 
     return scrollViewProps;
-}
+};
 export function tableSectionProps(colors: ColorTheme) {
     const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
@@ -63,7 +63,7 @@ export function tableSectionProps(colors: ColorTheme) {
     };
 
     return tableSectionProps;
-}
+};
 export function tableCellProps(colors: ColorTheme) {
     const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
@@ -78,7 +78,7 @@ export function tableCellProps(colors: ColorTheme) {
     };
 
     return tableCellProps;
-}
+};
 
 // Consistent props for custom components
 export function calendarProps(colors: ColorTheme, weekStartsOn: Weekday) {
@@ -125,7 +125,7 @@ export function calendarProps(colors: ColorTheme, weekStartsOn: Weekday) {
     };
 
     return calendarProps;
-}
+};
 export function checkboxProps(colors: ColorTheme) {
     const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
@@ -135,7 +135,7 @@ export function checkboxProps(colors: ColorTheme) {
     };
 
     return checkboxProps;
-}
+};
 export function circularProgressProps(colors: ColorTheme) {
     const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
@@ -148,7 +148,7 @@ export function circularProgressProps(colors: ColorTheme) {
     };
 
     return circularProgressProps;
-}
+};
 export function colorPickerProps(colors: ColorTheme) {
     const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
@@ -162,7 +162,7 @@ export function colorPickerProps(colors: ColorTheme) {
     };
 
     return colorPickerProps;
-}
+};
 export function headerProps(colors: ColorTheme) {
     const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
@@ -179,7 +179,7 @@ export function headerProps(colors: ColorTheme) {
     };
 
     return headerProps;
-}
+};
 export function textButtonProps(colors: ColorTheme) {
     const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
@@ -195,4 +195,4 @@ export function textButtonProps(colors: ColorTheme) {
     };
 
     return textButtonProps;
-}
+};

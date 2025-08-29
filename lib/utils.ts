@@ -25,4 +25,4 @@ export const dateToDateData = (date: Date) => {
         timestamp,
         dateString,
     } as DateData;
-}
+};

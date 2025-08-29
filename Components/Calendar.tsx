@@ -64,4 +64,4 @@ export default function Calendar(props: CalendarProps) {
             key={themeKey}
         />
     );
-}
+};

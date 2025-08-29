@@ -58,7 +58,7 @@ export default function Checkbox(props: CheckboxProps) {
             />
         </TouchableOpacity>
     );
-}
+};
 
 const checkboxStyles = StyleSheet.create({
     checkbox: {

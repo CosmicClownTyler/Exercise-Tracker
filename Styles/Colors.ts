@@ -70,7 +70,7 @@ export function hexToRGB(color: ColorHex) {
 
     // Return the rgb object
     return rgb;
-}
+};
 // Given a color in RGB object format, return a hex string in #RRGGBB format
 export function rgbToHex(color: ColorRGB) {
     // Deconstruct the separate colors
@@ -89,7 +89,7 @@ export function rgbToHex(color: ColorRGB) {
     const hexString: ColorHex = `#${rHexString}${gHexString}${bHexString}`;
 
     return hexString as ColorHex;
-}
+};
 
 // Given a color in hex #RRGGBB format, return the relative luminance (number between 0 and 1)
 export function calcLuminance(color: ColorHex) {
@@ -138,7 +138,7 @@ export function calcLuminance(color: ColorHex) {
     b_lum *= 0.0722;
 
     return r_lum + g_lum + b_lum;
-}
+};
 
 // Given two colors in hex #RRGGBB format, return the contrast ratio (number between 1 and 21)
 export function calcContrastRatio(color1: ColorHex, color2: ColorHex) {
@@ -152,12 +152,12 @@ export function calcContrastRatio(color1: ColorHex, color2: ColorHex) {
     }
 
     return (lum1 + 0.05) / (lum2 + 0.05);
-}
+};
 
 // Given two colors in hex #RRGGBB format, return true if the contrast between them is acceptable, otherwise return false
 export function isValidContrast(color1: ColorHex, color2: ColorHex) {
     return calcContrastRatio(color1, color2) >= 3;
-}
+};
 
 // Given an accent color in hex #RRGGBB format, return two colors with a visible contrast
 // (this function dynamically determins if a color should be made darker or lighter to accompany the accent)
@@ -205,16 +205,16 @@ export function calcContrastingAccentPair(accent: ColorHex) {
     }
 
     return { lighter: lighter as ColorHex, darker: darker as ColorHex };
-}
+};
 
 // Given a color in hex #RRGGBB format, lighten the color by the given amount (#535353, 3 -> #565656)
 export function lightenColor(color: ColorHex, amount: number) {
     return changeColor(color, amount) as ColorHex;
-}
+};
 // Given a color in hex #RRGGBB format, darken the color by the given amount (#535353, 3 -> #505050)
 export function darkenColor(color: ColorHex, amount: number) {
     return changeColor(color, -amount) as ColorHex;
-}
+};
 
 // Given a color in hex #RRGGBB format, change a color by the given amount (positive = lighten, negative = darken)
 function changeColor(color: ColorHex, amount: number) {
@@ -227,9 +227,9 @@ function changeColor(color: ColorHex, amount: number) {
     rgb.b = clampColorValue(rgb.b + amount);
 
     return rgbToHex(rgb) as ColorHex;
-}
+};
 
 // Clamp a color value between 0 and 255
 function clampColorValue(value: number) {
     return value > 255 ? 255 : value < 0 ? 0 : value;
-}
+};
