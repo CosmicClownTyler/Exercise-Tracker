@@ -15,9 +15,9 @@ export const preferencesSlice = createSlice({
     name: 'preferences',
     initialState: defaultPreferencesState,
     reducers: {
-        revertToDefaultPreferences: (state) => {
+        revertToDefaultPreferences: () => {
             console.warn('RESETTING PREFERENCES');
-            state = defaultPreferencesState;
+            return defaultPreferencesState;
         },
         setWeekStartsOn: (state, action: PayloadAction<Weekday>) => {
             state.weekStartsOn = action.payload;

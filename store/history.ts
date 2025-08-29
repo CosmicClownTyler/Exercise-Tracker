@@ -15,9 +15,9 @@ export const historySlice = createSlice({
     name: 'history',
     initialState: defaultHistoryState,
     reducers: {
-        revertToDefaultHistory: (state) => {
+        revertToDefaultHistory: () => {
             console.warn('RESETTING HISTORY');
-            state = defaultHistoryState;
+            return defaultHistoryState;
         },
         addEntry: (state, action: PayloadAction<NewHistoryEntry>) => {
             // The ID for this new entry
@@ -25,7 +25,7 @@ export const historySlice = createSlice({
 
             // The new entry to add
             const entry: HistoryEntry = { ...action.payload, id };
-            
+
             // Add the entry
             state.byId[id] = entry;
             state.allIds.push(id);

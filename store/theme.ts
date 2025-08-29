@@ -17,9 +17,9 @@ export const themeSlice = createSlice({
     name: 'theme',
     initialState: defaultThemeState,
     reducers: {
-        revertToDefaultTheme: (state) => {
+        revertToDefaultTheme: () => {
             console.warn('RESETTING THEME');
-            state = defaultThemeState;
+            return defaultThemeState;
         },
         automaticColorScheme: (state) => {
             state.colorScheme = 'system';
