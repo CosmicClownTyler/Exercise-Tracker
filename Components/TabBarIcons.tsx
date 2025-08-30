@@ -56,3 +56,14 @@ export function SettingsIcon({ color, size }: TabBarIconProps) {
         }}
     />);
 };
+
+export function SitupIcon({ color, size }: TabBarIconProps) {
+    return (<Image
+        tintColor={color}
+        source={require('@/assets/icons/situp.png')}
+        style={{
+            width: size,
+            height: size,
+        }}
+    />);
+};
