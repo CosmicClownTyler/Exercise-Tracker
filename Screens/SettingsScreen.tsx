@@ -1,4 +1,4 @@
-import { ScrollView } from 'react-native';
+import { ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
 import {
+    revertToDefaultPreferences,
     selectPreferencesWeekStartsOn,
     selectPreferencesExercisesListView,
     setWeekStartsOn,
@@ -13,6 +14,7 @@ import {
     exercisesGridView,
 } from '@/store/preferences';
 import {
+    revertToDefaultTheme,
     selectThemeColorScheme,
     selectThemeAccentType,
     automaticColorScheme,
@@ -22,6 +24,7 @@ import {
     customAccentColor,
     setThemeAccentColor,
 } from '@/store/theme';
+import { revertToDefaultHistory } from '@/store/history';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
@@ -46,6 +49,9 @@ export default function SettingsScreen() {
 };
 
 function Landing({ navigation, route }: SettingsLandingProps) {
+    // Get necessary state
+    const dispatch = useAppDispatch();
+
     // Use the theme colors
     const themeColors = useThemeColors();
 
@@ -55,6 +61,67 @@ function Landing({ navigation, route }: SettingsLandingProps) {
     const scrollViewProps = Styles.scrollViewProps(themeColors);
     const tableSectionProps = Styles.tableSectionProps(themeColors);
     const tableCellProps = Styles.tableCellProps(themeColors);
+
+    // Reset the theme
+    const resetTheme = () => {
+        Alert.alert(
+            "Reset Theme?",
+            "This will reset the app's theme but will not reset any other settings or clear any saved exercises.",
+            [
+                {
+                    text: "No",
+                    style: "cancel",
+                },
+                {
+                    text: "Yes",
+                    onPress: () => dispatch(revertToDefaultTheme()),
+                },
+            ],
+            {
+                cancelable: true,
+            }
+        );
+    }
+    // Reset all preferences
+    const resetPreferences = () => {
+        Alert.alert(
+            "Reset Settings?",
+            "This will reset the app's settings but will not clear any saved exercises.",
+            [
+                {
+                    text: "No",
+                    style: "cancel",
+                },
+                {
+                    text: "Yes",
+                    onPress: () => dispatch(revertToDefaultPreferences()),
+                },
+            ],
+            {
+                cancelable: true,
+            }
+        );
+    }
+    // Reset the history data
+    const resetData = () => {
+        Alert.alert(
+            "Clear History Data?",
+            "This will clear all saved exercises and data.",
+            [
+                {
+                    text: "No",
+                    style: "cancel",
+                },
+                {
+                    text: "Yes",
+                    onPress: () => dispatch(revertToDefaultHistory()),
+                },
+            ],
+            {
+                cancelable: true,
+            }
+        );
+    }
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
@@ -90,6 +157,29 @@ function Landing({ navigation, route }: SettingsLandingProps) {
                             cellStyle='Basic'
                             accessory='DisclosureIndicator'
                             onPress={() => { navigation.navigate('Theme'); }}
+                            {...tableCellProps}
+                        />
+                    </Section>
+                    <Section header='Reset' {...tableSectionProps}>
+                        <Cell
+                            title='Reset Theme'
+                            cellStyle='Basic'
+                            titleTextStyle={{ color: 'red' }}
+                            onPress={resetTheme}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Reset Settings'
+                            cellStyle='Basic'
+                            titleTextStyle={{ color: 'red' }}
+                            onPress={resetPreferences}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Clear History Data'
+                            cellStyle='Basic'
+                            titleTextStyle={{ color: 'red' }}
+                            onPress={resetData}
                             {...tableCellProps}
                         />
                     </Section>
