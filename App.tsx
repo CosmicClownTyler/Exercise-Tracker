@@ -11,9 +11,10 @@ import { store, persistor } from '@/store';
 
 import { useThemeColors } from '@/hooks/theme';
 
-import { CalendarIcon, CheckmarkIcon, SettingsIcon } from '@/Components/TabBarIcons';
+import { CalendarIcon, CheckmarkIcon, SitupIcon, SettingsIcon } from '@/Components/TabBarIcons';
 import HistoryScreen from '@/Screens/HistoryScreen';
-import HomeScreen from '@/Screens/HomeScreen';
+import FITineraryScreen from "@/Screens/FITineraryScreen";
+import ExercisesScreen from '@/Screens/ExercisesScreen';
 import SettingsScreen from '@/Screens/SettingsScreen';
 
 import type { RootBottomTabParamList, ColorHex } from '@/types/types';
@@ -43,7 +44,7 @@ export function AppComponent() {
         <NavigationContainer>
             <StatusBar backgroundColor={themeColors.background} barStyle={themeColors.isDark ? 'light-content' : 'dark-content'} />
             <Tab.Navigator
-                initialRouteName='Home'
+                initialRouteName='FITinerary'
                 screenOptions={({ route }) => ({
                     // Header options
                     headerShown: false,
@@ -59,15 +60,18 @@ export function AppComponent() {
                     tabBarIcon: ({ color, size }) => {
                         if (route.name === 'History')
                             return <CalendarIcon color={color as ColorHex} size={size} />;
-                        if (route.name === 'Home')
+                        if (route.name === 'FITinerary')
                             return <CheckmarkIcon color={color as ColorHex} size={size} />;
+                        if (route.name === 'Exercises')
+                            return <SitupIcon color={color as ColorHex} size={size} />;
                         if (route.name === 'Settings')
                             return <SettingsIcon color={color as ColorHex} size={size} />;
                     },
                 })}
             >
                 <Tab.Screen name='History' component={HistoryScreen} />
-                <Tab.Screen name='Home' component={HomeScreen} />
+                <Tab.Screen name='FITinerary' component={FITineraryScreen} />
+                <Tab.Screen name='Exercises' component={ExercisesScreen} />
                 <Tab.Screen name='Settings' component={SettingsScreen} />
             </Tab.Navigator>
         </NavigationContainer>

@@ -7,7 +7,7 @@ import type { PreferencesState } from '@/types/types';
 // The initial default preferences state
 export const defaultPreferencesState: PreferencesState = {
     weekStartsOn: Weekday.Sunday,
-    homepageListView: true,
+    exercisesListView: true,
 };
 
 // The preferences slice
@@ -22,11 +22,11 @@ export const preferencesSlice = createSlice({
         setWeekStartsOn: (state, action: PayloadAction<Weekday>) => {
             state.weekStartsOn = action.payload;
         },
-        homepageListView: (state) => {
-            state.homepageListView = true;
+        exercisesListView: (state) => {
+            state.exercisesListView = true;
         },
-        homepageGridView: (state) => {
-            state.homepageListView = false;
+        exercisesGridView: (state) => {
+            state.exercisesListView = false;
         },
     },
 });
@@ -38,11 +38,11 @@ export const preferencesReducer = preferencesSlice.reducer;
 export const {
     revertToDefaultPreferences,
     setWeekStartsOn,
-    homepageListView,
-    homepageGridView,
+    exercisesListView,
+    exercisesGridView,
 } = preferencesSlice.actions;
 
 // Basic selectors
 export const selectPreferences = (state: AppState) => state.settings.preferences;
 export const selectPreferencesWeekStartsOn = (state: AppState) => state.settings.preferences.weekStartsOn;
-export const selectPreferencesHomepageListView = (state: AppState) => state.settings.preferences.homepageListView;
+export const selectPreferencesExercisesListView = (state: AppState) => state.settings.preferences.exercisesListView;

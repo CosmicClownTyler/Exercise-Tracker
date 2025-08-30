@@ -7,10 +7,10 @@ import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
 import {
     selectPreferencesWeekStartsOn,
-    selectPreferencesHomepageListView,
+    selectPreferencesExercisesListView,
     setWeekStartsOn,
-    homepageListView,
-    homepageGridView,
+    exercisesListView,
+    exercisesGridView,
 } from '@/store/preferences';
 import {
     selectThemeColorScheme,
@@ -204,7 +204,7 @@ function Notifications({ navigation, route }: NotificationsProps) {
 function Layout({ navigation, route }: LayoutProps) {
     // Get necessary state
     const dispatch = useAppDispatch();
-    const isHomepageListView = useAppSelector(state => selectPreferencesHomepageListView(state));
+    const isExercisesListView = useAppSelector(state => selectPreferencesExercisesListView(state));
 
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -217,11 +217,11 @@ function Layout({ navigation, route }: LayoutProps) {
     const tableCellProps = Styles.tableCellProps(themeColors);
 
     // Functions for changing layout
-    const setHomepageListView = () => {
-        dispatch(homepageListView());
+    const setExercisesListView = () => {
+        dispatch(exercisesListView());
     };
-    const setHomepageGridView = () => {
-        dispatch(homepageGridView());
+    const setExercisesGridView = () => {
+        dispatch(exercisesGridView());
     };
 
     return (
@@ -233,15 +233,15 @@ function Layout({ navigation, route }: LayoutProps) {
                         <Cell
                             title='List'
                             cellStyle='Basic'
-                            accessory={isHomepageListView ? 'Checkmark' : undefined}
-                            onPress={setHomepageListView}
+                            accessory={isExercisesListView ? 'Checkmark' : undefined}
+                            onPress={setExercisesListView}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Grid'
                             cellStyle='Basic'
-                            accessory={!isHomepageListView ? 'Checkmark' : undefined}
-                            onPress={setHomepageGridView}
+                            accessory={!isExercisesListView ? 'Checkmark' : undefined}
+                            onPress={setExercisesGridView}
                             {...tableCellProps}
                         />
                     </Section>

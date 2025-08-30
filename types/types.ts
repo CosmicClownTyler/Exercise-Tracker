@@ -2,11 +2,19 @@ import type { NavigatorScreenParams } from '@react-navigation/native';
 
 // Navigation types
 export type RootBottomTabParamList = {
-    Home: NavigatorScreenParams<HomeStackParamList>;
+    History: NavigatorScreenParams<HistoryStackParamList>;
+    FITinerary: NavigatorScreenParams<FITineraryStackParamList>;
+    Exercises: NavigatorScreenParams<ExercisesStackParamList>;
     Settings: NavigatorScreenParams<SettingsStackParamList>;
-    History: NavigatorScreenParams<SettingsStackParamList>;
 };
-export type HomeStackParamList = {
+export type HistoryStackParamList = {
+    Landing: undefined;
+    Entry: { id: number };
+};
+export type FITineraryStackParamList = {
+    Landing: undefined;
+};
+export type ExercisesStackParamList = {
     Landing: undefined;
     SitUps: undefined;
     PushUps: undefined;
@@ -19,10 +27,6 @@ export type SettingsStackParamList = {
     Notifications: undefined;
     Layout: undefined;
     Theme: undefined;
-};
-export type HistoryStackParamList = {
-    Landing: undefined;
-    Entry: { id: number };
 };
 
 
@@ -43,7 +47,7 @@ export interface ThemeState {
 };
 export interface PreferencesState {
     weekStartsOn: Weekday;
-    homepageListView: boolean;
+    exercisesListView: boolean;
 };
 
 

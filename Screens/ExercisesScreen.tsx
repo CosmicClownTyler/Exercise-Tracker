@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useAppSelector } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
-import { selectPreferencesHomepageListView } from '@/store/preferences';
+import { selectPreferencesExercisesListView } from '@/store/preferences';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
@@ -14,26 +14,26 @@ import PushUpsComponent from '@/Components/Exercises/PushUpsComponent';
 import PullUpsComponent from '@/Components/Exercises/PullUpsComponent';
 import PlanksComponent from '@/Components/Exercises/PlanksComponent';
 
-import type { HomeStackParamList } from '@/types/types';
-import type { HomeLandingProps, SitUpsProps, PushUpsProps, PullUpsProps, PlanksProps, } from '@/types/props';
+import type { ExercisesStackParamList } from '@/types/types';
+import type { ExercisesLandingProps, SitUpsProps, PushUpsProps, PullUpsProps, PlanksProps } from '@/types/props';
 
-const HomeStack = createNativeStackNavigator<HomeStackParamList>();
+const ExercisesStack = createNativeStackNavigator<ExercisesStackParamList>();
 
-export default function HomeScreen() {
+export default function ExercisesScreen() {
     return (
-        <HomeStack.Navigator initialRouteName='Landing' screenOptions={{ headerShown: false }} >
-            <HomeStack.Screen name='Landing' component={Landing} />
-            <HomeStack.Screen name='SitUps' component={SitUps} />
-            <HomeStack.Screen name='PushUps' component={PushUps} />
-            <HomeStack.Screen name='PullUps' component={PullUps} />
-            <HomeStack.Screen name='Planks' component={Planks} />
-        </HomeStack.Navigator>
+        <ExercisesStack.Navigator initialRouteName='Landing' screenOptions={{ headerShown: false }} >
+            <ExercisesStack.Screen name='Landing' component={Landing} />
+            <ExercisesStack.Screen name='SitUps' component={SitUps} />
+            <ExercisesStack.Screen name='PushUps' component={PushUps} />
+            <ExercisesStack.Screen name='PullUps' component={PullUps} />
+            <ExercisesStack.Screen name='Planks' component={Planks} />
+        </ExercisesStack.Navigator>
     );
 };
 
-function Landing({ navigation, route }: HomeLandingProps) {
+function Landing({ navigation, route }: ExercisesLandingProps) {
     // Get necessary state
-    const homepageListView = useAppSelector(state => selectPreferencesHomepageListView(state));
+    const exercisesListView = useAppSelector(state => selectPreferencesExercisesListView(state));
 
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -45,8 +45,8 @@ function Landing({ navigation, route }: HomeLandingProps) {
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
-            <Header title='Home' {...headerProps} />
-            {homepageListView &&
+            <Header title='Exercises' {...headerProps} />
+            {exercisesListView &&
                 <View style={{
                     width: '100%',
                     flexGrow: 1,
@@ -67,7 +67,7 @@ function Landing({ navigation, route }: HomeLandingProps) {
                     </TextButton>
                 </View>
             }
-            {!homepageListView &&
+            {!exercisesListView &&
                 <View style={{
                     width: '100%',
                     flexGrow: 1,

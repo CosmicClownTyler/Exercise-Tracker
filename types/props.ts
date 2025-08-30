@@ -2,17 +2,19 @@ import type { DimensionValue, StyleProp, ViewStyle, TextStyle, ImageSourcePropTy
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { Theme as CalendarTheme, MarkedDates as CalendarMarkedDates, MarkingTypes as CalendarMarkingTypes, DateData } from 'react-native-calendars/src/types';
 
-import type { HomeStackParamList, HistoryStackParamList, SettingsStackParamList, ColorHex } from '@/types/types';
+import type { HistoryStackParamList, FITineraryStackParamList, ExercisesStackParamList, SettingsStackParamList, ColorHex } from '@/types/types';
 
-// Home stack route props
-export type HomeLandingProps = NativeStackScreenProps<HomeStackParamList, 'Landing'>;
-export type SitUpsProps = NativeStackScreenProps<HomeStackParamList, 'SitUps'>;
-export type PushUpsProps = NativeStackScreenProps<HomeStackParamList, 'PushUps'>;
-export type PullUpsProps = NativeStackScreenProps<HomeStackParamList, 'PullUps'>;
-export type PlanksProps = NativeStackScreenProps<HomeStackParamList, 'Planks'>;
 // History stack route props
 export type HistoryLandingProps = NativeStackScreenProps<HistoryStackParamList, 'Landing'>;
 export type EntryProps = NativeStackScreenProps<HistoryStackParamList, 'Entry'>;
+// FITinerary stack route props
+export type FITineraryLandingProps = NativeStackScreenProps<FITineraryStackParamList, 'Landing'>;
+// Exercises stack route props
+export type ExercisesLandingProps = NativeStackScreenProps<ExercisesStackParamList, 'Landing'>;
+export type SitUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'SitUps'>;
+export type PushUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'PushUps'>;
+export type PullUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'PullUps'>;
+export type PlanksProps = NativeStackScreenProps<ExercisesStackParamList, 'Planks'>;
 // Settings stack route props
 export type SettingsLandingProps = NativeStackScreenProps<SettingsStackParamList, 'Landing'>;
 export type DateTimeProps = NativeStackScreenProps<SettingsStackParamList, 'DateTime'>;
