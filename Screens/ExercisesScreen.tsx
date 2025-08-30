@@ -13,9 +13,11 @@ import SitUpsComponent from '@/Components/Exercises/SitUpsComponent';
 import PushUpsComponent from '@/Components/Exercises/PushUpsComponent';
 import PullUpsComponent from '@/Components/Exercises/PullUpsComponent';
 import PlanksComponent from '@/Components/Exercises/PlanksComponent';
+import SquatsComponent from '@/Components/Exercises/SquatsComponent';
+import ManualComponent from '@/Components/Exercises/ManualComponent';
 
 import type { ExercisesStackParamList } from '@/types/types';
-import type { ExercisesLandingProps, SitUpsProps, PushUpsProps, PullUpsProps, PlanksProps } from '@/types/props';
+import type { ExercisesLandingProps, SitUpsProps, PushUpsProps, PullUpsProps, PlanksProps, SquatsProps, ManualProps } from '@/types/props';
 
 const ExercisesStack = createNativeStackNavigator<ExercisesStackParamList>();
 
@@ -27,6 +29,8 @@ export default function ExercisesScreen() {
             <ExercisesStack.Screen name='PushUps' component={PushUps} />
             <ExercisesStack.Screen name='PullUps' component={PullUps} />
             <ExercisesStack.Screen name='Planks' component={Planks} />
+            <ExercisesStack.Screen name='Squats' component={Squats} />
+            <ExercisesStack.Screen name='Manual' component={Manual} />
         </ExercisesStack.Navigator>
     );
 };
@@ -46,6 +50,7 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Exercises' {...headerProps} />
+            {/* List View */}
             {exercisesListView &&
                 <View style={{
                     width: '100%',
@@ -65,8 +70,12 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                     <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Planks'); }}>
                         Planks
                     </TextButton>
+                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Squats'); }}>
+                        Squats
+                    </TextButton>
                 </View>
             }
+            {/* Grid View */}
             {!exercisesListView &&
                 <View style={{
                     width: '100%',
@@ -92,6 +101,13 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                         </TextButtonSquare>
                         <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Planks'); }}>
                             Planks
+                        </TextButtonSquare>
+                    </View>
+                    <View style={{
+                        flexDirection: 'row',
+                    }}>
+                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Squats'); }}>
+                            Squats
                         </TextButtonSquare>
                     </View>
                 </View>
@@ -157,6 +173,36 @@ function Planks({ navigation, route }: PlanksProps) {
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Planks' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
             <PlanksComponent />
+        </SafeAreaView>
+    );
+};
+function Squats({ navigation, route }: SquatsProps) {
+    // Use the theme colors
+    const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+
+    return (
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='Squats' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <SquatsComponent />
+        </SafeAreaView>
+    );
+};
+function Manual({ navigation, route }: ManualProps) {
+    // Use the theme colors
+    const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+
+    return (
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='Manual Entry' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <ManualComponent />
         </SafeAreaView>
     );
 };

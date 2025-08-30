@@ -15,13 +15,19 @@ export type SitUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'SitUp
 export type PushUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'PushUps'>;
 export type PullUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'PullUps'>;
 export type PlanksProps = NativeStackScreenProps<ExercisesStackParamList, 'Planks'>;
+export type SquatsProps = NativeStackScreenProps<ExercisesStackParamList, 'Squats'>;
+export type ManualProps = NativeStackScreenProps<ExercisesStackParamList, 'Manual'>;
 // Settings stack route props
 export type SettingsLandingProps = NativeStackScreenProps<SettingsStackParamList, 'Landing'>;
 export type DateTimeProps = NativeStackScreenProps<SettingsStackParamList, 'DateTime'>;
 export type NotificationsProps = NativeStackScreenProps<SettingsStackParamList, 'Notifications'>;
 export type LayoutProps = NativeStackScreenProps<SettingsStackParamList, 'Layout'>;
 export type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>;
-
+export type SitUpsSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'SitUpsSettings'>;
+export type PushUpsSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'PushUpsSettings'>;
+export type PullUpsSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'PullUpsSettings'>;
+export type PlanksSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'PlanksSettings'>;
+export type SquatsSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'SquatsSettings'>;
 
 // Component props
 export interface CalendarProps {
@@ -87,15 +93,21 @@ export interface TextButtonProps {
 
 
 // Exercise component props
-export interface PlanksComponentProps {
-
-};
-export interface PullUpsComponentProps {
+export interface SitUpsComponentProps {
 
 };
 export interface PushUpsComponentProps {
 
 };
-export interface SitUpsComponentProps {
+export interface PullUpsComponentProps {
+
+};
+export interface PlanksComponentProps {
+
+};
+export interface SquatsComponentProps {
+
+};
+export interface ManualComponentProps {
 
 };

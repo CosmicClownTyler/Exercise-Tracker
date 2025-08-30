@@ -20,6 +20,8 @@ export type ExercisesStackParamList = {
     PushUps: undefined;
     PullUps: undefined;
     Planks: undefined;
+    Squats: undefined;
+    Manual: undefined;
 };
 export type SettingsStackParamList = {
     Landing: undefined;
