@@ -17,12 +17,18 @@ import type { NewHistoryEntry } from '@/types/types';
 import type { ManualComponentProps } from '@/types/props';
 
 export default function ManualComponent(props: ManualComponentProps) {
-    // Values to 
+    // State values to create the new entry
     const [date, setDate] = useState<DateData>(dateToDateData(new Date()));
     const [dateString, setDateString] = useState<string>(date.dateString);
     const [exercise, setExercise] = useState<string>("");
     const [countString, setCountString] = useState<string>("");
     const [count, setCount] = useState<number>(0);
+
+    // Error message (if any exists)
+    const [error, setError] = useState<string>("");
+    const ERROR_EMPTY_EXERCISE_NAME = "The exercise name cannot be blank";
+    const ERROR_COUNT_IS_NAN = "The count must be a valid number";
+    const ERROR_COUNT_NUMBER_IS_LESS_THAN_ZERO = "The count number must be greater than 0";
 
     // Get necessary state
     const dispatch = useAppDispatch();
@@ -37,12 +43,40 @@ export default function ManualComponent(props: ManualComponentProps) {
     const calendarProps = Styles.calendarProps(themeColors, weekStartsOn);
 
     const onExerciseTextChange = (text: string) => {
+        // Remove the error message if it was caused by this field
+        if (error === ERROR_EMPTY_EXERCISE_NAME) setError("");
+
+        // Set the exercise text
         setExercise(text);
     };
     const onCountTextChange = (text: string) => {
-        if (/^\d*$/.test(text)) {
-            setCountString(text);
+        // Remove the error message if it was caused by this field
+        if (error === ERROR_COUNT_IS_NAN) setError("");
+
+        // Set the count string
+        setCountString(text);
+
+        // If the input text is empty, do nothing
+        if (text == "") {
+            setCount(0);
+        }
+        // If the input text contains only digits, try parsing the count number
+        else if (/^\d*$/.test(text)) {
+            // Try parsing the count number
+            const countInt = parseInt(text);
+
+            // If parsing failed, set the error message
+            if (isNaN(countInt)) {
+                setError(ERROR_COUNT_IS_NAN);
+                return;
+            }
+
+            // If parsing succeeded, set the count number
             setCount(parseInt(text));
+        }
+        // Otherwise set an error message
+        else {
+            setError(ERROR_COUNT_IS_NAN);
         }
     };
     const onDateSelect = (date: DateData) => {
@@ -51,12 +85,37 @@ export default function ManualComponent(props: ManualComponentProps) {
     };
 
     const submitEntry = () => {
+        // If there is currently an error, do nothing
+        if (error) {
+            return;
+        }
+
+        // If there is no exercise text, set the error message and return
+        if (exercise == "") {
+            setError(ERROR_EMPTY_EXERCISE_NAME);
+            return;
+        }
+
+        // If there is no exercise text, set the error message and return
+        if (countString == "") {
+            setError(ERROR_COUNT_IS_NAN);
+            return;
+        }
+
+        // If the count is less than 1, set the error message and return
+        if (count < 1) {
+            setError(ERROR_COUNT_NUMBER_IS_LESS_THAN_ZERO);
+            return;
+        }
+
+        // Create the new entry if the values are valid
         const entry: NewHistoryEntry = {
             date: date.dateString,
             exercise: exercise,
             count: count,
         };
 
+        // Add the entry to the state
         dispatch(addEntry(entry));
     }
 
@@ -134,6 +193,9 @@ export default function ManualComponent(props: ManualComponentProps) {
                 width: '100%',
                 alignItems: 'center',
             }}>
+                <Text style={[textStyles.mediumText, { color: 'red' }]}>
+                    {error}
+                </Text>
                 <TextButton {...textButtonProps} onPress={submitEntry}>
                     Add
                 </TextButton>
