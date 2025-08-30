@@ -9,9 +9,12 @@ import {
     revertToDefaultPreferences,
     selectPreferencesWeekStartsOn,
     selectPreferencesExercisesListView,
+    selectPreferencesManualEntryFloatingButton,
     setWeekStartsOn,
     exercisesListView,
     exercisesGridView,
+    manualEntryFloatingButton,
+    manualEntryFixedButton,
 } from '@/store/preferences';
 import {
     revertToDefaultTheme,
@@ -295,6 +298,7 @@ function Layout({ navigation, route }: LayoutProps) {
     // Get necessary state
     const dispatch = useAppDispatch();
     const isExercisesListView = useAppSelector(state => selectPreferencesExercisesListView(state));
+    const isManualEntryFloatingButton = useAppSelector(state => selectPreferencesManualEntryFloatingButton(state));
 
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -313,13 +317,19 @@ function Layout({ navigation, route }: LayoutProps) {
     const setExercisesGridView = () => {
         dispatch(exercisesGridView());
     };
+    const setManualEntryFloatingButton = () => {
+        dispatch(manualEntryFloatingButton());
+    };
+    const setManualEntryFixedButton = () => {
+        dispatch(manualEntryFixedButton());
+    };
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Layout' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
             <ScrollView {...scrollViewProps}>
                 <TableView>
-                    <Section header='Layout' {...tableSectionProps}>
+                    <Section header='Exercises Layout' {...tableSectionProps}>
                         <Cell
                             title='List'
                             cellStyle='Basic'
@@ -332,6 +342,22 @@ function Layout({ navigation, route }: LayoutProps) {
                             cellStyle='Basic'
                             accessory={!isExercisesListView ? 'Checkmark' : undefined}
                             onPress={setExercisesGridView}
+                            {...tableCellProps}
+                        />
+                    </Section>
+                    <Section header='Manual Exercise Entry Button' {...tableSectionProps}>
+                        <Cell
+                            title='Floating Button'
+                            cellStyle='Basic'
+                            accessory={isManualEntryFloatingButton ? 'Checkmark' : undefined}
+                            onPress={setManualEntryFloatingButton}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Fixed Button'
+                            cellStyle='Basic'
+                            accessory={!isManualEntryFloatingButton ? 'Checkmark' : undefined}
+                            onPress={setManualEntryFixedButton}
                             {...tableCellProps}
                         />
                     </Section>

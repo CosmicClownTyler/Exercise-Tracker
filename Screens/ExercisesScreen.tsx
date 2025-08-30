@@ -4,11 +4,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useAppSelector } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
-import { selectPreferencesExercisesListView } from '@/store/preferences';
+import { selectPreferencesExercisesListView, selectPreferencesManualEntryFloatingButton } from '@/store/preferences';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import TextButton, { TextButtonSquare } from '@/Components/TextButton';
+import ImageButton from '@/Components/ImageButton';
 import SitUpsComponent from '@/Components/Exercises/SitUpsComponent';
 import PushUpsComponent from '@/Components/Exercises/PushUpsComponent';
 import PullUpsComponent from '@/Components/Exercises/PullUpsComponent';
@@ -38,6 +39,7 @@ export default function ExercisesScreen() {
 function Landing({ navigation, route }: ExercisesLandingProps) {
     // Get necessary state
     const exercisesListView = useAppSelector(state => selectPreferencesExercisesListView(state));
+    const manualEntryFloatingButton = useAppSelector(state => selectPreferencesManualEntryFloatingButton(state));
 
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -46,6 +48,7 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const textButtonProps = Styles.textButtonProps(themeColors);
+    const imageButtonProps = Styles.imageButtonProps(themeColors);
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
@@ -73,6 +76,12 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                     <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Squats'); }}>
                         Squats
                     </TextButton>
+                    {/* Optional manual entry fixed button */}
+                    {!manualEntryFloatingButton &&
+                        <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Manual'); }}>
+                            Manual
+                        </TextButton>
+                    }
                 </View>
             }
             {/* Grid View */}
@@ -109,7 +118,27 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                         <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Squats'); }}>
                             Squats
                         </TextButtonSquare>
+                        {/* Optional manual entry fixed button */}
+                        {!manualEntryFloatingButton &&
+                            <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Manual'); }}>
+                                Manual
+                            </TextButtonSquare>
+                        }
                     </View>
+                </View>
+            }
+            {/* Optional manual entry floating button */}
+            {manualEntryFloatingButton &&
+                <View style={{
+                    width: '100%',
+                    alignItems: 'flex-end',
+                }}>
+                    <ImageButton
+                        {...imageButtonProps}
+                        src={require('@/assets/icons/plus.png')}
+                        size={40}
+                        onPress={() => { navigation.navigate('Manual'); }}
+                    />
                 </View>
             }
         </SafeAreaView>

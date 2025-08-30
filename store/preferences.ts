@@ -8,6 +8,7 @@ import type { PreferencesState } from '@/types/types';
 export const defaultPreferencesState: PreferencesState = {
     weekStartsOn: Weekday.Sunday,
     exercisesListView: true,
+    manualEntryFloatingButton: true,
 };
 
 // The preferences slice
@@ -28,6 +29,12 @@ export const preferencesSlice = createSlice({
         exercisesGridView: (state) => {
             state.exercisesListView = false;
         },
+        manualEntryFloatingButton: (state) => {
+            state.manualEntryFloatingButton = true;
+        },
+        manualEntryFixedButton: (state) => {
+            state.manualEntryFloatingButton = false;
+        },
     },
 });
 
@@ -40,9 +47,12 @@ export const {
     setWeekStartsOn,
     exercisesListView,
     exercisesGridView,
+    manualEntryFloatingButton,
+    manualEntryFixedButton,
 } = preferencesSlice.actions;
 
 // Basic selectors
 export const selectPreferences = (state: AppState) => state.settings.preferences;
 export const selectPreferencesWeekStartsOn = (state: AppState) => state.settings.preferences.weekStartsOn;
 export const selectPreferencesExercisesListView = (state: AppState) => state.settings.preferences.exercisesListView;
+export const selectPreferencesManualEntryFloatingButton = (state: AppState) => state.settings.preferences.manualEntryFloatingButton;

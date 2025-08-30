@@ -5,7 +5,7 @@ import { calcContrastingAccentPair } from '@/Styles/Colors';
 import type { ScrollViewProps } from 'react-native';
 import type { SectionInterface } from 'react-native-tableview-simple/lib/typescript/components/Section';
 import type { CellInterface } from 'react-native-tableview-simple/lib/typescript/components/Cell';
-import type { CalendarProps, CheckboxProps, CircularProgressProps, ColorPickerProps, HeaderProps, TextButtonProps } from '@/types/props';
+import type { CalendarProps, CheckboxProps, CircularProgressProps, ColorPickerProps, HeaderProps, TextButtonProps, ImageButtonProps } from '@/types/props';
 
 import { Weekday } from '@/types/types';
 import type { ColorTheme } from '@/types/types';
@@ -30,6 +30,10 @@ export function textStyles(colors: ColorTheme) {
     return StyleSheet.create({
         text: {
             color: primary,
+        },
+        mediumText: {
+            color: primary,
+            fontSize: 18,
         },
         menuText: {
             textAlign: 'left',
@@ -195,4 +199,18 @@ export function textButtonProps(colors: ColorTheme) {
     };
 
     return textButtonProps;
+};
+export function imageButtonProps(colors: ColorTheme) {
+    const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
+
+    const imageButtonProps: ImageButtonProps = {
+        style: {
+            backgroundColor: foreground,
+            borderColor: borders,
+            margin: 15,
+        },
+        color: primary,
+    };
+
+    return imageButtonProps;
 };

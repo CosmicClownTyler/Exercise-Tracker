@@ -50,6 +50,7 @@ export interface ThemeState {
 export interface PreferencesState {
     weekStartsOn: Weekday;
     exercisesListView: boolean;
+    manualEntryFloatingButton: boolean;
 };
 
 
