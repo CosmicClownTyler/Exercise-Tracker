@@ -10,11 +10,15 @@ import {
     selectPreferencesWeekStartsOn,
     selectPreferencesExercisesListView,
     selectPreferencesManualEntryFloatingButton,
+    selectPreferencesConfirmBeforeDeletingEntry,
+    selectPreferencesSitUpsDeviceHorizontal,
     setWeekStartsOn,
     exercisesListView,
     exercisesGridView,
     manualEntryFloatingButton,
     manualEntryFixedButton,
+    confirmBeforeDeletingEntry,
+    doNotConfirmBeforeDeletingEntry,
 } from '@/store/preferences';
 import {
     revertToDefaultTheme,
@@ -35,7 +39,7 @@ import ColorPicker from '@/Components/ColorPicker';
 
 import { Weekday } from '@/types/types';
 import type { SettingsStackParamList, ColorHex } from '@/types/types';
-import type { SettingsLandingProps, DateTimeProps, NotificationsProps, LayoutProps, ThemeProps } from '@/types/props';
+import type { SettingsLandingProps, DateTimeProps, NotificationsProps, BehaviourProps, LayoutProps, ThemeProps } from '@/types/props';
 
 const SettingsStack = createNativeStackNavigator<SettingsStackParamList>();
 
@@ -45,6 +49,7 @@ export default function SettingsScreen() {
             <SettingsStack.Screen name='Landing' component={Landing} />
             <SettingsStack.Screen name='DateTime' component={DateTime} />
             <SettingsStack.Screen name='Notifications' component={Notifications} />
+            <SettingsStack.Screen name='Behaviour' component={Behaviour} />
             <SettingsStack.Screen name='Layout' component={Layout} />
             <SettingsStack.Screen name='Theme' component={Theme} />
         </SettingsStack.Navigator>
@@ -144,6 +149,13 @@ function Landing({ navigation, route }: SettingsLandingProps) {
                             cellStyle='Basic'
                             accessory='DisclosureIndicator'
                             onPress={() => { navigation.navigate('Notifications'); }}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Behaviour'
+                            cellStyle='Basic'
+                            accessory='DisclosureIndicator'
+                            onPress={() => { navigation.navigate('Behaviour'); }}
                             {...tableCellProps}
                         />
                     </Section>
@@ -273,7 +285,6 @@ function DateTime({ navigation, route }: DateTimeProps) {
         </SafeAreaView>
     );
 };
-
 function Notifications({ navigation, route }: NotificationsProps) {
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -288,6 +299,55 @@ function Notifications({ navigation, route }: NotificationsProps) {
             <Header title='Notifications' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
             <ScrollView {...scrollViewProps}>
                 <TableView>
+                </TableView>
+            </ScrollView>
+        </SafeAreaView>
+    );
+};
+function Behaviour({ navigation, route }: BehaviourProps) {
+    // Get necessary state
+    const dispatch = useAppDispatch();
+    const shouldConfirmBeforeDeletingEntry = useAppSelector(state => selectPreferencesConfirmBeforeDeletingEntry(state));
+
+    // Use the theme colors
+    const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+    const scrollViewProps = Styles.scrollViewProps(themeColors);
+    const tableSectionProps = Styles.tableSectionProps(themeColors);
+    const tableCellProps = Styles.tableCellProps(themeColors);
+
+    // Functions for changing behaviour
+    const setConfirmBeforeDeletingEntry = () => {
+        dispatch(confirmBeforeDeletingEntry());
+    };
+    const setDoNotConfirmBeforeDeletingEntry = () => {
+        dispatch(doNotConfirmBeforeDeletingEntry());
+    };
+
+    return (
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='Behaviour' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <ScrollView {...scrollViewProps}>
+                <TableView>
+                    <Section header='Confirm Before Deleting Entry' {...tableSectionProps}>
+                        <Cell
+                            title='Yes'
+                            cellStyle='Basic'
+                            accessory={shouldConfirmBeforeDeletingEntry ? 'Checkmark' : undefined}
+                            onPress={setConfirmBeforeDeletingEntry}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='No'
+                            cellStyle='Basic'
+                            accessory={!shouldConfirmBeforeDeletingEntry ? 'Checkmark' : undefined}
+                            onPress={setDoNotConfirmBeforeDeletingEntry}
+                            {...tableCellProps}
+                        />
+                    </Section>
                 </TableView>
             </ScrollView>
         </SafeAreaView>
@@ -366,7 +426,6 @@ function Layout({ navigation, route }: LayoutProps) {
         </SafeAreaView>
     );
 };
-
 function Theme({ navigation, route }: ThemeProps) {
     // Get necessary state
     const dispatch = useAppDispatch();

@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Alert } from 'react-native';
 
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
 import { useHistoryEntryById } from '@/hooks/history';
-import { selectPreferencesWeekStartsOn } from '@/store/preferences';
+import { selectPreferencesWeekStartsOn, selectPreferencesConfirmBeforeDeletingEntry } from '@/store/preferences';
 import { addEntry, updateEntry, removeEntry } from '@/store/history';
 
 import * as Styles from '@/Styles/Styles';
@@ -30,6 +30,7 @@ export default function ManualComponent(props: ManualComponentProps) {
     // Get necessary state
     const dispatch = useAppDispatch();
     const weekStartsOn = useAppSelector(state => selectPreferencesWeekStartsOn(state));
+    const confirmBeforeDeletingEntry = useAppSelector(state => selectPreferencesConfirmBeforeDeletingEntry(state));
     const entry = useHistoryEntryById(entryId ? entryId : null);
 
     // Use the theme colors
@@ -142,6 +143,28 @@ export default function ManualComponent(props: ManualComponentProps) {
         // If an on submit function exists, call it after submitting
         if (onSubmit) onSubmit();
     }
+    const askToDeleteEntry = () => {
+        // If no current entry exists, do nothing
+        if (!entry) return;
+
+        Alert.alert(
+            "Delete exercise?",
+            "",
+            [
+                {
+                    text: "No",
+                    style: "cancel",
+                },
+                {
+                    text: "Yes",
+                    onPress: () => deleteEntry,
+                },
+            ],
+            {
+                cancelable: true,
+            }
+        );
+    }
     const deleteEntry = () => {
         // If no current entry exists, do nothing
         if (!entry) return;
@@ -241,7 +264,7 @@ export default function ManualComponent(props: ManualComponentProps) {
                 }}>
                     {entry &&
                         <TextButton
-                            onPress={deleteEntry}
+                            onPress={confirmBeforeDeletingEntry ? askToDeleteEntry : deleteEntry}
                             {...textButtonProps}
                             style={[textButtonProps.style, { width: '45%' }]}
                             textStyle={[textButtonProps.textStyle, { fontSize: 30 }]}

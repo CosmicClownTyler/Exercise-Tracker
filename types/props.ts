@@ -21,6 +21,7 @@ export type ManualProps = NativeStackScreenProps<ExercisesStackParamList, 'Manua
 export type SettingsLandingProps = NativeStackScreenProps<SettingsStackParamList, 'Landing'>;
 export type DateTimeProps = NativeStackScreenProps<SettingsStackParamList, 'DateTime'>;
 export type NotificationsProps = NativeStackScreenProps<SettingsStackParamList, 'Notifications'>;
+export type BehaviourProps = NativeStackScreenProps<SettingsStackParamList, 'Behaviour'>;
 export type LayoutProps = NativeStackScreenProps<SettingsStackParamList, 'Layout'>;
 export type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>;
 export type SitUpsSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'SitUpsSettings'>;

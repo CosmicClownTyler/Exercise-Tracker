@@ -9,6 +9,7 @@ export const defaultPreferencesState: PreferencesState = {
     weekStartsOn: Weekday.Sunday,
     exercisesListView: true,
     manualEntryFloatingButton: true,
+    confirmBeforeDeletingEntry: true,
 };
 
 // The preferences slice
@@ -35,6 +36,12 @@ export const preferencesSlice = createSlice({
         manualEntryFixedButton: (state) => {
             state.manualEntryFloatingButton = false;
         },
+        confirmBeforeDeletingEntry: (state) => {
+            state.confirmBeforeDeletingEntry = true;
+        },
+        doNotConfirmBeforeDeletingEntry: (state) => {
+            state.confirmBeforeDeletingEntry = false;
+        },
     },
 });
 
@@ -49,6 +56,8 @@ export const {
     exercisesGridView,
     manualEntryFloatingButton,
     manualEntryFixedButton,
+    confirmBeforeDeletingEntry,
+    doNotConfirmBeforeDeletingEntry,
 } = preferencesSlice.actions;
 
 // Basic selectors
@@ -56,3 +65,4 @@ export const selectPreferences = (state: AppState) => state.settings.preferences
 export const selectPreferencesWeekStartsOn = (state: AppState) => state.settings.preferences.weekStartsOn;
 export const selectPreferencesExercisesListView = (state: AppState) => state.settings.preferences.exercisesListView;
 export const selectPreferencesManualEntryFloatingButton = (state: AppState) => state.settings.preferences.manualEntryFloatingButton;
+export const selectPreferencesConfirmBeforeDeletingEntry = (state: AppState) => state.settings.preferences.confirmBeforeDeletingEntry;

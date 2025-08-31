@@ -27,6 +27,7 @@ export type SettingsStackParamList = {
     Landing: undefined;
     DateTime: undefined;
     Notifications: undefined;
+    Behaviour: undefined;
     Layout: undefined;
     Theme: undefined;
 };
@@ -51,6 +52,7 @@ export interface PreferencesState {
     weekStartsOn: Weekday;
     exercisesListView: boolean;
     manualEntryFloatingButton: boolean;
+    confirmBeforeDeletingEntry: boolean;
 };
 
 
