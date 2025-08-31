@@ -157,7 +157,7 @@ export default function HistoryEntryComponent(props: HistoryEntryComponentProps)
                 },
                 {
                     text: "Yes",
-                    onPress: () => deleteEntry,
+                    onPress: deleteEntry,
                 },
             ],
             {
