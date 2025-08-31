@@ -1,5 +1,21 @@
 import { DateData } from "react-native-calendars";
 
+// Convert a string (YYYY-MM-DD) to a DateData object
+export const stringToDateData = (dateString: string) => {
+    // Split the date string to the separate YYYY, MM, DD components
+    const dateArr = dateString.split("-");
+
+    // Parse each part of the string
+    const year = parseInt(dateArr[0]);
+    const month = parseInt(dateArr[1]);
+    const day = parseInt(dateArr[2]);
+
+    // Get the date
+    const date = new Date(year, month - 1, day);
+
+    // Return the date data
+    return dateToDateData(date);
+}
 // Convert a Date object to a DateData object
 export const dateToDateData = (date: Date) => {
     // Function for padding a string
