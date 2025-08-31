@@ -11,7 +11,6 @@ import {
     selectPreferencesExercisesListView,
     selectPreferencesHistoryEntryFloatingButton,
     selectPreferencesConfirmBeforeDeletingEntry,
-    selectPreferencesSitUpsDeviceHorizontal,
     setWeekStartsOn,
     exercisesListView,
     exercisesGridView,

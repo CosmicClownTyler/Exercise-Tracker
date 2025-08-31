@@ -16,9 +16,9 @@ export type FITineraryStackParamList = {
 };
 export type ExercisesStackParamList = {
     Landing: undefined;
-    SitUps: undefined;
-    PushUps: undefined;
-    PullUps: undefined;
+    Situps: undefined;
+    Pushups: undefined;
+    Pullups: undefined;
     Planks: undefined;
     Squats: undefined;
     HistoryEntry: undefined;

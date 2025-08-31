@@ -11,9 +11,9 @@ export type EntryProps = NativeStackScreenProps<HistoryStackParamList, 'Entry'>;
 export type FITineraryLandingProps = NativeStackScreenProps<FITineraryStackParamList, 'Landing'>;
 // Exercises stack route props
 export type ExercisesLandingProps = NativeStackScreenProps<ExercisesStackParamList, 'Landing'>;
-export type SitUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'SitUps'>;
-export type PushUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'PushUps'>;
-export type PullUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'PullUps'>;
+export type SitupsProps = NativeStackScreenProps<ExercisesStackParamList, 'Situps'>;
+export type PushupsProps = NativeStackScreenProps<ExercisesStackParamList, 'Pushups'>;
+export type PullupsProps = NativeStackScreenProps<ExercisesStackParamList, 'Pullups'>;
 export type PlanksProps = NativeStackScreenProps<ExercisesStackParamList, 'Planks'>;
 export type SquatsProps = NativeStackScreenProps<ExercisesStackParamList, 'Squats'>;
 export type HistoryEntryProps = NativeStackScreenProps<ExercisesStackParamList, 'HistoryEntry'>;
@@ -24,11 +24,6 @@ export type NotificationsProps = NativeStackScreenProps<SettingsStackParamList, 
 export type BehaviourProps = NativeStackScreenProps<SettingsStackParamList, 'Behaviour'>;
 export type LayoutProps = NativeStackScreenProps<SettingsStackParamList, 'Layout'>;
 export type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>;
-export type SitUpsSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'SitUpsSettings'>;
-export type PushUpsSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'PushUpsSettings'>;
-export type PullUpsSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'PullUpsSettings'>;
-export type PlanksSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'PlanksSettings'>;
-export type SquatsSettingsProps = NativeStackScreenProps<SettingsStackParamList, 'SquatsSettings'>;
 
 // Component props
 export interface CalendarProps {
@@ -109,13 +104,13 @@ export interface HistoryEntryComponentProps {
 
 
 // Exercise component props
-export interface SitUpsComponentProps {
+export interface SitupsComponentProps {
 
 };
-export interface PushUpsComponentProps {
+export interface PushupsComponentProps {
 
 };
-export interface PullUpsComponentProps {
+export interface PullupsComponentProps {
 
 };
 export interface PlanksComponentProps {

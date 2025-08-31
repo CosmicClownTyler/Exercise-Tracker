@@ -10,15 +10,15 @@ import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import TextButton, { TextButtonSquare } from '@/Components/TextButton';
 import ImageButton from '@/Components/ImageButton';
-import SitUpsComponent from '@/Components/Exercises/SitUpsComponent';
-import PushUpsComponent from '@/Components/Exercises/PushUpsComponent';
-import PullUpsComponent from '@/Components/Exercises/PullUpsComponent';
+import SitupsComponent from '@/Components/Exercises/SitupsComponent';
+import PushupsComponent from '@/Components/Exercises/PushupsComponent';
+import PullupsComponent from '@/Components/Exercises/PullupsComponent';
 import PlanksComponent from '@/Components/Exercises/PlanksComponent';
 import SquatsComponent from '@/Components/Exercises/SquatsComponent';
 import HistoryEntryComponent from '@/Components/HistoryEntryComponent';
 
 import type { ExercisesStackParamList } from '@/types/types';
-import type { ExercisesLandingProps, SitUpsProps, PushUpsProps, PullUpsProps, PlanksProps, SquatsProps, HistoryEntryProps } from '@/types/props';
+import type { ExercisesLandingProps, SitupsProps, PushupsProps, PullupsProps, PlanksProps, SquatsProps, HistoryEntryProps } from '@/types/props';
 
 const ExercisesStack = createNativeStackNavigator<ExercisesStackParamList>();
 
@@ -26,9 +26,9 @@ export default function ExercisesScreen() {
     return (
         <ExercisesStack.Navigator initialRouteName='Landing' screenOptions={{ headerShown: false }} >
             <ExercisesStack.Screen name='Landing' component={Landing} />
-            <ExercisesStack.Screen name='SitUps' component={SitUps} />
-            <ExercisesStack.Screen name='PushUps' component={PushUps} />
-            <ExercisesStack.Screen name='PullUps' component={PullUps} />
+            <ExercisesStack.Screen name='Situps' component={Situps} />
+            <ExercisesStack.Screen name='Pushups' component={Pushups} />
+            <ExercisesStack.Screen name='Pullups' component={Pullups} />
             <ExercisesStack.Screen name='Planks' component={Planks} />
             <ExercisesStack.Screen name='Squats' component={Squats} />
             <ExercisesStack.Screen name='HistoryEntry' component={HistoryEntry} />
@@ -61,14 +61,14 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                     alignItems: 'center',
                     justifyContent: 'flex-start',
                 }}>
-                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('SitUps'); }}>
-                        Sit Ups
+                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Situps'); }}>
+                        Situps
                     </TextButton>
-                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('PushUps'); }}>
-                        Push Ups
+                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Pushups'); }}>
+                        Pushups
                     </TextButton>
-                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('PullUps'); }}>
-                        Pull Ups
+                    <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Pullups'); }}>
+                        Pullups
                     </TextButton>
                     <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Planks'); }}>
                         Planks
@@ -95,18 +95,18 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                     <View style={{
                         flexDirection: 'row',
                     }}>
-                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('SitUps'); }}>
-                            Sit Ups
+                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Situps'); }}>
+                            Situps
                         </TextButtonSquare>
-                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('PushUps'); }}>
-                            Push Ups
+                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Pushups'); }}>
+                            Pushups
                         </TextButtonSquare>
                     </View>
                     <View style={{
                         flexDirection: 'row',
                     }}>
-                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('PullUps'); }}>
-                            Pull Ups
+                        <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Pullups'); }}>
+                            Pullups
                         </TextButtonSquare>
                         <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Planks'); }}>
                             Planks
@@ -145,7 +145,7 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
     );
 };
 
-function SitUps({ navigation, route }: SitUpsProps) {
+function Situps({ navigation, route }: SitupsProps) {
     // Use the theme colors
     const themeColors = useThemeColors();
 
@@ -155,12 +155,12 @@ function SitUps({ navigation, route }: SitUpsProps) {
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
-            <Header title='Sit Ups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-            <SitUpsComponent />
+            <Header title='Situps' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <SitupsComponent />
         </SafeAreaView>
     );
 };
-function PushUps({ navigation, route }: PushUpsProps) {
+function Pushups({ navigation, route }: PushupsProps) {
     // Use the theme colors
     const themeColors = useThemeColors();
 
@@ -170,12 +170,12 @@ function PushUps({ navigation, route }: PushUpsProps) {
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
-            <Header title='Push Ups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-            <PushUpsComponent />
+            <Header title='Pushups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <PushupsComponent />
         </SafeAreaView>
     );
 };
-function PullUps({ navigation, route }: PullUpsProps) {
+function Pullups({ navigation, route }: PullupsProps) {
     // Use the theme colors
     const themeColors = useThemeColors();
 
@@ -185,8 +185,8 @@ function PullUps({ navigation, route }: PullUpsProps) {
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
-            <Header title='Pull Ups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-            <PullUpsComponent />
+            <Header title='Pullups' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <PullupsComponent />
         </SafeAreaView>
     );
 };
