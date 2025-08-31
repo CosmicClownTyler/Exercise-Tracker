@@ -78,7 +78,7 @@ export default function HistoryEntryComponent(props: HistoryEntryComponentProps)
             }
 
             // If parsing succeeded, set the count number
-            setCount(parseInt(text));
+            setCount(countInt);
         }
         // Otherwise set an error message
         else {
