@@ -60,7 +60,9 @@ export const historyReducer = historySlice.reducer;
 // The actions for this slice
 export const {
     revertToDefaultHistory,
-    addEntry
+    addEntry,
+    removeEntry,
+    updateEntry,
 } = historySlice.actions;
 
 // Basic selectors
