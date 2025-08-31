@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useAppSelector } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
-import { useHistoryEntriesByDate } from '@/hooks/history';
+import { useHistoryEntriesByDate, useHistoryEntriesByPartialDate } from '@/hooks/history';
 import { selectPreferencesWeekStartsOn } from '@/store/preferences';
 
 import { dateToDateData } from '@/lib/utils';
@@ -16,7 +16,7 @@ import Header from '@/Components/Header';
 import Calendar from '@/Components/Calendar';
 import ManualComponent from '@/Components/Exercises/ManualComponent';
 
-import type { DateData } from 'react-native-calendars';
+import type { DateData, MarkedDates } from 'react-native-calendars/src/types';
 import type { HistoryStackParamList, HistoryEntry } from '@/types/types';
 import type { HistoryLandingProps, EntryProps } from '@/types/props';
 
@@ -32,17 +32,26 @@ export default function HistoryScreen() {
 };
 
 function Landing({ navigation, route }: HistoryLandingProps) {
-    // The currently selected day
-    const [selectedDay, setSelectedDay] = useState<DateData | null>(dateToDateData(new Date()));
+    // The currently shown month and selected date
+    const [shownMonth, setShownMonth] = useState<DateData>(dateToDateData(new Date()));
+    const [selectedDate, setSelectedDate] = useState<DateData | null>(dateToDateData(new Date()));
 
     // Get necessary state
     const weekStartsOn = useAppSelector(state => selectPreferencesWeekStartsOn(state));
-
-    // Use the entries for the current date
-    const entries: HistoryEntry[] = useHistoryEntriesByDate(selectedDay ? selectedDay.dateString : null);
+    const monthEntries: HistoryEntry[] = useHistoryEntriesByPartialDate(shownMonth.dateString.substring(0, 7));
+    const dayEntries: HistoryEntry[] = useHistoryEntriesByDate(selectedDate ? selectedDate.dateString : null);
 
     // Use the theme colors
     const themeColors = useThemeColors();
+
+    // Set the marked dates using entries from this month
+    let markedDates: MarkedDates = {};
+    monthEntries.map((entry: HistoryEntry) => {
+        markedDates[entry.date] = {
+            marked: true,
+            dots: [{ color: themeColors.accent }],
+        };
+    });
 
     // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
@@ -55,31 +64,33 @@ function Landing({ navigation, route }: HistoryLandingProps) {
     // Function for selecting days
     const onDaySelect = (date: DateData) => {
         // If pressing the currently selected date, clear the selection
-        if (selectedDay && selectedDay.dateString == date.dateString) {
-            setSelectedDay(null);
+        if (selectedDate && selectedDate.dateString == date.dateString) {
+            setSelectedDate(null);
         }
         else {
-            setSelectedDay(date);
+            setSelectedDate(date);
         }
     };
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='History' {...headerProps} />
-            <View style={[{ width: '100%' }, selectedDay != null && entries.length > 0 ? {} : { flexGrow: 1 }]}>
+            <View style={[{ width: '100%' }, selectedDate != null && dayEntries.length > 0 ? {} : { flexGrow: 1 }]}>
                 <Calendar
                     {...calendarProps}
-                    selectedDay={selectedDay}
+                    selectedDay={selectedDate}
                     onDaySelect={onDaySelect}
+                    onMonthSelect={setShownMonth}
+                    markedDates={markedDates}
                     // Extra information from the theme to ensure the component rerenders correctly
                     themeKey={[themeColors.isDark, themeColors.accent, weekStartsOn]}
                 />
             </View>
-            {selectedDay != null && entries.length > 0 &&
+            {selectedDate != null && dayEntries.length > 0 &&
                 <ScrollView {...scrollViewProps}>
                     <TableView>
-                        <Section header={`${selectedDay.dateString}`} {...tableSectionProps}>
-                            {entries.map((entry, index) => (
+                        <Section header={`${selectedDate.dateString}`} {...tableSectionProps}>
+                            {dayEntries.map((entry, index) => (
                                 <Cell
                                     title={entry.exercise}
                                     key={index}
