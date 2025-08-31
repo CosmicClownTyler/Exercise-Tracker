@@ -1,5 +1,5 @@
 import { useAppSelector } from '@/hooks/hooks';
-import { selectHistoryEntryById, selectHistoryEntriesByDate } from '@/store/history';
+import { selectHistoryEntryById, selectHistoryEntriesByDate, selectHistoryEntriesByPartialDate } from '@/store/history';
 
 // Hook for getting a history entry by id
 export const useHistoryEntryById = (id: number | null) => {
@@ -12,6 +12,13 @@ export const useHistoryEntryById = (id: number | null) => {
 export const useHistoryEntriesByDate = (date: string | null) => {
     // Get the history entries from the state
     const entries = useAppSelector(state => date ? selectHistoryEntriesByDate(state, date) : []);
+
+    return entries;
+};
+// Hook for getting history entries for a specific month
+export const useHistoryEntriesByPartialDate = (date: string | null) => {
+    // Get the history entries from the state
+    const entries = useAppSelector(state => date ? selectHistoryEntriesByPartialDate(state, date) : []);
 
     return entries;
 };

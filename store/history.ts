@@ -70,6 +70,7 @@ export const selectHistory = (state: AppState) => state.history;
 export const selectHistoryNextId = (state: AppState) => state.history.nextId;
 export const selectHistoryEntryId = (state: AppState, id: number) => id;
 export const selectHistoryEntryDate = (state: AppState, date: string) => date;
+export const selectHistoryEntryPartialDate = (state: AppState, date: string) => date;
 
 // Memoized selectors
 export const selectHistoryEntries = createSelector(
@@ -88,5 +89,11 @@ export const selectHistoryEntriesByDate = createSelector(
     [selectHistoryEntries, selectHistoryEntryDate],
     (entries: HistoryEntry[], date: string) => {
         return entries.filter(entry => entry.date == date);
+    }
+);
+export const selectHistoryEntriesByPartialDate = createSelector(
+    [selectHistoryEntries, selectHistoryEntryPartialDate],
+    (entries: HistoryEntry[], date: string) => {
+        return entries.filter(entry => entry.date.includes(date));
     }
 );
