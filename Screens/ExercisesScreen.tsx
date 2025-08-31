@@ -79,7 +79,7 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                     {/* Optional history entry fixed button */}
                     {!historyEntryFloatingButton &&
                         <TextButton {...textButtonProps} onPress={() => { navigation.navigate('HistoryEntry'); }}>
-                            Manual Entry
+                            Manual
                         </TextButton>
                     }
                 </View>
@@ -121,7 +121,7 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                         {/* Optional history entry fixed button */}
                         {!historyEntryFloatingButton &&
                             <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('HistoryEntry'); }}>
-                                Manual Entry
+                                Manual
                             </TextButtonSquare>
                         }
                     </View>
