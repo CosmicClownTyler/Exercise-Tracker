@@ -35,6 +35,7 @@ export interface CalendarProps {
     calendarStyle?: CalendarTheme;
     selectedDay?: DateData | null;
     onDaySelect?: (date: DateData) => void;
+    onMonthSelect?: (date: DateData) => void;
     markedDates?: CalendarMarkedDates;
     themeKey?: any;
     monthFormat?: string;

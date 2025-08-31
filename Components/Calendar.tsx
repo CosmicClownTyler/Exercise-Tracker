@@ -10,6 +10,7 @@ export default function Calendar(props: CalendarProps) {
         calendarStyle,
         selectedDay,
         onDaySelect,
+        onMonthSelect,
         markedDates: initialMarkedDates,
         themeKey,
         monthFormat = 'MMMM yyyy',
@@ -30,9 +31,9 @@ export default function Calendar(props: CalendarProps) {
     }
 
     // Functions for selecting the month
-    const onMonthSelect = (date: DateData) => {
+    const onMonthChange = (date: DateData) => {
         shownDate.current = date;
-        shownDate.current.day = 1;
+        if (onMonthSelect) onMonthSelect(date);
     };
 
     return (
@@ -52,7 +53,7 @@ export default function Calendar(props: CalendarProps) {
             }}
             initialDate={shownDate.current ? shownDate.current.dateString : undefined}
             onDayPress={onDaySelect}
-            onMonthChange={onMonthSelect}
+            onMonthChange={onMonthChange}
             monthFormat={monthFormat}
             hideExtraDays={hideExtraDays}
             firstDay={firstDay}
