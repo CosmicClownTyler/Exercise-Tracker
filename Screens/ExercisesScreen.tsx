@@ -231,7 +231,7 @@ function Manual({ navigation, route }: ManualProps) {
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Manual Entry' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-            <ManualComponent />
+            <ManualComponent onSubmit={() => { navigation.goBack(); navigation.getParent()?.navigate('History'); }} />
         </SafeAreaView>
     );
 };

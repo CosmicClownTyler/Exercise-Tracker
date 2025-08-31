@@ -17,6 +17,9 @@ import type { NewHistoryEntry } from '@/types/types';
 import type { ManualComponentProps } from '@/types/props';
 
 export default function ManualComponent(props: ManualComponentProps) {
+    // Deconstruct props
+    const { onSubmit } = props;
+
     // State values to create the new entry
     const [date, setDate] = useState<DateData>(dateToDateData(new Date()));
     const [dateString, setDateString] = useState<string>(date.dateString);
@@ -117,6 +120,9 @@ export default function ManualComponent(props: ManualComponentProps) {
 
         // Add the entry to the state
         dispatch(addEntry(entry));
+
+        // If an on submit function exists, call it after submitting
+        if (onSubmit) onSubmit();
     }
 
     return (

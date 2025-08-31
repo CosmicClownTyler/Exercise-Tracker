@@ -109,5 +109,5 @@ export interface SquatsComponentProps {
 
 };
 export interface ManualComponentProps {
-
+    onSubmit?: () => void;
 };
