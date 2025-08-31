@@ -160,7 +160,8 @@ export default function ManualComponent(props: ManualComponentProps) {
                 <TextInput
                     textAlign='right'
                     value={countString}
-                    keyboardType='numeric'
+                    keyboardType='number-pad'
+                    returnKeyType='done'
                     onChangeText={onCountTextChange}
                     style={[textStyles.text, { width: '50%' }]}
                     placeholder='0'
