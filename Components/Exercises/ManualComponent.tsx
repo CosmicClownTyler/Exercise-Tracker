@@ -191,7 +191,9 @@ export default function ManualComponent(props: ManualComponentProps) {
             />
             <View style={{
                 width: '100%',
+                flexGrow: 1,
                 alignItems: 'center',
+                justifyContent: 'space-evenly',
             }}>
                 <Text style={[textStyles.mediumText, { color: 'red' }]}>
                     {error}
