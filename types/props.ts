@@ -90,6 +90,13 @@ export interface TextButtonProps {
     textStyle?: StyleProp<TextStyle>;
     children?: string;
 };
+export interface ImageButtonProps {
+    onPress?: () => void;
+    style?: StyleProp<ViewStyle>;
+    src?: ImageSourcePropType;
+    color?: ColorHex;
+    size?: number;
+};
 
 
 // Exercise component props
