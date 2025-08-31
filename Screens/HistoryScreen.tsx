@@ -14,7 +14,7 @@ import { dateToDateData } from '@/lib/utils';
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import Calendar from '@/Components/Calendar';
-import ManualComponent from '@/Components/Exercises/ManualComponent';
+import HistoryEntryComponent from '@/Components/HistoryEntryComponent';
 
 import type { DateData, MarkedDates } from 'react-native-calendars/src/types';
 import type { HistoryStackParamList, HistoryEntry } from '@/types/types';
@@ -124,7 +124,7 @@ function Entry({ navigation, route }: EntryProps) {
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Edit Entry' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-            <ManualComponent entryId={id} onSubmit={() => { navigation.goBack(); }} />
+            <HistoryEntryComponent entryId={id} onSubmit={() => { navigation.goBack(); }} />
         </SafeAreaView>
     );
 };

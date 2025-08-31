@@ -9,14 +9,14 @@ import {
     revertToDefaultPreferences,
     selectPreferencesWeekStartsOn,
     selectPreferencesExercisesListView,
-    selectPreferencesManualEntryFloatingButton,
+    selectPreferencesHistoryEntryFloatingButton,
     selectPreferencesConfirmBeforeDeletingEntry,
     selectPreferencesSitUpsDeviceHorizontal,
     setWeekStartsOn,
     exercisesListView,
     exercisesGridView,
-    manualEntryFloatingButton,
-    manualEntryFixedButton,
+    historyEntryFloatingButton,
+    historyEntryFixedButton,
     confirmBeforeDeletingEntry,
     doNotConfirmBeforeDeletingEntry,
 } from '@/store/preferences';
@@ -358,7 +358,7 @@ function Layout({ navigation, route }: LayoutProps) {
     // Get necessary state
     const dispatch = useAppDispatch();
     const isExercisesListView = useAppSelector(state => selectPreferencesExercisesListView(state));
-    const isManualEntryFloatingButton = useAppSelector(state => selectPreferencesManualEntryFloatingButton(state));
+    const isHistoryEntryFloatingButton = useAppSelector(state => selectPreferencesHistoryEntryFloatingButton(state));
 
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -377,11 +377,11 @@ function Layout({ navigation, route }: LayoutProps) {
     const setExercisesGridView = () => {
         dispatch(exercisesGridView());
     };
-    const setManualEntryFloatingButton = () => {
-        dispatch(manualEntryFloatingButton());
+    const setHistoryEntryFloatingButton = () => {
+        dispatch(historyEntryFloatingButton());
     };
-    const setManualEntryFixedButton = () => {
-        dispatch(manualEntryFixedButton());
+    const setHistoryEntryFixedButton = () => {
+        dispatch(historyEntryFixedButton());
     };
 
     return (
@@ -409,15 +409,15 @@ function Layout({ navigation, route }: LayoutProps) {
                         <Cell
                             title='Floating Button'
                             cellStyle='Basic'
-                            accessory={isManualEntryFloatingButton ? 'Checkmark' : undefined}
-                            onPress={setManualEntryFloatingButton}
+                            accessory={isHistoryEntryFloatingButton ? 'Checkmark' : undefined}
+                            onPress={setHistoryEntryFloatingButton}
                             {...tableCellProps}
                         />
                         <Cell
                             title='Fixed Button'
                             cellStyle='Basic'
-                            accessory={!isManualEntryFloatingButton ? 'Checkmark' : undefined}
-                            onPress={setManualEntryFixedButton}
+                            accessory={!isHistoryEntryFloatingButton ? 'Checkmark' : undefined}
+                            onPress={setHistoryEntryFixedButton}
                             {...tableCellProps}
                         />
                     </Section>

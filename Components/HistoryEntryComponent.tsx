@@ -15,9 +15,9 @@ import { dateToDateData, stringToDateData } from '@/lib/utils';
 
 import type { DateData } from 'react-native-calendars';
 import type { HistoryEntry, NewHistoryEntry } from '@/types/types';
-import type { ManualComponentProps } from '@/types/props';
+import type { HistoryEntryComponentProps } from '@/types/props';
 
-export default function ManualComponent(props: ManualComponentProps) {
+export default function HistoryEntryComponent(props: HistoryEntryComponentProps) {
     // Deconstruct props
     const { entryId, onSubmit } = props;
 
@@ -251,7 +251,8 @@ export default function ManualComponent(props: ManualComponentProps) {
                 width: '100%',
                 flexGrow: 1,
                 alignItems: 'center',
-                justifyContent: 'space-evenly',
+                justifyContent: 'flex-end',
+                marginVertical: 25,
             }}>
                 <Text style={[textStyles.mediumText, { color: 'red' }]}>
                     {error}

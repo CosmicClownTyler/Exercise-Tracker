@@ -21,7 +21,7 @@ export type ExercisesStackParamList = {
     PullUps: undefined;
     Planks: undefined;
     Squats: undefined;
-    Manual: undefined;
+    HistoryEntry: undefined;
 };
 export type SettingsStackParamList = {
     Landing: undefined;
@@ -51,7 +51,7 @@ export interface ThemeState {
 export interface PreferencesState {
     weekStartsOn: Weekday;
     exercisesListView: boolean;
-    manualEntryFloatingButton: boolean;
+    historyEntryFloatingButton: boolean;
     confirmBeforeDeletingEntry: boolean;
 };
 

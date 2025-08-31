@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useAppSelector } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
-import { selectPreferencesExercisesListView, selectPreferencesManualEntryFloatingButton } from '@/store/preferences';
+import { selectPreferencesExercisesListView, selectPreferencesHistoryEntryFloatingButton } from '@/store/preferences';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
@@ -15,10 +15,10 @@ import PushUpsComponent from '@/Components/Exercises/PushUpsComponent';
 import PullUpsComponent from '@/Components/Exercises/PullUpsComponent';
 import PlanksComponent from '@/Components/Exercises/PlanksComponent';
 import SquatsComponent from '@/Components/Exercises/SquatsComponent';
-import ManualComponent from '@/Components/Exercises/ManualComponent';
+import HistoryEntryComponent from '@/Components/HistoryEntryComponent';
 
 import type { ExercisesStackParamList } from '@/types/types';
-import type { ExercisesLandingProps, SitUpsProps, PushUpsProps, PullUpsProps, PlanksProps, SquatsProps, ManualProps } from '@/types/props';
+import type { ExercisesLandingProps, SitUpsProps, PushUpsProps, PullUpsProps, PlanksProps, SquatsProps, HistoryEntryProps } from '@/types/props';
 
 const ExercisesStack = createNativeStackNavigator<ExercisesStackParamList>();
 
@@ -31,7 +31,7 @@ export default function ExercisesScreen() {
             <ExercisesStack.Screen name='PullUps' component={PullUps} />
             <ExercisesStack.Screen name='Planks' component={Planks} />
             <ExercisesStack.Screen name='Squats' component={Squats} />
-            <ExercisesStack.Screen name='Manual' component={Manual} />
+            <ExercisesStack.Screen name='HistoryEntry' component={HistoryEntry} />
         </ExercisesStack.Navigator>
     );
 };
@@ -39,7 +39,7 @@ export default function ExercisesScreen() {
 function Landing({ navigation, route }: ExercisesLandingProps) {
     // Get necessary state
     const exercisesListView = useAppSelector(state => selectPreferencesExercisesListView(state));
-    const manualEntryFloatingButton = useAppSelector(state => selectPreferencesManualEntryFloatingButton(state));
+    const historyEntryFloatingButton = useAppSelector(state => selectPreferencesHistoryEntryFloatingButton(state));
 
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -76,10 +76,10 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                     <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Squats'); }}>
                         Squats
                     </TextButton>
-                    {/* Optional manual entry fixed button */}
-                    {!manualEntryFloatingButton &&
-                        <TextButton {...textButtonProps} onPress={() => { navigation.navigate('Manual'); }}>
-                            Manual
+                    {/* Optional history entry fixed button */}
+                    {!historyEntryFloatingButton &&
+                        <TextButton {...textButtonProps} onPress={() => { navigation.navigate('HistoryEntry'); }}>
+                            Manual Entry
                         </TextButton>
                     }
                 </View>
@@ -118,17 +118,17 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                         <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Squats'); }}>
                             Squats
                         </TextButtonSquare>
-                        {/* Optional manual entry fixed button */}
-                        {!manualEntryFloatingButton &&
-                            <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('Manual'); }}>
-                                Manual
+                        {/* Optional history entry fixed button */}
+                        {!historyEntryFloatingButton &&
+                            <TextButtonSquare {...textButtonProps} onPress={() => { navigation.navigate('HistoryEntry'); }}>
+                                Manual Entry
                             </TextButtonSquare>
                         }
                     </View>
                 </View>
             }
-            {/* Optional manual entry floating button */}
-            {manualEntryFloatingButton &&
+            {/* Optional history entry floating button */}
+            {historyEntryFloatingButton &&
                 <View style={{
                     width: '100%',
                     alignItems: 'flex-end',
@@ -137,7 +137,7 @@ function Landing({ navigation, route }: ExercisesLandingProps) {
                         {...imageButtonProps}
                         src={require('@/assets/icons/plus.png')}
                         size={40}
-                        onPress={() => { navigation.navigate('Manual'); }}
+                        onPress={() => { navigation.navigate('HistoryEntry'); }}
                     />
                 </View>
             }
@@ -220,7 +220,7 @@ function Squats({ navigation, route }: SquatsProps) {
         </SafeAreaView>
     );
 };
-function Manual({ navigation, route }: ManualProps) {
+function HistoryEntry({ navigation, route }: HistoryEntryProps) {
     // Use the theme colors
     const themeColors = useThemeColors();
 
@@ -231,7 +231,7 @@ function Manual({ navigation, route }: ManualProps) {
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Manual Entry' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-            <ManualComponent onSubmit={() => { navigation.goBack(); navigation.getParent()?.navigate('History'); }} />
+            <HistoryEntryComponent onSubmit={() => { navigation.goBack(); navigation.getParent()?.navigate('History'); }} />
         </SafeAreaView>
     );
 };

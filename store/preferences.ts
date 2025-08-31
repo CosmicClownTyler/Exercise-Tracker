@@ -8,7 +8,7 @@ import type { PreferencesState } from '@/types/types';
 export const defaultPreferencesState: PreferencesState = {
     weekStartsOn: Weekday.Sunday,
     exercisesListView: true,
-    manualEntryFloatingButton: true,
+    historyEntryFloatingButton: true,
     confirmBeforeDeletingEntry: true,
 };
 
@@ -30,11 +30,11 @@ export const preferencesSlice = createSlice({
         exercisesGridView: (state) => {
             state.exercisesListView = false;
         },
-        manualEntryFloatingButton: (state) => {
-            state.manualEntryFloatingButton = true;
+        historyEntryFloatingButton: (state) => {
+            state.historyEntryFloatingButton = true;
         },
-        manualEntryFixedButton: (state) => {
-            state.manualEntryFloatingButton = false;
+        historyEntryFixedButton: (state) => {
+            state.historyEntryFloatingButton = false;
         },
         confirmBeforeDeletingEntry: (state) => {
             state.confirmBeforeDeletingEntry = true;
@@ -54,8 +54,8 @@ export const {
     setWeekStartsOn,
     exercisesListView,
     exercisesGridView,
-    manualEntryFloatingButton,
-    manualEntryFixedButton,
+    historyEntryFloatingButton,
+    historyEntryFixedButton,
     confirmBeforeDeletingEntry,
     doNotConfirmBeforeDeletingEntry,
 } = preferencesSlice.actions;
@@ -64,5 +64,5 @@ export const {
 export const selectPreferences = (state: AppState) => state.settings.preferences;
 export const selectPreferencesWeekStartsOn = (state: AppState) => state.settings.preferences.weekStartsOn;
 export const selectPreferencesExercisesListView = (state: AppState) => state.settings.preferences.exercisesListView;
-export const selectPreferencesManualEntryFloatingButton = (state: AppState) => state.settings.preferences.manualEntryFloatingButton;
+export const selectPreferencesHistoryEntryFloatingButton = (state: AppState) => state.settings.preferences.historyEntryFloatingButton;
 export const selectPreferencesConfirmBeforeDeletingEntry = (state: AppState) => state.settings.preferences.confirmBeforeDeletingEntry;

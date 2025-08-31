@@ -16,7 +16,7 @@ export type PushUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'Push
 export type PullUpsProps = NativeStackScreenProps<ExercisesStackParamList, 'PullUps'>;
 export type PlanksProps = NativeStackScreenProps<ExercisesStackParamList, 'Planks'>;
 export type SquatsProps = NativeStackScreenProps<ExercisesStackParamList, 'Squats'>;
-export type ManualProps = NativeStackScreenProps<ExercisesStackParamList, 'Manual'>;
+export type HistoryEntryProps = NativeStackScreenProps<ExercisesStackParamList, 'HistoryEntry'>;
 // Settings stack route props
 export type SettingsLandingProps = NativeStackScreenProps<SettingsStackParamList, 'Landing'>;
 export type DateTimeProps = NativeStackScreenProps<SettingsStackParamList, 'DateTime'>;
@@ -99,6 +99,10 @@ export interface ImageButtonProps {
     color?: ColorHex;
     size?: number;
 };
+export interface HistoryEntryComponentProps {
+    entryId?: number;
+    onSubmit?: () => void;
+};
 
 
 // Exercise component props
@@ -116,8 +120,4 @@ export interface PlanksComponentProps {
 };
 export interface SquatsComponentProps {
 
-};
-export interface ManualComponentProps {
-    entryId?: number;
-    onSubmit?: () => void;
 };
