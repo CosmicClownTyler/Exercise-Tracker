@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-import { calcContrastingAccentPair } from '@/Styles/Colors';
-
 import type { ScrollViewProps } from 'react-native';
 import type { SectionInterface } from 'react-native-tableview-simple/lib/typescript/components/Section';
 import type { CellInterface } from 'react-native-tableview-simple/lib/typescript/components/Cell';
@@ -143,12 +141,8 @@ export function checkboxProps(colors: ColorTheme) {
 export function circularProgressProps(colors: ColorTheme) {
     const { isDark, background, primary, secondary, foreground, borders, accent } = colors;
 
-    // Calculate the background and progress bar colors using an appropriate contrast from the accent
-    const { lighter, darker } = calcContrastingAccentPair(accent);
-
     const circularProgressProps: CircularProgressProps = {
-        backgroundColor: darker,
-        progressColor: lighter,
+        progressColor: accent,
     };
 
     return circularProgressProps;

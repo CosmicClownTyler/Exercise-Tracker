@@ -63,6 +63,7 @@ export interface CircularProgressProps {
     backgroundColor?: ColorHex;
     progressColor?: ColorHex;
     progress?: number;
+    maxProgress?: number;
     style?: StyleProp<ViewStyle>;
 };
 export interface ColorPickerProps {

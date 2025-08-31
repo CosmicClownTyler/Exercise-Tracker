@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'react';
-import { Dimensions, Animated, View, Text } from 'react-native';
+import { useState, useEffect, useRef } from 'react';
+import { Dimensions, Animated, View, Text, TouchableOpacity } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 
 import type { CircularProgressProps } from '@/types/props';
@@ -12,14 +12,14 @@ export default function CircularProgress(props: CircularProgressProps) {
         size = Math.min(Dimensions.get('window').width / 2, 300),
         backgroundWidth = size / 10,
         progressWidth = size / 10 - size / 20,
-        backgroundColor = '#004488',
         progressColor = '#0088ff',
         progress: inputProgress = 0,
+        maxProgress = 100,
         style,
     } = props;
 
-    // Clamp the progress between 0 and 100
-    const progress = inputProgress >= 100 ? 100 : inputProgress <= 0 ? 0 : inputProgress;
+    // Clamp the progress between 0 and the maximum
+    const progress = inputProgress >= maxProgress ? maxProgress : inputProgress <= 0 ? 0 : inputProgress;
 
     // The center of the circle
     const center = size / 2;
@@ -31,6 +31,9 @@ export default function CircularProgress(props: CircularProgressProps) {
     // The background path and progress path forming the circular progress bar
     let backgroundPath = fullCirclePath(radius, center);
     let progressPath: string = '';
+
+    // 
+    const [showPercentage, setShowPercentage] = useState<boolean>(false);
 
     // A ref for the animated progress path
     const pathRef = useRef<Path>(null);
@@ -51,13 +54,16 @@ export default function CircularProgress(props: CircularProgressProps) {
     useEffect(() => {
         // Animate the progress
         animateProgress(progress);
+    }, [progress]);
 
+    // Add listener
+    useEffect(() => {
         // Add a listener for the animated progress value
         animatedProgress.addListener(event => {
             // If the path ref exists animate the path
             if (pathRef && pathRef.current) {
                 // Calculate the new progress circle path
-                progressPath = progressCirclePath(radius, center, event.value);
+                progressPath = progressCirclePath(radius, center, (event.value / maxProgress) * 100);
 
                 // Update the path ref's path prop
                 pathRef.current.setNativeProps({
@@ -65,46 +71,59 @@ export default function CircularProgress(props: CircularProgressProps) {
                 });
             }
         });
-    }, [progress]);
+
+        return () => animatedProgress.removeAllListeners();
+    }, []);
 
     return (
-        <View style={style}>
-            <Svg width={size} height={size}>
-                <Path
-                    d={backgroundPath}
-                    stroke={backgroundColor}
-                    strokeWidth={backgroundWidth || progressWidth}
-                    strokeLinecap='butt'
-                    fill='transparent'
-                />
-                <AnimatedPath
-                    ref={pathRef}
-                    d={progressPath}
-                    stroke={progressColor}
-                    strokeWidth={progressWidth}
-                    strokeLinecap='round'
-                    fill='transparent'
-                />
-            </Svg>
-            <View style={{
-                position: 'absolute',
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                backgroundColor: 'transparent',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-                <Text style={{
-                    textAlign: 'center',
-                    color: '#ffffff',
-                    fontSize: radius - (radius / 4),
-                    fontWeight: '200',
+        <View style={[style, {
+            alignItems: 'center',
+            justifyContent: 'center',
+        }]}>
+            <TouchableOpacity
+                onPress={() => setShowPercentage(!showPercentage)}
+                style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Svg width={size} height={size}>
+                    <Path
+                        d={backgroundPath}
+                        stroke={`${progressColor}40`}
+                        strokeWidth={backgroundWidth || progressWidth}
+                        strokeLinecap='butt'
+                        fill='transparent'
+                    />
+                    <AnimatedPath
+                        ref={pathRef}
+                        d={progressPath}
+                        stroke={progressColor}
+                        strokeWidth={progressWidth}
+                        strokeLinecap='round'
+                        fill='transparent'
+                    />
+                </Svg>
+                <View style={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    backgroundColor: 'transparent',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                 }}>
-                    {progress}
-                </Text>
-            </View>
+                    <Text style={{
+                        textAlign: 'center',
+                        color: '#ffffff',
+                        fontSize: radius - (radius / 4),
+                        fontWeight: '200',
+                    }}>
+                        {showPercentage ? `${Math.round(progress / maxProgress * 100)}%` : progress}
+                    </Text>
+                </View>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -168,7 +187,7 @@ const partialCirclePath = (radius: number, center: number, fill: number) => {
 // A function that returns a circle path for the progress amount
 const progressCirclePath = (radius: number, center: number, progress: number) => {
     // Draw a full circle if the progress is at 100%
-    if (progress == 100) {
+    if (progress >= 100) {
         return fullCirclePath(radius, center);
     }
     // Otherwise draw a partial circle
