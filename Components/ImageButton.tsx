@@ -4,12 +4,13 @@ import type { ImageButtonProps } from '@/types/props';
 
 export default function ImageButton(props: ImageButtonProps) {
     // Deconstruct props
-    const { onPress, style, src, color, size } = props;
+    const { onPress, disabled, style, src, color, size } = props;
 
     return (
         <TouchableOpacity
             onPress={onPress}
             style={[buttonStyles.button, style]}
+            disabled={disabled}
         >
             <Image
                 tintColor={color}

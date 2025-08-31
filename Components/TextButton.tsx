@@ -4,12 +4,13 @@ import type { TextButtonProps } from '@/types/props';
 
 export default function TextButton(props: TextButtonProps) {
     // Deconstruct props
-    const { onPress, style, textStyle, children } = props;
+    const { onPress, disabled, style, textStyle, children } = props;
 
     return (
         <TouchableOpacity
             onPress={onPress}
             style={[buttonStyles.button, style]}
+            disabled={disabled}
         >
             <Text style={[buttonStyles.buttonText, textStyle]}>
                 {children}
@@ -19,13 +20,14 @@ export default function TextButton(props: TextButtonProps) {
 };
 export function TextButtonSquare(props: TextButtonProps) {
     // Deconstruct props
-    const { onPress, style, textStyle, children } = props;
+    const { onPress, disabled, style, textStyle, children } = props;
 
     return (
         <TextButton
             onPress={onPress}
             style={[buttonStylesSquare.button, style]}
             textStyle={textStyle}
+            disabled={disabled}
         >
             {children}
         </TextButton>

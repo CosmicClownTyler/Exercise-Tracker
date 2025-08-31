@@ -89,12 +89,14 @@ export interface TabBarIconProps {
 };
 export interface TextButtonProps {
     onPress?: () => void;
+    disabled?: boolean;
     style?: StyleProp<ViewStyle>;
     textStyle?: StyleProp<TextStyle>;
     children?: string;
 };
 export interface ImageButtonProps {
     onPress?: () => void;
+    disabled?: boolean;
     style?: StyleProp<ViewStyle>;
     src?: ImageSourcePropType;
     color?: ColorHex;
