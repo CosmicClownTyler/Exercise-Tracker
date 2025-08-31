@@ -1,12 +1,12 @@
 import { useAppSelector } from '@/hooks/hooks';
 import { selectHistoryEntryById, selectHistoryEntriesByDate } from '@/store/history';
 
-// Hook for getting history entries by id
-export const useHistoryEntriesById = (id: number) => {
-    // Get the history entries from the state
-    const entries = useAppSelector(state => selectHistoryEntryById(state, id));
+// Hook for getting a history entry by id
+export const useHistoryEntryById = (id: number | null) => {
+    // Get the history entry from the state
+    const entry = useAppSelector(state => id ? selectHistoryEntryById(state, id) : null);
 
-    return entries;
+    return entry;
 };
 // Hook for getting history entries for a specific date
 export const useHistoryEntriesByDate = (date: string | null) => {
