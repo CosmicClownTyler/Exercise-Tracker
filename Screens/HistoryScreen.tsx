@@ -14,6 +14,7 @@ import { dateToDateData } from '@/lib/utils';
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
 import Calendar from '@/Components/Calendar';
+import ManualComponent from '@/Components/Exercises/ManualComponent';
 
 import type { DateData } from 'react-native-calendars';
 import type { HistoryStackParamList, HistoryEntry } from '@/types/types';
@@ -80,11 +81,13 @@ function Landing({ navigation, route }: HistoryLandingProps) {
                         <Section header={`${selectedDay.dateString}`} {...tableSectionProps}>
                             {entries.map((entry, index) => (
                                 <Cell
-                                    title={`Exercise #${entry.id}`}
+                                    title={entry.exercise}
                                     key={index}
-                                    cellStyle='Basic'
+                                    cellStyle='Subtitle'
                                     accessory='DisclosureIndicator'
+                                    detail={entry.count}
                                     onPress={() => { navigation.navigate('Entry', { id: entry.id }); }}
+                                    contentContainerStyle={{ paddingVertical: 5 }}
                                     {...tableCellProps}
                                 />
                             ))}
@@ -97,31 +100,20 @@ function Landing({ navigation, route }: HistoryLandingProps) {
 };
 
 function Entry({ navigation, route }: EntryProps) {
+    // Deconstruct route params
+    const { id } = route.params;
+
     // Use the theme colors
     const themeColors = useThemeColors();
 
     // Get the styles and props needed for the components
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
-    const textStyles = Styles.textStyles(themeColors);
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
-            <Header title={`Exercise #${route.params.id}`} leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-            <View style={{
-                width: '100%',
-                flexGrow: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-                <View style={{
-                    flexDirection: 'row',
-                }}>
-                    <Text style={textStyles.menuText}>
-                        Test {route.params.id}
-                    </Text>
-                </View>
-            </View>
+            <Header title='Edit Entry' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <ManualComponent entryId={id} onSubmit={() => { navigation.goBack(); }} />
         </SafeAreaView>
     );
 };

@@ -116,5 +116,6 @@ export interface SquatsComponentProps {
 
 };
 export interface ManualComponentProps {
+    entryId?: number;
     onSubmit?: () => void;
 };

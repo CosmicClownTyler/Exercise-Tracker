@@ -3,29 +3,23 @@ import { View, Text, TextInput } from 'react-native';
 
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
 import { useThemeColors } from '@/hooks/theme';
+import { useHistoryEntryById } from '@/hooks/history';
 import { selectPreferencesWeekStartsOn } from '@/store/preferences';
-import { addEntry } from '@/store/history';
+import { addEntry, updateEntry, removeEntry } from '@/store/history';
 
 import * as Styles from '@/Styles/Styles';
 import Calendar from '@/Components/Calendar';
 import TextButton from '@/Components/TextButton';
 
-import { dateToDateData } from '@/lib/utils';
+import { dateToDateData, stringToDateData } from '@/lib/utils';
 
 import type { DateData } from 'react-native-calendars';
-import type { NewHistoryEntry } from '@/types/types';
+import type { HistoryEntry, NewHistoryEntry } from '@/types/types';
 import type { ManualComponentProps } from '@/types/props';
 
 export default function ManualComponent(props: ManualComponentProps) {
     // Deconstruct props
-    const { onSubmit } = props;
-
-    // State values to create the new entry
-    const [date, setDate] = useState<DateData>(dateToDateData(new Date()));
-    const [dateString, setDateString] = useState<string>(date.dateString);
-    const [exercise, setExercise] = useState<string>("");
-    const [countString, setCountString] = useState<string>("");
-    const [count, setCount] = useState<number>(0);
+    const { entryId, onSubmit } = props;
 
     // Error message (if any exists)
     const [error, setError] = useState<string>("");
@@ -36,6 +30,7 @@ export default function ManualComponent(props: ManualComponentProps) {
     // Get necessary state
     const dispatch = useAppDispatch();
     const weekStartsOn = useAppSelector(state => selectPreferencesWeekStartsOn(state));
+    const entry = useHistoryEntryById(entryId ? entryId : null);
 
     // Use the theme colors
     const themeColors = useThemeColors();
@@ -44,6 +39,13 @@ export default function ManualComponent(props: ManualComponentProps) {
     const textStyles = Styles.textStyles(themeColors);
     const textButtonProps = Styles.textButtonProps(themeColors);
     const calendarProps = Styles.calendarProps(themeColors, weekStartsOn);
+
+    // State values to create the new entry
+    const [date, setDate] = useState<DateData>(entry ? stringToDateData(entry.date) : dateToDateData(new Date()));
+    const [dateString, setDateString] = useState<string>(date.dateString);
+    const [exercise, setExercise] = useState<string>(entry ? entry.exercise : "");
+    const [countString, setCountString] = useState<string>(entry ? `${entry.count}` : "");
+    const [count, setCount] = useState<number>(entry ? entry.count : 0);
 
     const onExerciseTextChange = (text: string) => {
         // Remove the error message if it was caused by this field
@@ -111,15 +113,41 @@ export default function ManualComponent(props: ManualComponentProps) {
             return;
         }
 
-        // Create the new entry if the values are valid
-        const entry: NewHistoryEntry = {
-            date: date.dateString,
-            exercise: exercise,
-            count: count,
-        };
+        // If an entry already exists, update it
+        if (entry) {
+            // Create the updated entry if the values are valid
+            const updatedEntry: HistoryEntry = {
+                id: entry.id,
+                date: date.dateString,
+                exercise: exercise,
+                count: count,
+            };
 
-        // Add the entry to the state
-        dispatch(addEntry(entry));
+            // Add the entry to the state
+            dispatch(updateEntry(updatedEntry));
+        }
+        // Otherwise create the new entry
+        else {
+            // Create the new entry if the values are valid
+            const newEntry: NewHistoryEntry = {
+                date: date.dateString,
+                exercise: exercise,
+                count: count,
+            };
+
+            // Add the entry to the state
+            dispatch(addEntry(newEntry));
+        }
+
+        // If an on submit function exists, call it after submitting
+        if (onSubmit) onSubmit();
+    }
+    const deleteEntry = () => {
+        // If no current entry exists, do nothing
+        if (!entry) return;
+
+        // Remove the entry from the state
+        dispatch(removeEntry(entry.id));
 
         // If an on submit function exists, call it after submitting
         if (onSubmit) onSubmit();
@@ -205,9 +233,31 @@ export default function ManualComponent(props: ManualComponentProps) {
                 <Text style={[textStyles.mediumText, { color: 'red' }]}>
                     {error}
                 </Text>
-                <TextButton {...textButtonProps} onPress={submitEntry}>
-                    Add
-                </TextButton>
+                <View style={{
+                    width: '100%',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-evenly',
+                }}>
+                    {entry &&
+                        <TextButton
+                            onPress={deleteEntry}
+                            {...textButtonProps}
+                            style={[textButtonProps.style, { width: '45%' }]}
+                            textStyle={[textButtonProps.textStyle, { fontSize: 30 }]}
+                        >
+                            Delete
+                        </TextButton>
+                    }
+                    <TextButton
+                        onPress={submitEntry}
+                        {...textButtonProps}
+                        style={[textButtonProps.style, entry ? { width: '45%' } : {}]}
+                        textStyle={[textButtonProps.textStyle, entry ? { fontSize: 30 } : {}]}
+                    >
+                        {entry ? "Update" : "Add"}
+                    </TextButton>
+                </View>
             </View>
         </View>
     );
