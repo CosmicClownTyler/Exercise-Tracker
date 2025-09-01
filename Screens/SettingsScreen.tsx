@@ -1,4 +1,4 @@
-import { ScrollView, Alert } from 'react-native';
+import { ScrollView, Alert, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -434,22 +434,21 @@ function About({ navigation, route }: AboutProps) {
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const scrollViewProps = Styles.scrollViewProps(themeColors);
-    const tableSectionProps = Styles.tableSectionProps(themeColors);
-    const tableCellProps = Styles.tableCellProps(themeColors);
+    const textStyles = Styles.textStyles(themeColors);
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='About the App' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
             <ScrollView {...scrollViewProps}>
-                <TableView>
-                    <Section header='About the App' {...tableSectionProps}>
-                        <Cell
-                            title=''
-                            cellStyle='Basic'
-                            {...tableCellProps}
-                        />
-                    </Section>
-                </TableView>
+                <Text style={[textStyles.mediumText, { padding: 15 }]}>
+                    This is an app for tracking situps automatically using device sensors.
+                </Text>
+                <Text style={[textStyles.mediumText, { padding: 15, paddingTop: 0 }]}>
+                    Just orient the device properly and tap start, then begin your situps; the app will track them for you.
+                </Text>
+                <Text style={[textStyles.mediumText, { padding: 15, paddingTop: 0 }]}>
+                    You can also manually enter situps (and other exercises) by tapping the plus icon at the top right of the Situps page
+                </Text>
             </ScrollView>
         </SafeAreaView>
     );
@@ -462,22 +461,36 @@ function Credits({ navigation, route }: CreditsProps) {
     const containerStyles = Styles.containerStyles(themeColors);
     const headerProps = Styles.headerProps(themeColors);
     const scrollViewProps = Styles.scrollViewProps(themeColors);
-    const tableSectionProps = Styles.tableSectionProps(themeColors);
-    const tableCellProps = Styles.tableCellProps(themeColors);
+    const textStyles = Styles.textStyles(themeColors);
 
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Credits' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
             <ScrollView {...scrollViewProps}>
-                <TableView>
-                    <Section header='Credits' {...tableSectionProps}>
-                        <Cell
-                            title='sit up by Yon ten from <a href="https://thenounproject.com/browse/icons/term/sit-up/" target="_blank" title="sit up Icons">Noun Project</a> (CC BY 3.0)'
-                            cellStyle='Basic'
-                            {...tableCellProps}
-                        />
-                    </Section>
-                </TableView>
+                <Text style={[textStyles.mediumText, { padding: 15 }]}>
+                    This app was created solely by me, without using any code written from third parties, whether that be resources, blogs, or generative AI tools.
+                    This excludes the use of language, framework, or library documentation, as I did refer to appropriate documentation throughout development.
+                </Text>
+                <Text style={[textStyles.mediumText, { padding: 15, paddingTop: 0 }]}>
+                    This app uses icons created by me, along with one icon, the Situps icon, created by a third party, featured in the tab bar at the bottom.
+                </Text>
+                <Text style={[textStyles.mediumText, { padding: 15, paddingVertical: 0 }]}>
+                    The situp icon was found on The Noun Project, by creater "Yon ten".
+                </Text>
+                <Text style={[textStyles.mediumText, { padding: 15, paddingTop: 0 }]}>
+                    Full credit attribution below.
+                </Text>
+                <View style={{ padding: 25, backgroundColor: themeColors.foreground }}>
+                    <Text style={[textStyles.text, { paddingBottom: 15 }]}>
+                        sit up by Yon ten from
+                    </Text>
+                    <Text style={[textStyles.text, { paddingBottom: 15 }]}>
+                        "https://thenounproject.com/browse/icons/term/sit-up/"
+                    </Text>
+                    <Text style={[textStyles.text, { paddingBottom: 0 }]}>
+                        (CC BY 3.0)
+                    </Text>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
