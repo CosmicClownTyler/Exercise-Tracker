@@ -20,7 +20,8 @@
                 "foregroundImage": "./assets/adaptive-icon.png",
                 "backgroundColor": "#000000"
             },
-            "edgeToEdgeEnabled": true
+            "edgeToEdgeEnabled": true,
+            "package": "com.cosmicclowntyler.exercisetracker"
         },
         "web": {
             "favicon": "./assets/favicon.png"
@@ -30,6 +31,12 @@
                 "projectId": "88f71cd9-011d-4ae0-ba7d-d752d9628a81"
             }
         },
-        "owner": "cosmicclowntyler"
+        "owner": "cosmicclowntyler",
+        "runtimeVersion": {
+            "policy": "appVersion"
+        },
+        "updates": {
+            "url": "https://u.expo.dev/88f71cd9-011d-4ae0-ba7d-d752d9628a81"
+        }
     }
 }

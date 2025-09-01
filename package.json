@@ -26,7 +26,8 @@
         "react-native-tableview-simple": "^4.4.1",
         "react-navigation": "^5.0.0",
         "react-redux": "^9.2.0",
-        "redux-persist": "^6.0.0"
+        "redux-persist": "^6.0.0",
+        "expo-updates": "~0.28.17"
     },
     "devDependencies": {
         "@babel/core": "^7.25.2",
