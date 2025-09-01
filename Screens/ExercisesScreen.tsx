@@ -156,7 +156,7 @@ function Situps({ navigation, route }: SitupsProps) {
     return (
         <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
             <Header title='Situps' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-            <SitupsComponent />
+            <SitupsComponent onSubmit={() => { navigation.goBack(); navigation.getParent()?.navigate('History'); }} />
         </SafeAreaView>
     );
 };

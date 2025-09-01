@@ -105,7 +105,7 @@ export interface HistoryEntryComponentProps {
 
 // Exercise component props
 export interface SitupsComponentProps {
-
+    onSubmit?: () => void;
 };
 export interface PushupsComponentProps {
 
