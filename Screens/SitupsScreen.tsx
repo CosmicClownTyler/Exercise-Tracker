@@ -5,7 +5,7 @@ import { useThemeColors } from '@/hooks/theme';
 
 import * as Styles from '@/Styles/Styles';
 import Header from '@/Components/Header';
-import SitupsComponent from '@/Components/Exercises/SitupsComponentTemp';
+import SitupsComponent from '@/Components/Exercises/SitupsComponent';
 import HistoryEntryComponent from '@/Components/HistoryEntryComponent';
 
 import type { SitupsStackParamList } from '@/types/types';
