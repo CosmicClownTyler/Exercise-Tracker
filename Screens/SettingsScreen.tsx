@@ -8,14 +8,8 @@ import { useThemeColors } from '@/hooks/theme';
 import {
     revertToDefaultPreferences,
     selectPreferencesWeekStartsOn,
-    selectPreferencesExercisesListView,
-    selectPreferencesHistoryEntryFloatingButton,
     selectPreferencesConfirmBeforeDeletingEntry,
     setWeekStartsOn,
-    exercisesListView,
-    exercisesGridView,
-    historyEntryFloatingButton,
-    historyEntryFixedButton,
     confirmBeforeDeletingEntry,
     doNotConfirmBeforeDeletingEntry,
 } from '@/store/preferences';
@@ -38,7 +32,14 @@ import ColorPicker from '@/Components/ColorPicker';
 
 import { Weekday } from '@/types/types';
 import type { SettingsStackParamList, ColorHex } from '@/types/types';
-import type { SettingsLandingProps, DateTimeProps, NotificationsProps, BehaviourProps, LayoutProps, ThemeProps } from '@/types/props';
+import type {
+    SettingsLandingProps,
+    DateTimeProps,
+    BehaviourProps,
+    ThemeProps,
+    AboutProps,
+    CreditsProps,
+} from '@/types/props';
 
 const SettingsStack = createNativeStackNavigator<SettingsStackParamList>();
 
@@ -47,10 +48,10 @@ export default function SettingsScreen() {
         <SettingsStack.Navigator initialRouteName='Landing' screenOptions={{ headerShown: false }} >
             <SettingsStack.Screen name='Landing' component={Landing} />
             <SettingsStack.Screen name='DateTime' component={DateTime} />
-            <SettingsStack.Screen name='Notifications' component={Notifications} />
             <SettingsStack.Screen name='Behaviour' component={Behaviour} />
-            <SettingsStack.Screen name='Layout' component={Layout} />
             <SettingsStack.Screen name='Theme' component={Theme} />
+            <SettingsStack.Screen name='About' component={About} />
+            <SettingsStack.Screen name='Credits' component={Credits} />
         </SettingsStack.Navigator>
     );
 };
@@ -144,13 +145,6 @@ function Landing({ navigation, route }: SettingsLandingProps) {
                             {...tableCellProps}
                         />
                         <Cell
-                            title='Notifications'
-                            cellStyle='Basic'
-                            accessory='DisclosureIndicator'
-                            onPress={() => { navigation.navigate('Notifications'); }}
-                            {...tableCellProps}
-                        />
-                        <Cell
                             title='Behaviour'
                             cellStyle='Basic'
                             accessory='DisclosureIndicator'
@@ -160,17 +154,26 @@ function Landing({ navigation, route }: SettingsLandingProps) {
                     </Section>
                     <Section header='Display & Appearance' {...tableSectionProps}>
                         <Cell
-                            title='Layout'
-                            cellStyle='Basic'
-                            accessory='DisclosureIndicator'
-                            onPress={() => { navigation.navigate('Layout'); }}
-                            {...tableCellProps}
-                        />
-                        <Cell
                             title='Theme & Colors'
                             cellStyle='Basic'
                             accessory='DisclosureIndicator'
                             onPress={() => { navigation.navigate('Theme'); }}
+                            {...tableCellProps}
+                        />
+                    </Section>
+                    <Section header='About' {...tableSectionProps}>
+                        <Cell
+                            title='About SitupBuddy'
+                            cellStyle='Basic'
+                            accessory='DisclosureIndicator'
+                            onPress={() => { navigation.navigate('About'); }}
+                            {...tableCellProps}
+                        />
+                        <Cell
+                            title='Credits'
+                            cellStyle='Basic'
+                            accessory='DisclosureIndicator'
+                            onPress={() => { navigation.navigate('Credits'); }}
                             {...tableCellProps}
                         />
                     </Section>
@@ -284,25 +287,6 @@ function DateTime({ navigation, route }: DateTimeProps) {
         </SafeAreaView>
     );
 };
-function Notifications({ navigation, route }: NotificationsProps) {
-    // Use the theme colors
-    const themeColors = useThemeColors();
-
-    // Get the styles and props needed for the components
-    const containerStyles = Styles.containerStyles(themeColors);
-    const headerProps = Styles.headerProps(themeColors);
-    const scrollViewProps = Styles.scrollViewProps(themeColors);
-
-    return (
-        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
-            <Header title='Notifications' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-            <ScrollView {...scrollViewProps}>
-                <TableView>
-                </TableView>
-            </ScrollView>
-        </SafeAreaView>
-    );
-};
 function Behaviour({ navigation, route }: BehaviourProps) {
     // Get necessary state
     const dispatch = useAppDispatch();
@@ -353,78 +337,6 @@ function Behaviour({ navigation, route }: BehaviourProps) {
     );
 };
 
-function Layout({ navigation, route }: LayoutProps) {
-    // Get necessary state
-    const dispatch = useAppDispatch();
-    const isExercisesListView = useAppSelector(state => selectPreferencesExercisesListView(state));
-    const isHistoryEntryFloatingButton = useAppSelector(state => selectPreferencesHistoryEntryFloatingButton(state));
-
-    // Use the theme colors
-    const themeColors = useThemeColors();
-
-    // Get the styles and props needed for the components
-    const containerStyles = Styles.containerStyles(themeColors);
-    const headerProps = Styles.headerProps(themeColors);
-    const scrollViewProps = Styles.scrollViewProps(themeColors);
-    const tableSectionProps = Styles.tableSectionProps(themeColors);
-    const tableCellProps = Styles.tableCellProps(themeColors);
-
-    // Functions for changing layout
-    const setExercisesListView = () => {
-        dispatch(exercisesListView());
-    };
-    const setExercisesGridView = () => {
-        dispatch(exercisesGridView());
-    };
-    const setHistoryEntryFloatingButton = () => {
-        dispatch(historyEntryFloatingButton());
-    };
-    const setHistoryEntryFixedButton = () => {
-        dispatch(historyEntryFixedButton());
-    };
-
-    return (
-        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
-            <Header title='Layout' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
-            <ScrollView {...scrollViewProps}>
-                <TableView>
-                    <Section header='Exercises Layout' {...tableSectionProps}>
-                        <Cell
-                            title='List'
-                            cellStyle='Basic'
-                            accessory={isExercisesListView ? 'Checkmark' : undefined}
-                            onPress={setExercisesListView}
-                            {...tableCellProps}
-                        />
-                        <Cell
-                            title='Grid'
-                            cellStyle='Basic'
-                            accessory={!isExercisesListView ? 'Checkmark' : undefined}
-                            onPress={setExercisesGridView}
-                            {...tableCellProps}
-                        />
-                    </Section>
-                    <Section header='Manual Exercise Entry Button' {...tableSectionProps}>
-                        <Cell
-                            title='Floating Button'
-                            cellStyle='Basic'
-                            accessory={isHistoryEntryFloatingButton ? 'Checkmark' : undefined}
-                            onPress={setHistoryEntryFloatingButton}
-                            {...tableCellProps}
-                        />
-                        <Cell
-                            title='Fixed Button'
-                            cellStyle='Basic'
-                            accessory={!isHistoryEntryFloatingButton ? 'Checkmark' : undefined}
-                            onPress={setHistoryEntryFixedButton}
-                            {...tableCellProps}
-                        />
-                    </Section>
-                </TableView>
-            </ScrollView>
-        </SafeAreaView>
-    );
-};
 function Theme({ navigation, route }: ThemeProps) {
     // Get necessary state
     const dispatch = useAppDispatch();
@@ -509,6 +421,63 @@ function Theme({ navigation, route }: ThemeProps) {
                 </TableView>
                 {themeAccentType == 'custom' ?
                     <ColorPicker onChange={setAccentColor} {...colorPickerProps} /> : null}
+            </ScrollView>
+        </SafeAreaView>
+    );
+};
+
+function About({ navigation, route }: AboutProps) {
+    // Use the theme colors
+    const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+    const scrollViewProps = Styles.scrollViewProps(themeColors);
+    const tableSectionProps = Styles.tableSectionProps(themeColors);
+    const tableCellProps = Styles.tableCellProps(themeColors);
+
+    return (
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='About the App' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <ScrollView {...scrollViewProps}>
+                <TableView>
+                    <Section header='About the App' {...tableSectionProps}>
+                        <Cell
+                            title=''
+                            cellStyle='Basic'
+                            {...tableCellProps}
+                        />
+                    </Section>
+                </TableView>
+            </ScrollView>
+        </SafeAreaView>
+    );
+};
+function Credits({ navigation, route }: CreditsProps) {
+    // Use the theme colors
+    const themeColors = useThemeColors();
+
+    // Get the styles and props needed for the components
+    const containerStyles = Styles.containerStyles(themeColors);
+    const headerProps = Styles.headerProps(themeColors);
+    const scrollViewProps = Styles.scrollViewProps(themeColors);
+    const tableSectionProps = Styles.tableSectionProps(themeColors);
+    const tableCellProps = Styles.tableCellProps(themeColors);
+
+    return (
+        <SafeAreaView style={containerStyles.container} edges={['left', 'right', 'top']}>
+            <Header title='Credits' leftImage={require('@/assets/icons/arrow-left.png')} onLeft={navigation.goBack} {...headerProps} />
+            <ScrollView {...scrollViewProps}>
+                <TableView>
+                    <Section header='Credits' {...tableSectionProps}>
+                        <Cell
+                            title='sit up by Yon ten from <a href="https://thenounproject.com/browse/icons/term/sit-up/" target="_blank" title="sit up Icons">Noun Project</a> (CC BY 3.0)'
+                            cellStyle='Basic'
+                            {...tableCellProps}
+                        />
+                    </Section>
+                </TableView>
             </ScrollView>
         </SafeAreaView>
     );

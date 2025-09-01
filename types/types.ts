@@ -3,33 +3,24 @@ import type { NavigatorScreenParams } from '@react-navigation/native';
 // Navigation types
 export type RootBottomTabParamList = {
     History: NavigatorScreenParams<HistoryStackParamList>;
-    FITinerary: NavigatorScreenParams<FITineraryStackParamList>;
-    Exercises: NavigatorScreenParams<ExercisesStackParamList>;
+    Situps: NavigatorScreenParams<SitupsStackParamList>;
     Settings: NavigatorScreenParams<SettingsStackParamList>;
 };
 export type HistoryStackParamList = {
     Landing: undefined;
     Entry: { id: number };
 };
-export type FITineraryStackParamList = {
+export type SitupsStackParamList = {
     Landing: undefined;
-};
-export type ExercisesStackParamList = {
-    Landing: undefined;
-    Situps: undefined;
-    Pushups: undefined;
-    Pullups: undefined;
-    Planks: undefined;
-    Squats: undefined;
     HistoryEntry: undefined;
 };
 export type SettingsStackParamList = {
     Landing: undefined;
     DateTime: undefined;
-    Notifications: undefined;
     Behaviour: undefined;
-    Layout: undefined;
     Theme: undefined;
+    About: undefined;
+    Credits: undefined;
 };
 
 
@@ -50,8 +41,6 @@ export interface ThemeState {
 };
 export interface PreferencesState {
     weekStartsOn: Weekday;
-    exercisesListView: boolean;
-    historyEntryFloatingButton: boolean;
     confirmBeforeDeletingEntry: boolean;
 };
 

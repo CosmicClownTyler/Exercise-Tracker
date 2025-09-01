@@ -2,28 +2,21 @@ import type { DimensionValue, StyleProp, ViewStyle, TextStyle, ImageSourcePropTy
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { Theme as CalendarTheme, MarkedDates as CalendarMarkedDates, MarkingTypes as CalendarMarkingTypes, DateData } from 'react-native-calendars/src/types';
 
-import type { HistoryStackParamList, FITineraryStackParamList, ExercisesStackParamList, SettingsStackParamList, ColorHex } from '@/types/types';
+import type { HistoryStackParamList, SitupsStackParamList, SettingsStackParamList, ColorHex } from '@/types/types';
 
 // History stack route props
 export type HistoryLandingProps = NativeStackScreenProps<HistoryStackParamList, 'Landing'>;
 export type EntryProps = NativeStackScreenProps<HistoryStackParamList, 'Entry'>;
-// FITinerary stack route props
-export type FITineraryLandingProps = NativeStackScreenProps<FITineraryStackParamList, 'Landing'>;
-// Exercises stack route props
-export type ExercisesLandingProps = NativeStackScreenProps<ExercisesStackParamList, 'Landing'>;
-export type SitupsProps = NativeStackScreenProps<ExercisesStackParamList, 'Situps'>;
-export type PushupsProps = NativeStackScreenProps<ExercisesStackParamList, 'Pushups'>;
-export type PullupsProps = NativeStackScreenProps<ExercisesStackParamList, 'Pullups'>;
-export type PlanksProps = NativeStackScreenProps<ExercisesStackParamList, 'Planks'>;
-export type SquatsProps = NativeStackScreenProps<ExercisesStackParamList, 'Squats'>;
-export type HistoryEntryProps = NativeStackScreenProps<ExercisesStackParamList, 'HistoryEntry'>;
+// Situps stack route props
+export type SitupsLandingProps = NativeStackScreenProps<SitupsStackParamList, 'Landing'>;
+export type HistoryEntryProps = NativeStackScreenProps<SitupsStackParamList, 'HistoryEntry'>;
 // Settings stack route props
 export type SettingsLandingProps = NativeStackScreenProps<SettingsStackParamList, 'Landing'>;
 export type DateTimeProps = NativeStackScreenProps<SettingsStackParamList, 'DateTime'>;
-export type NotificationsProps = NativeStackScreenProps<SettingsStackParamList, 'Notifications'>;
 export type BehaviourProps = NativeStackScreenProps<SettingsStackParamList, 'Behaviour'>;
-export type LayoutProps = NativeStackScreenProps<SettingsStackParamList, 'Layout'>;
 export type ThemeProps = NativeStackScreenProps<SettingsStackParamList, 'Theme'>;
+export type AboutProps = NativeStackScreenProps<SettingsStackParamList, 'About'>;
+export type CreditsProps = NativeStackScreenProps<SettingsStackParamList, 'Credits'>;
 
 // Component props
 export interface CalendarProps {
