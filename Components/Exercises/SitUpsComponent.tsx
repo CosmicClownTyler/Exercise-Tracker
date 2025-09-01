@@ -109,6 +109,19 @@ export default function SitupsComponent(props: SitupsComponentProps) {
         if (timer) clearInterval(timer);
         setStartedWorkout(false);
     }
+    // Reset all values and start again
+    const resetWorkout = () => {
+        if (timer) clearInterval(timer);
+        setCanStarkWorkout(false);
+        setStartedWorkout(false);
+        setFinishedWorkout(false);
+        setStartedSitup(false);
+        setCount(0);
+        setTimer(null);
+        setTimeElapsed(0);
+        setGoal(15);
+        setGoalString(`${goal}`);
+    }
 
     // When the goal string is changed from the text input
     const onGoalStringChange = (text: string) => {
@@ -246,6 +259,9 @@ export default function SitupsComponent(props: SitupsComponentProps) {
 
         // If an on submit function exists, call it after submitting
         if (onSubmit) onSubmit();
+
+        // Reset the workout
+        resetWorkout();
     }
 
     return (
@@ -453,14 +469,23 @@ export default function SitupsComponent(props: SitupsComponentProps) {
                 {finishedWorkout &&
                     <View style={{
                         width: '100%',
+                        flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'space-evenly',
                     }}>
                         <TextButton
+                            onPress={resetWorkout}
+                            {...textButtonProps}
+                            style={[textButtonProps.style, { width: '45%' }]}
+                            textStyle={[textButtonProps.textStyle, { fontSize: 30 }]}
+                        >
+                            Cancel
+                        </TextButton>
+                        <TextButton
                             onPress={submitEntry}
                             {...textButtonProps}
-                            style={[textButtonProps.style]}
-                            textStyle={[textButtonProps.textStyle]}
+                            style={[textButtonProps.style, { width: '45%' }]}
+                            textStyle={[textButtonProps.textStyle, { fontSize: 30 }]}
                         >
                             Submit
                         </TextButton>
